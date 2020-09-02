@@ -1,0 +1,97 @@
+PODS:
+  - Alamofire (4.9.1)
+  - BxInputController/Common (2.18.4):
+    - BxObjC/Common
+    - BxObjC/Control/Navigation
+    - BxObjC/Control/Rate
+    - BxObjC/Control/ShakeAnimation
+    - BxObjC/Control/TextView
+    - BxTextField
+  - BxObjC/Common (1.7.0)
+  - BxObjC/Control/Navigation (1.7.0):
+    - BxObjC/Common
+    - BxObjC/Control/ShakeAnimation
+  - BxObjC/Control/Rate (1.7.0)
+  - BxObjC/Control/ShakeAnimation (1.7.0)
+  - BxObjC/Control/TextView (1.7.0)
+  - BxTextField (1.10.12)
+  - CircularSpinner (1.4.1)
+  - CodableAlamofire (1.1.2):
+    - Alamofire (~> 4.0)
+  - Fuzi (3.1.2)
+  - GTProgressBar (0.3.3)
+  - KeychainAccess (4.2.0)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
+  - Realm (5.3.5):
+    - Realm/Headers (= 5.3.5)
+  - Realm/Headers (5.3.5)
+  - RealmSwift (5.3.5):
+    - Realm (= 5.3.5)
+  - RSLoadingView (1.1.3)
+  - XMLDictionary (1.4.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - BxInputController/Common
+  - CircularSpinner (from `https://github.com/Altarix/CircularSpinner.git`)
+  - CodableAlamofire
+  - Fuzi
+  - GTProgressBar
+  - KeychainAccess
+  - PromiseKit
+  - RealmSwift
+  - RSLoadingView
+  - XMLDictionary
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - BxInputController
+    - BxObjC
+    - BxTextField
+    - CodableAlamofire
+    - Fuzi
+    - GTProgressBar
+    - KeychainAccess
+    - PromiseKit
+    - Realm
+    - RealmSwift
+    - RSLoadingView
+    - XMLDictionary
+
+EXTERNAL SOURCES:
+  CircularSpinner:
+    :git: https://github.com/Altarix/CircularSpinner.git
+
+CHECKOUT OPTIONS:
+  CircularSpinner:
+    :commit: 225a169e5bf250ace0af1ba2d15dd02926e9a6a1
+    :git: https://github.com/Altarix/CircularSpinner.git
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  BxInputController: 20aa2aa44fa1943fee5dd95172b703ce6066dba9
+  BxObjC: bfbb9716513900c893899e63833d5e469ca48a3e
+  BxTextField: dd2a0963665582f66f915563c90148240e877c09
+  CircularSpinner: da2c837faf57f4dc0631311a0a82dc81a3c107cf
+  CodableAlamofire: b7adfb2e5e980392014b4b3f3b8b62c01b9de4aa
+  Fuzi: dba7215e52fb39dd7b1a62f69ede1e30edff0ae1
+  GTProgressBar: a480283ecb0ada50de16c71e634892826928f640
+  KeychainAccess: 3f760109aa99b05d0f231e28b22642da7153e38a
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
+  Realm: 2b52fcc86fc0ed3d75a56ac0eb1e73c4f1a60e16
+  RealmSwift: a6ea2ea561039fc3833c08dec81371a9a3bb5ca6
+  RSLoadingView: c7749afdd455229643e8f34277d0695973a15b1a
+  XMLDictionary: fa07b6ff422b3a91d47a5de9bc82e3fc04fbd167
+
+PODFILE CHECKSUM: b0e5d01c26bb6b7d9816304fc353400f664dea39
+
+COCOAPODS: 1.9.3

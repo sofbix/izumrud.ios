@@ -11,6 +11,7 @@ import BxInputController
 import CircularSpinner
 import Alamofire
 import Fuzi
+import PromiseKit
 
 class ViewController: BxInputController {
     
@@ -114,9 +115,9 @@ class ViewController: BxInputController {
     
     // Internal data for requests:
     
-    var form_build_id: String?
-    var honeypot_time: String?
-    var form_id: String?
+    private(set) var form_build_id: String?
+    private(set) var honeypot_time: String?
+    private(set) var form_id: String?
     
     let sendFooter: UIView = {
         let foother = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -312,8 +313,7 @@ class ViewController: BxInputController {
     
     @objc
     func start() {
-        startUpravdom()
-        //startRKS()
+        startServices()
     }
     
 //    let headers = [
@@ -379,261 +379,23 @@ class ViewController: BxInputController {
                 
                 CircularSpinner.hide()
             }
-            
-            
-            
         }
         
     }
     
-    // показания принимаются 15 по 20
-    func startUpravdom() {
-        
-        guard let form_build_id = form_build_id, let honeypot_time = honeypot_time, let form_id = form_id else {
-            showAlert(title: "Ошибка", message: "Не случилась первоначальная загрузка для Управдома. Проверте сеть. Может вы подаете показания не в промежуток с 15 по 20 число месяца.")
-            return
-        }
-        
-        CircularSpinner.show("Отправка в Управдом", animated: true, type: .indeterminate, showDismissButton: false)
-        
-        let headers = [
-            "Content-Type" : "application/x-www-form-urlencoded"
+    func startServices() {
+        CircularSpinner.show("Передача показаний", animated: true, type: .indeterminate, showDismissButton: false)
+        let services : [Promise<Data>] = [
+            UpravdomSendDataService().start(with: self),
+            RKSSendDataService().start(with: self)
         ]
-        
-        var parameters = [
-            "pokazaniya_den": "\(dayElectricCountRow.value ?? "")",
-            "pokazaniya_noch": "\(nightElectricCountRow.value ?? "")",
-            "fio":    "\(surnameRow.value ?? "")+\(nameRow.value ?? "")+\(patronymicRow.value ?? "")",
-            "adres":    "Самара,+Пятая+просека,+дом+\(homeNumberRow.value ?? ""),+квартира+\(flatNumberRow.value ?? "")",
-            "telefon":    "\(phoneNumberRow.value ?? "")",
-            "kommentariy":    "\(commentsRow.value ?? "")",
-            "op":    "Отправить",
-            "form_build_id":    form_build_id,
-            "form_id":    form_id,
-            "honeypot_time":    honeypot_time,
-            "phone":    ""
-        ]
-        
-        for waterCounter in waterCounters {
-            if waterCounter.isValid { #warning("Has problem with checking realy params. Order can be invalided.")
-                let entity = waterCounter.entity
-                parameters["no_schyotchika_gvs_\(entity.order)"] = "\(entity.hotSerialNumber)"
-                parameters["pokazaniya_gvs_\(entity.order)"] = "\(entity.hotCount)"
-                parameters["no_schyotchika_hvs_\(entity.order)"] = "\(entity.coldSerialNumber)"
-                parameters["pokazaniya_hvs_\(entity.order)"] = "\(entity.coldCount)"
-                if entity.order > 1 {
-                    parameters["dobavit_schyotchik_gvs_\(entity.order)"] = "1"
-                    parameters["dobavit_schyotchik_hvs_\(entity.order)"] = "1"
-                }
-                #warning("3th counter should all empty values, or 2th for realy one. Please will add it if need. Without dobavit_schyotchik_hvs_(3/2) each other")
-            }
-        }
-        
-        //let request = try! URLRequest(url: "https://upravdom63.ru/", method: .post)
-        //let encode = try! URLEncoding.default.encode(request , with: parameters)
-        //let stringData = String(data: encode.httpBody!, encoding: .utf8)!
-        //print("\(stringData)")
-        
-        Alamofire.SessionManager.default
-            .request("https://upravdom63.ru/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
-            .response
-        {[weak self] (response) in
-            
-            if let error = response.error {
-                
-                self?.showAlert(title: "Ошибка", message: error.localizedDescription)
-                
-                CircularSpinner.hide()
-            } else if let data = response.data {
-                
-                
-                if let stringData = String(data: data, encoding: .utf8)
-                    
-                {
-                    if stringData.contains("Ваши показания успешно отправлены") {
-                        //self?.showAlert(title: "Bingo!", message: "Ваши показания успешно отправлены")
-                        self?.startRKS()
-                        return
-                    } else {
-                        self?.showAlert(title: "Ошибка отправки", message: "Что то пошло не так с Управдомом")
-                        print(stringData)
-                    }
-                }
-                
-                CircularSpinner.hide()
-            }
-            
-            
-            
-        }
-        
-        
-        
-    }
-    
-    // показания принимаются 7 по 23
-    func startRKS() {
-        CircularSpinner.show("Отправка в РКС", animated: true, type: .indeterminate, showDismissButton: false)
-        
-        let headers = [
-            "Content-Type" : "multipart/form-data; boundary=---------------------------207598656814045288261793191761",
-            "Cookie" : "_ym_uid=1595532639642879152; _ym_d=1595532639; _ym_isad=1; PHPSESSID=f0hd9f3vmak8l4khjt2ac87ts0; _csrf=1b16c5592b7d182619cc6f6396cc26e8edcc52fc1a3a5960226d31afb49b7bc6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%223ZfJdPO2A1PgF4lw63FNASiO0-m9-j1h%22%3B%7D; hide_privacy=true"
-        ]
-        
-        #warning("account_number has 15 digital with any zeros in first position!")
-        
-        
-        var coldCounters = ["", "", "", "", ""]
-        var hotCounters = coldCounters
-        
-        for waterCounter in waterCounters {
-            if waterCounter.isValid { #warning("Has problem with checking realy params. Order can be invalided.")
-                let index = waterCounter.order - 1
-                guard index >= 0 || index < coldCounters.count else {
-                    continue
-                }
-                coldCounters[index] = "\(waterCounter.coldCountRow.value ?? "")"
-                hotCounters[index] = "\(waterCounter.hotCountRow.value ?? "")"
-            }
-        }
-        
-        let body = """
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="_csrf"
-
-EC4PuD4YqipJiOsDRPiwSQq-Glkew2wQib1n_S08hP0jdGnyWkjlGAi5u2QCzNw-PI1cF1-QBV-5kArEAFa1lQ==
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[step_2]"
-
-1
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[account_number]"
-
-\(rksAccountNumberRow.value ?? "")
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[email]"
-
-\(emailRow.value ?? "")
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[address]"
-
-5 ПРОСЕКА, дом № \(homeNumberRow.value ?? ""), кв.№\(flatNumberRow.value ?? "")
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_P01]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_N01]"
-
-\(coldCounters[0])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_P02]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_N02]"
-
-\(coldCounters[1])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_P03]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_N03]"
-
-\(coldCounters[2])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_P04]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_N04]"
-
-\(coldCounters[3])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_P05]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[XVS_N05]"
-
-\(coldCounters[4])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_P01]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_N01]"
-
-\(hotCounters[0])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_P02]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_N02]"
-
-\(hotCounters[1])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_P03]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_N03]"
-
-\(hotCounters[2])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_P04]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_N04]"
-
-\(hotCounters[3])
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_P05]"
-
-
------------------------------207598656814045288261793191761
-Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_N05]"
-
-\(hotCounters[4])
------------------------------207598656814045288261793191761--
-"""
-        
-
-        var request = try! URLRequest(url: "https://lk.samcomsys.ru/submit-values", method: .post, headers: headers)
-        request.httpBody = body.data(using: .utf8)
-        
-        Alamofire.SessionManager.default
-            .request(request)
-            .response
-        {[weak self] (response) in
-            
-            if let error = response.error {
-                
-                self?.showAlert(title: "Ошибка", message: error.localizedDescription)
-                
-                CircularSpinner.hide()
-            } else if let data = response.data {
-                
-                
-                if let stringData = String(data: data, encoding: .utf8)
-                    
-                {
-                    if stringData.contains("Показания приборов учета приняты") {
-                        self?.showAlert(title: "Bingo!", message: "Ваши показания успешно отправлены")
-                    } else {
-                        self?.showAlert(title: "Ошибка отправки", message: "Что то пошло не так с РКС")
-                        print(stringData)
-                    }
-                }
-                
-                CircularSpinner.hide()
-            }
-            
-            
-            
+        when(fulfilled: services)
+        .done {[weak self] datas in
+            CircularSpinner.hide()
+            self?.showAlert(title: "Bingo!", message: "Ваши показания успешно отправлены")
+        }.catch {[weak self] error in
+            CircularSpinner.hide()
+            self?.showAlert(title: "Ошибка", message: error.localizedDescription)
         }
     }
     
@@ -647,8 +409,6 @@ Content-Disposition: form-data; name="SendDataWithoutRegForm[GVS_N05]"
         present(alertController, animated: true, completion: nil)
     }
     
-    
-
 
 }
 

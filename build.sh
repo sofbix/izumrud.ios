@@ -1,7 +1,7 @@
 
 #
 #  build.sh
-#  version 2.0.3
+#  version 2.1.0
 #
 #  Created by Sergey Balalaev on 20.08.15.
 #  Copyright (c) 2015-2021 ByteriX. All rights reserved.
@@ -13,7 +13,9 @@ SCHEME_NAME=""
 SETUP_VERSION=auto
 IS_PODS_INIT=false
 IS_TAG_VERSION=false
+HAS_BITCODE=false
 OUTPUT_NAME=""
+TEAM_ID=""
 
 EXPORT_PLIST=""
 PROVISIONING_PROFILE="" #reserver
@@ -71,25 +73,42 @@ case $key in
     shift # past argument
     shift # past value
     ;;
-    -e|--export)
+    -t|--team)
+    TEAM_ID=$2
+    shift # past argument
+    shift # past value
+    ;;
+    -ep|--exportPlist)
     EXPORT_PLIST="$2"
     shift # past argument
     shift # past value
     ;;
-    -ip|--initpods)
+    -ip|--initPods)
     IS_PODS_INIT=true
     shift # past argument
     ;;
-    -at|--addtag)
+    -at|--addTag)
     IS_TAG_VERSION=true
+    shift # past argument
+    ;;
+    -bc|--bitcode)
+    HAS_BITCODE=true
     shift # past argument
     ;;
     -h|--help)
     echo ""
     echo "Help for call build script with parameters:"
-    echo "  -p, --project : name of project or workspase. Requered param."
-    echo "  -t, --target  : name of target. Default is project name."
-    echo "  -e, --export  : export plist file. Default is AdHoc.plist or AppStore.plist when defined -u/--user"
+    echo "  -p, --project        : name of project or workspase. Requered param."
+    echo "  -c, --configuration  : name of configuration. Default is Release."
+    echo "  -s, --scheme         : name of target scheme. Default is the same as project name."
+    echo "  -u, --user           : 2 params: login password. It specialized user, who created in Connection of developer programm. If defined then App will be uploaded to Store."
+    echo "  -v, --version        : number of bundle version of the App. If has 'auto' value then will be detected from tags. Default auto."
+    echo "  -o, --output         : name of out ipa file. Default is SchemeName.ipa."
+    echo "  -t, --team           : team identifier. If defined -ep doesn't meater and export plist would created automaticle."
+    echo "  -ep, --exportPlist   : export plist file. When team is empty has default value of AdHoc.plist or AppStore.plist when defined -u/--user."
+    echo "  -ip, --initPods      : If selected then will update Pods as is as from 'Pods.lock' in a start. Default is not selected."
+    echo "  -at, --addTag        : If selected then will add Tag after build. Default is not selected."
+    echo "  -bc, --bitcode       : If selected then will export with bitcode. Default is not selected."
     echo ""
     echo "Emample: sh build.sh -p ProjectName -ip -t --version auto\n\n"
     exit 0
@@ -169,7 +188,7 @@ checkExit(){
 
 # Functions
 
-clearCurrent(){
+clearCurrentBuild(){
     rm -rf "${BUILD_DIR}"
     rm -r -f -d "${APP_CURRENT_BUILD_PATH}"
 }
@@ -185,7 +204,8 @@ createIPA()
     APP="${BUILD_DIR}/${CONFIGURATION_NAME}-iphoneos/${PROJECT_NAME}.app"
     ARCHIVE_PATH="${BUILD_DIR}/${SCHEME_NAME}.xcarchive"
     
-    clearCurrent
+    clearCurrentBuild
+    mkdir -p "${APP_CURRENT_BUILD_PATH}"
 
     if [ -d "${PROJECT_NAME}.xcworkspace" ]; then
         XCODE_PROJECT="-workspace ${PROJECT_NAME}.xcworkspace"
@@ -207,6 +227,15 @@ createIPA()
     -sdk iphoneos \
     -xcconfig "${APP_CONFIG_PATH}" BUILD_DIR="${BUILD_DIR}" \
     -archivePath "${ARCHIVE_PATH}" $PROVISIONING_PROFILE_PARAMS $ACTION
+
+    if [ TEAM_ID != "" ] ; then
+        EXPORT_PLIST="${APP_CURRENT_BUILD_PATH}/Export.plist"
+        echo "Creating export plist:"
+        createExportPlist "${EXPORT_PLIST}"
+        cat "$EXPORT_PLIST"
+        checkExit
+        echo "Export plist was created in ${EXPORT_PLIST}\n"
+    fi
     
     checkExit
     echo "Creating .ipa for ${APP} ${APP_CURRENT_BUILD_PATH} ${SIGNING_IDENTITY} ${PROVISIONING_PROFILE}\n"
@@ -252,6 +281,37 @@ tagCommit(){
 	git push -f --tags
     checkExit
     echo "Tag addition complete"
+}
+
+createExportPlist(){
+    local EXPORT_PLIST=$1
+
+    if [ "$USERNAME" == "" ]; then
+        SIGNING_METHOD=ad-hoc
+    else
+        SIGNING_METHOD=app-store
+    fi
+
+    cat > $EXPORT_PLIST << EOL
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>signingStyle</key>
+    <string>automatic</string>
+    <key>signingCertificate</key>
+    <string>iOS Distribution</string>
+    <key>method</key>
+    <string>${SIGNING_METHOD}</string>
+    <key>teamID</key>
+    <string>${TEAM_ID}</string>
+    <key>iCloudContainerEnvironment</key>
+    <string>Production</string>
+    <key>compileBitcode</key>
+    <${HAS_BITCODE}/>
+</dict>
+</plist>
+EOL
 }
 
  #reserved
@@ -322,4 +382,4 @@ if $IS_TAG_VERSION ; then
     tagCommit
 fi
 
-clearCurrent
+clearCurrentBuild

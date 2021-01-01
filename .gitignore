@@ -9,7 +9,6 @@ DerivedData/
 
 ## Временно
 AppStore.plist
-build.sh
 
 ## Various settings
 *.pbxuser

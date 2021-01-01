@@ -1,7 +1,7 @@
 
 #
 #  build.sh
-#  version 2.0.2
+#  version 2.0.3
 #
 #  Created by Sergey Balalaev on 20.08.15.
 #  Copyright (c) 2015-2021 ByteriX. All rights reserved.
@@ -170,6 +170,7 @@ checkExit(){
 # Functions
 
 clearCurrent(){
+    rm -rf "${BUILD_DIR}"
     rm -r -f -d "${APP_CURRENT_BUILD_PATH}"
 }
 
@@ -184,7 +185,7 @@ createIPA()
     APP="${BUILD_DIR}/${CONFIGURATION_NAME}-iphoneos/${PROJECT_NAME}.app"
     ARCHIVE_PATH="${BUILD_DIR}/${SCHEME_NAME}.xcarchive"
     
-    rm -rf "${BUILD_DIR}"
+    clearCurrent
 
     if [ -d "${PROJECT_NAME}.xcworkspace" ]; then
         XCODE_PROJECT="-workspace ${PROJECT_NAME}.xcworkspace"
@@ -209,7 +210,7 @@ createIPA()
     
     checkExit
     echo "Creating .ipa for ${APP} ${APP_CURRENT_BUILD_PATH} ${SIGNING_IDENTITY} ${PROVISIONING_PROFILE}\n"
-    clearCurrent
+    
 
     xcodebuild \
     -allowProvisioningUpdates \
@@ -231,7 +232,7 @@ createIpaAndSave(){
 
     createIPA "${CONFIGURATION_NAME}" "${SCHEME_NAME}" "${EXPORT_PLIST}" "${PROVISIONING_PROFILE}"
 
-    RESULT_DIR=${APP_BUILD_PATH}/${SCHEME_NAME}
+    RESULT_DIR=${APP_BUILD_PATH}/${CONFIGURATION_NAME}
     IPA_FILES=( ${APP_CURRENT_BUILD_PATH}/*.ipa )
     IPA_FILE=${IPA_FILES[0]}
     echo "Found builded ipa file: ${IPA_FILE}"
@@ -320,3 +321,5 @@ if $IS_TAG_VERSION ; then
     echo "Starting addition tag:"
     tagCommit
 fi
+
+clearCurrent

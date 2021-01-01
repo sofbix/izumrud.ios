@@ -1,15 +1,15 @@
 
 #
 #  build.sh
-#  version 2.0
+#  version 2.0.1
 #
 #  Created by Sergey Balalaev on 20.08.15.
 #  Copyright (c) 2015-2021 ByteriX. All rights reserved.
 #
 
 PROJECT_NAME=""
-CONFIGURATION_NAME=""
-SCHEME_NAME="Release"
+CONFIGURATION_NAME="Release"
+SCHEME_NAME=""
 SETUP_VERSION=auto
 IS_PODS_INIT=false
 IS_TAG_VERSION=false
@@ -121,11 +121,11 @@ if [ "$PROJECT_NAME" == "" ]; then
     echo "ERROR: Expected project name from build parameters. Please read the help (call with -h or -help)."
     exit 1
 fi
-if [ "$CONFIGURATION_NAME" == "" ]; then
-    CONFIGURATION_NAME=$PROJECT_NAME
+if [ "$SCHEME_NAME" == "" ]; then
+    SCHEME_NAME=$PROJECT_NAME
 fi
 if [ "$OUTPUT_NAME" == "" ]; then
-    OUTPUT_NAME="${CONFIGURATION_NAME}"
+    OUTPUT_NAME="${SCHEME_NAME}"
 fi
 if [ "$EXPORT_PLIST" == "" ]; then
     if [ "$USERNAME" == "" ]; then
@@ -186,7 +186,6 @@ createIPA()
     APP="${BUILD_DIR}/${CONFIGURATION_NAME}-iphoneos/${PROJECT_NAME}.app"
     ARCHIVE_PATH="${BUILD_DIR}/${SCHEME_NAME}.xcarchive"
     
-    echo "CONFIGURATION_NAME = ${CONFIGURATION_NAME}\n"
     rm -rf "${BUILD_DIR}"
 
     if [ -d "${PROJECT_NAME}.xcworkspace" ]; then
@@ -204,7 +203,7 @@ createIPA()
     
     xcodebuild \
     -allowProvisioningUpdates \
-    -configuration $CONFIGURATION_NAME} $XCODE_PROJECT \
+    -configuration ${CONFIGURATION_NAME} $XCODE_PROJECT \
     -scheme ${SCHEME_NAME} \
     -sdk iphoneos \
     -xcconfig "${APP_CONFIG_PATH}" BUILD_DIR="${BUILD_DIR}" \

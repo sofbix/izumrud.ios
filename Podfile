@@ -30,6 +30,6 @@ target 'Izumrud' do
   # Progress
   pod 'RSLoadingView'
   pod 'GTProgressBar'
-  pod 'CircularSpinner', :git => 'https://github.com/Altarix/CircularSpinner.git'
+  pod 'CircularSpinner', :git => 'https://github.com/Byterix/CircularSpinner.git'
 
 end

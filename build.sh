@@ -251,6 +251,8 @@ createIpaAndSave(){
 tagCommit(){
 	git tag -f -a "${BUILD_VERSION_TAG_GROUP_NAME}/${CURRENT_PROJECT_VERSION}" -m build
 	git push -f --tags
+    checkExit
+    echo "Tag addition complete"
 }
 
  #reserved
@@ -286,6 +288,8 @@ podSetup(){
 
 uploadToStore(){
     xcrun altool --upload-app -f "${IPA_PATH}" -u $USERNAME -p $PASSWORD
+    checkExit
+    echo "Application uploading finished with success"
 }
 
 if $IS_PODS_INIT ; then
@@ -304,7 +308,6 @@ echo "OUTPUT_NAME          = ${OUTPUT_NAME}"
 cat "$APP_CONFIG_PATH"
 
 createIpaAndSave "${CONFIGURATION_NAME}" "${SCHEME_NAME}" "${EXPORT_PLIST}" "${PROVISIONING_PROFILE}"
-checkExit
 
 if [ "$USERNAME" != "" ] ; then
     echo ""
@@ -313,11 +316,9 @@ if [ "$USERNAME" != "" ] ; then
     echo "PASSWORD          = ${PASSWORD}"
 
     uploadToStore
-    checkExit
 fi
 
 if $IS_TAG_VERSION ; then
-    echo "Starting add tag:"
+    echo "Starting addition tag:"
     tagCommit
-    checkExit
 fi

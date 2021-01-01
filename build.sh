@@ -104,11 +104,11 @@ case $key in
     echo "  -u, --user           : 2 params: login password. It specialized user, who created in Connection of developer programm. If defined then App will be uploaded to Store."
     echo "  -v, --version        : number of bundle version of the App. If has 'auto' value then will be detected from tags. Default auto."
     echo "  -o, --output         : name of out ipa file. Default is SchemeName.ipa."
-    echo "  -t, --team           : team identifier. If defined -ep doesn't meater and export plist would created automaticle."
+    echo "  -t, --team           : team identifier of your developer program for a upload IPA to Connection AppSore. If defined -ep doesn't meater and export plist will created automaticle."
     echo "  -ep, --exportPlist   : export plist file. When team is empty has default value of AdHoc.plist or AppStore.plist when defined -u/--user."
     echo "  -ip, --initPods      : If selected then will update Pods as is as from 'Pods.lock' in a start. Default is not selected."
     echo "  -at, --addTag        : If selected then will add Tag after build. Default is not selected."
-    echo "  -bc, --bitcode       : If selected then will export with bitcode. Default is not selected."
+    echo "  -bc, --bitcode       : If selected then will export with bitcode (when defined team). Default is not selected."
     echo ""
     echo "Emample: sh build.sh -p ProjectName -ip -t --version auto\n\n"
     exit 0

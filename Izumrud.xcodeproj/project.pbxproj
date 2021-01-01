@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03059B1AF15625CC47DAD2DB /* Pods_Izumrud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */; };
+		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
 		E30F303125926359000DD810 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303025926359000DD810 /* Service.swift */; };
 		E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */; };
 		E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303A25927BC9000DD810 /* RKSSendDataService.swift */; };
@@ -25,6 +26,7 @@
 		551223946D067F81B005C56F /* Pods-Izumrud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.release.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.release.xcconfig"; sourceTree = "<group>"; };
 		68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Izumrud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
+		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E30F303025926359000DD810 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomSendDataService.swift; sourceTree = "<group>"; };
 		E30F303A25927BC9000DD810 /* RKSSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSSendDataService.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				E3214DCC24C4B67100872B81 /* Assets.xcassets */,
 				E3214DCE24C4B67100872B81 /* LaunchScreen.storyboard */,
 				E3214DD124C4B67100872B81 /* Info.plist */,
+				C32DDE18259F4CC80034AFD4 /* Settings.swift */,
 			);
 			path = Izumrud;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				E3863D5924F7BB4D00C3C0B0 /* DatabaseManager.swift in Sources */,
 				E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */,
 				E3863D5E24F7C05600C3C0B0 /* WaterCounterEntity.swift in Sources */,
+				C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */,
 				E3863D5C24F7BDB200C3C0B0 /* FlatEntity.swift in Sources */,
 				E30F303125926359000DD810 /* Service.swift in Sources */,
 			);

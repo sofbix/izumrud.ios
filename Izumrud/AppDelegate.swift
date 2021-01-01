@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CircularSpinner
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
+
+        UIView.appearance().tintColor = Settings.Color.brand
+        CircularSpinner.trackPgColor = Settings.Color.brand
+        //CircularSpinner.trackBgColor = Settings.Color.brand.withAlphaComponent(0.2)
         
         print(DatabaseManager.documentDirectoryURL.path)
         let _ = DatabaseManager.shared

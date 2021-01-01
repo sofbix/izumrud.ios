@@ -1,7 +1,7 @@
 
 #
 #  build.sh
-#  version 2.0.1
+#  version 2.0.2
 #
 #  Created by Sergey Balalaev on 20.08.15.
 #  Copyright (c) 2015-2021 ByteriX. All rights reserved.
@@ -79,12 +79,10 @@ case $key in
     -ip|--initpods)
     IS_PODS_INIT=true
     shift # past argument
-    shift # past value
     ;;
     -at|--addtag)
     IS_TAG_VERSION=true
     shift # past argument
-    shift # past value
     ;;
     -h|--help)
     echo ""

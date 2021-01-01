@@ -7,9 +7,6 @@ build.config
 build/
 DerivedData/
 
-## Временно
-AppStore.plist
-
 ## Various settings
 *.pbxuser
 !default.pbxuser

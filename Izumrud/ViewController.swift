@@ -316,11 +316,6 @@ class ViewController: BxInputController {
         startServices()
     }
     
-//    let headers = [
-//        "Acept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-//        "Content-Type" : "application/x-www-form-urlencoded"
-//    ]
-    
     let headers = [
         "Host" : "upravdom63.ru",
         "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0",
@@ -350,9 +345,6 @@ class ViewController: BxInputController {
                 
                 CircularSpinner.hide()
             } else if let data = response.data {
-                //let stringData = String(data: data, encoding: .utf8)
-                
-                
                 
                 do {
                   let document = try XMLDocument(data: data)

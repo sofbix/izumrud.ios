@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CircularSpinner.trackPgColor = Settings.Color.brand
         //CircularSpinner.trackBgColor = Settings.Color.brand.withAlphaComponent(0.2)
         
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: Settings.Color.brand]
+        
         print(DatabaseManager.documentDirectoryURL.path)
         let _ = DatabaseManager.shared
         

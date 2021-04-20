@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CountersViewController.swift
 //  Izumrud
 //
 //  Created by Sergey Balalaev on 19.07.2020.
@@ -13,7 +13,7 @@ import Alamofire
 import Fuzi
 import PromiseKit
 
-class ViewController: BxInputController {
+class CountersViewController: BxInputController {
     
     
     let waterCounterMaxCount = 3

@@ -13,13 +13,13 @@ import Alamofire
 struct UpravdomSendDataService : Service {
     
     
-    typealias Input = ViewController
+    typealias Input = CountersViewController
     
     
     let title: String = "Управдом"
     
     
-    func map(_ input: ViewController) -> Promise<Data> {
+    func map(_ input: Input) -> Promise<Data> {
         
         
         guard let form_build_id = input.form_build_id,

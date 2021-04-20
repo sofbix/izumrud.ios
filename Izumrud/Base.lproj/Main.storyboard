@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rf3-KV-ey6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Ya-fw-fTW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ЖК "Изумрудный"-->
+        <!--Подача показаний-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Izumrud" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CountersViewController" customModule="Izumrud" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ЖК &quot;Изумрудный&quot;" prompt="Подача показаний" id="l0K-s9-bvp"/>
+                    <navigationItem key="navigationItem" title="Подача показаний" prompt="ЖК &quot;Изумрудный&quot;" id="l0K-s9-bvp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133" y="138"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Показания-->
         <scene sceneID="rFG-Jm-2dg">
             <objects>
                 <navigationController id="Rf3-KV-ey6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Показания" image="CounterTab" id="3za-N5-Du7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pf3-ML-FKb">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -40,5 +42,63 @@
             </objects>
             <point key="canvasLocation" x="-799" y="138"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="NAz-gn-8GX">
+            <objects>
+                <tabBarController id="4Ya-fw-fTW" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZE3-6F-VQK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Rf3-KV-ey6" kind="relationship" relationship="viewControllers" id="JU9-Rd-Dca"/>
+                        <segue destination="3hM-7I-8m6" kind="relationship" relationship="viewControllers" id="4lo-3m-VE1"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Atf-oy-8RA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1964" y="453"/>
+        </scene>
+        <!--Контакты-->
+        <scene sceneID="Vmj-yy-Vmb">
+            <objects>
+                <navigationController id="3hM-7I-8m6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Контакты" image="ContactsTab" id="IES-uy-ZJM"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ux3-ZX-7pw">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="45e-BN-DTU" kind="relationship" relationship="rootViewController" id="KMP-58-KSZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ywJ-Yx-PdV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-800" y="838"/>
+        </scene>
+        <!--Контакты-->
+        <scene sceneID="bwv-tU-jxB">
+            <objects>
+                <viewController id="45e-BN-DTU" customClass="ContactsViewController" customModule="Izumrud" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ocw-gd-0Oq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="76K-1F-XeX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Контакты" prompt="ЖК &quot;Изумрудный&quot;" id="tWw-yn-u1W"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SzM-LA-JyA" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="838"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="ContactsTab" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="CounterTab" width="33.333332061767578" height="33.333332061767578"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

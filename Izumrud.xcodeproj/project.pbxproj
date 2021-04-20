@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		03059B1AF15625CC47DAD2DB /* Pods_Izumrud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */; };
 		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
-		C39AEA49262EB929000109E9 /* WaterCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA48262EB929000109E9 /* WaterCounterViewModel.swift */; };
+		C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */; };
+		C39AEA50262EBB4E000109E9 /* CountersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA4E262EBB4E000109E9 /* CountersViewController.swift */; };
+		C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */; };
 		E30F303125926359000DD810 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303025926359000DD810 /* Service.swift */; };
 		E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */; };
 		E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303A25927BC9000DD810 /* RKSSendDataService.swift */; };
 		E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3214DC324C4B66B00872B81 /* AppDelegate.swift */; };
-		E3214DC824C4B66B00872B81 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3214DC724C4B66B00872B81 /* ViewController.swift */; };
 		E3214DCB24C4B66B00872B81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3214DC924C4B66B00872B81 /* Main.storyboard */; };
 		E3214DCD24C4B67100872B81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3214DCC24C4B67100872B81 /* Assets.xcassets */; };
 		E3214DD024C4B67100872B81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3214DCE24C4B67100872B81 /* LaunchScreen.storyboard */; };
@@ -28,13 +29,14 @@
 		68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Izumrud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		C39AEA48262EB929000109E9 /* WaterCounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterCounterViewModel.swift; sourceTree = "<group>"; };
+		C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterCounterViewModel.swift; sourceTree = "<group>"; };
+		C39AEA4E262EBB4E000109E9 /* CountersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersViewController.swift; sourceTree = "<group>"; };
+		C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		E30F303025926359000DD810 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomSendDataService.swift; sourceTree = "<group>"; };
 		E30F303A25927BC9000DD810 /* RKSSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSSendDataService.swift; sourceTree = "<group>"; };
 		E3214DC024C4B66B00872B81 /* Izumrud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Izumrud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3214DC324C4B66B00872B81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E3214DC724C4B66B00872B81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E3214DCA24C4B66B00872B81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3214DCC24C4B67100872B81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3214DCF24C4B67100872B81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,9 +69,27 @@
 		C39AEA47262EB878000109E9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				C39AEA48262EB929000109E9 /* WaterCounterViewModel.swift */,
+				C39AEA53262EBB99000109E9 /* Contacts */,
+				C39AEA4C262EBB4E000109E9 /* Counters */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		C39AEA4C262EBB4E000109E9 /* Counters */ = {
+			isa = PBXGroup;
+			children = (
+				C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */,
+				C39AEA4E262EBB4E000109E9 /* CountersViewController.swift */,
+			);
+			path = Counters;
+			sourceTree = "<group>";
+		};
+		C39AEA53262EBB99000109E9 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		DCF38B662D059D5522903D2B /* Pods */ = {
@@ -106,7 +126,6 @@
 				E3863D5A24F7BCF900C3C0B0 /* Network */,
 				C39AEA47262EB878000109E9 /* Features */,
 				E3214DC324C4B66B00872B81 /* AppDelegate.swift */,
-				E3214DC724C4B66B00872B81 /* ViewController.swift */,
 				E3214DC924C4B66B00872B81 /* Main.storyboard */,
 				E3214DCC24C4B67100872B81 /* Assets.xcassets */,
 				E3214DCE24C4B67100872B81 /* LaunchScreen.storyboard */,
@@ -252,8 +271,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */,
-				C39AEA49262EB929000109E9 /* WaterCounterViewModel.swift in Sources */,
-				E3214DC824C4B66B00872B81 /* ViewController.swift in Sources */,
+				C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */,
+				C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */,
 				E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */,
 				E3863D5924F7BB4D00C3C0B0 /* DatabaseManager.swift in Sources */,
 				E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */,
@@ -261,6 +280,7 @@
 				C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */,
 				E3863D5C24F7BDB200C3C0B0 /* FlatEntity.swift in Sources */,
 				E30F303125926359000DD810 /* Service.swift in Sources */,
+				C39AEA50262EBB4E000109E9 /* CountersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,13 +13,13 @@ import Alamofire
 struct RKSSendDataService : Service {
     
     
-    typealias Input = ViewController
+    typealias Input = CountersViewController
     
     
     let title: String = "РКС"
     
     
-    func map(_ input: ViewController) -> Promise<Data> {
+    func map(_ input: Input) -> Promise<Data> {
         
         
         let headers = [

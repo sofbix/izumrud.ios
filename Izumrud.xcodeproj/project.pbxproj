@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03059B1AF15625CC47DAD2DB /* Pods_Izumrud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */; };
 		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
+		C39AEA49262EB929000109E9 /* WaterCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA48262EB929000109E9 /* WaterCounterViewModel.swift */; };
 		E30F303125926359000DD810 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303025926359000DD810 /* Service.swift */; };
 		E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */; };
 		E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303A25927BC9000DD810 /* RKSSendDataService.swift */; };
@@ -27,6 +28,7 @@
 		68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Izumrud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C39AEA48262EB929000109E9 /* WaterCounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterCounterViewModel.swift; sourceTree = "<group>"; };
 		E30F303025926359000DD810 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomSendDataService.swift; sourceTree = "<group>"; };
 		E30F303A25927BC9000DD810 /* RKSSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSSendDataService.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C39AEA47262EB878000109E9 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				C39AEA48262EB929000109E9 /* WaterCounterViewModel.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		DCF38B662D059D5522903D2B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +104,7 @@
 			children = (
 				E3863D5724F7BB2F00C3C0B0 /* DB */,
 				E3863D5A24F7BCF900C3C0B0 /* Network */,
+				C39AEA47262EB878000109E9 /* Features */,
 				E3214DC324C4B66B00872B81 /* AppDelegate.swift */,
 				E3214DC724C4B66B00872B81 /* ViewController.swift */,
 				E3214DC924C4B66B00872B81 /* Main.storyboard */,
@@ -241,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */,
+				C39AEA49262EB929000109E9 /* WaterCounterViewModel.swift in Sources */,
 				E3214DC824C4B66B00872B81 /* ViewController.swift in Sources */,
 				E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */,
 				E3863D5924F7BB4D00C3C0B0 /* DatabaseManager.swift in Sources */,

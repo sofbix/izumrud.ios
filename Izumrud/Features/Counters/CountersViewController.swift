@@ -51,6 +51,12 @@ class CountersViewController: BxInputController {
     private(set) var honeypot_time: String?
     private(set) var form_id: String?
     
+    private let urls = [
+        "https://upravdom63.ru/",
+        "https://upravdom63.ru/passport"
+    ]
+    private var currentUrl: String? = nil
+    
     let sendFooter: UIView = {
         let foother = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         foother.backgroundColor = .clear
@@ -94,6 +100,10 @@ class CountersViewController: BxInputController {
         
         URLSessionConfiguration.default.timeoutIntervalForRequest = 60
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         firstLoad()
     }
     
@@ -262,12 +272,37 @@ class CountersViewController: BxInputController {
         "Upgrade-Insecure-Requests" : "1"
     ]
     
-    func firstLoad(){
-        
+    private func firstLoad(){
         CircularSpinner.show("Получаю данные с Управдома", animated: true, type: .indeterminate, showDismissButton: false)
+        currentUrl = nil
+        form_build_id = nil
+        honeypot_time = nil
+        form_id = nil
+        tryFirstLoad()
+    }
+    
+    private func tryFirstLoad(){
+        var isNeedShowError = false
+        if let currentUrl = currentUrl {
+            if let index = urls.firstIndex(of: currentUrl) {
+                if index + 1 < urls.count {
+                    self.currentUrl = urls[index + 1]
+                    if self.currentUrl == urls.last {
+                        isNeedShowError = true
+                    }
+                } else {
+                    isNeedShowError = true
+                }
+            }
+        } else {
+            currentUrl = urls.first
+            if urls.count < 2 {
+                isNeedShowError = true
+            }
+        }
         
         Alamofire.SessionManager.default
-            .request("https://upravdom63.ru/", method: .get, headers: headers)
+            .request(currentUrl!, method: .get, headers: headers)
             .response
         {[weak self] (response) in
             
@@ -278,6 +313,12 @@ class CountersViewController: BxInputController {
                 CircularSpinner.hide()
             } else if let data = response.data {
                 
+                guard let this = self else {
+                    return
+                }
+                
+                var errorMessage: String? = nil
+                
                 do {
                   let document = try XMLDocument(data: data)
                     
@@ -286,31 +327,54 @@ class CountersViewController: BxInputController {
                         if let name = item.attr("name"), let value = item.attr("value") {
                             if name == "form_build_id" {
                                 print("form_build_id : \(value)")
-                                self?.form_build_id = value
+                                this.form_build_id = value
                             } else if name == "honeypot_time" {
                                 print("honeypot_time : \(value)")
-                                self?.honeypot_time = value
+                                this.honeypot_time = value
                             } else if name == "form_id" {
                                 print("form_id : \(value)")
-                                self?.form_id = value
+                                this.form_id = value
                             }
                         }
                     }
                     
                 } catch let error {
-                  self?.showAlert(title: "Ошибка", message: error.localizedDescription)
+                    errorMessage = error.localizedDescription
+                }
+                
+                if this.hasUpravdomData == false {
+                    errorMessage = "Данные с Управдома не получены.\nОбратитесь в поддержку."
+                }
+                
+                if let errorMessage = errorMessage {
+                    if isNeedShowError {
+                        this.showAlert(title: "Ошибка", message: errorMessage)
+                    } else {
+                        this.tryFirstLoad()
+                        return
+                    }
                 }
                 
                 CircularSpinner.hide()
+                
             }
         }
-        
+    }
+    
+    var hasUpravdomData: Bool {
+        return form_build_id != nil && honeypot_time != nil && form_id != nil
     }
     
     func startServices() {
+        guard hasUpravdomData, let currentUrl = currentUrl else {
+            showAlert(title: "Ошибка", message: "Данные в Управдома невозможно отправить.\nОбратитесь в поддержку.")
+            return
+        }
+        
         CircularSpinner.show("Передача показаний", animated: true, type: .indeterminate, showDismissButton: false)
+        
         let services : [Promise<Data>] = [
-            UpravdomSendDataService().start(with: self),
+            UpravdomSendDataService(url: currentUrl).start(with: self),
             RKSSendDataService().start(with: self)
         ]
         when(fulfilled: services)

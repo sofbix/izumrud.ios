@@ -17,6 +17,11 @@ struct UpravdomSendDataService : Service {
     
     
     let title: String = "Управдом"
+    let url: String
+    
+    init(url: String){
+        self.url = url
+    }
     
     
     func map(_ input: Input) -> Promise<Data> {
@@ -67,7 +72,7 @@ struct UpravdomSendDataService : Service {
         //let stringData = String(data: encode.httpBody!, encoding: .utf8)!
         //print("\(stringData)")
         
-        return service("https://upravdom63.ru/", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+        return service(self.url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
 
     }
     

@@ -11,6 +11,8 @@ import RealmSwift
 
 class FlatEntity: Object {
     
+    static let serviceProvidersToSendingDevider : String.Element = ","
+    
     @objc dynamic var id: String = ""
     
     // for multyaccount mode in a future
@@ -30,8 +32,9 @@ class FlatEntity: Object {
     
     @objc dynamic var rksAccountNumber: String = ""
     
-    @objc dynamic var isSendingToUpravdom: Bool = true
-    @objc dynamic var isSendingToRKS: Bool = true
+    @objc dynamic var serviceProvidersToSending: String = ""
+
+    @objc dynamic var sentDate: Date?
     
     let waterCounters = List<WaterCounterEntity>()
     
@@ -40,7 +43,7 @@ class FlatEntity: Object {
     }
     
     override class func indexedProperties() -> [String] {
-        return ["order"]
+        return ["order", "sentDate"]
     }
     
 }

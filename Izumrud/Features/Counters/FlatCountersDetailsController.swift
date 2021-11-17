@@ -1,10 +1,11 @@
 //
-//  CountersViewController.swift
-//  Izumrud
+//  FlatCountersDetailsController.swift
+//  SamaraCounter
 //
-//  Created by Sergey Balalaev on 19.07.2020.
-//  Copyright © 2020 Byterix. All rights reserved.
+//  Created by Sergey Balalaev on 20.12.2020.
 //
+
+import UIKit
 
 import UIKit
 import BxInputController
@@ -13,90 +14,74 @@ import Alamofire
 import Fuzi
 import PromiseKit
 
-class CountersViewController: BxInputController {
-    
+class FlatCountersDetailsController: BxInputController {
     
     let waterCounterMaxCount = 3
-    
-    // Go button
-    
-    let startRow = BxInputIconActionRow<String>(icon: nil, title: "Start")
     
     // Input Fields:
     
     var id: String = ""
     var order: Int = 0
     
-    var surnameRow = BxInputTextRow(title: "Фамилия", maxCount: 200, value: "")
-    var nameRow = BxInputTextRow(title: "Имя", maxCount: 200, value: "")
-    var patronymicRow = BxInputTextRow(title: "Отчества", maxCount: 200, value: "")
-    var homeNumberRow = BxInputTextRow(title: "Номер дома", maxCount: 5, value: "")
-    var flatNumberRow = BxInputTextRow(title: "Номер квартиры", maxCount: 5, value: "")
-    var phoneNumberRow = BxInputFormattedTextRow(title: "Телефон", prefix: "+7", format: "(###)###-##-##")
-    var emailRow = BxInputTextRow(title: "E-mail", maxCount: 50, value: "")
-    var rksAccountNumberRow = BxInputTextRow(title: "Номер счета РКС", subtitle: "если необходим", maxCount: 20, value: "")
-    var commentsRow = BxInputTextMemoRow(title: "Коментарии", maxCount: 1000, value: "")
+    override var isEditing: Bool {
+        didSet {
+            guard isViewLoaded else {
+                return
+            }
+            updateData()
+        }
+    }
+    
+    var newBranchHandler: (()-> Void)? = nil
+    
+    let surnameRow = BxInputTextRow(title: "Фамилия", maxCount: 200, value: "")
+    let nameRow = BxInputTextRow(title: "Имя", maxCount: 200, value: "")
+    let patronymicRow = BxInputTextRow(title: "Отчества", maxCount: 200, value: "")
+    let streetRow = BxInputTextRow(title: "Улица", maxCount: 200, value: "5 ПРОСЕКА")
+    let homeNumberRow = BxInputTextRow(title: "Номер дома", maxCount: 5, value: "")
+    let flatNumberRow = BxInputTextRow(title: "Номер квартиры", maxCount: 5, value: "")
+    let phoneNumberRow = BxInputFormattedTextRow(title: "Телефон", prefix: "+7", format: "(###)###-##-##")
+    let emailRow = BxInputTextRow(title: "E-mail", maxCount: 50, value: "")
+    let rksAccountNumberRow = BxInputTextRow(title: "Номер счета РКС", subtitle: "если необходим", maxCount: 15, value: "")
+    let esPlusAccountNumberRow = BxInputTextRow(title: "Лицевой счёт Т+", subtitle: "если необходим", maxCount: 20, value: "")
+    let commentsRow = BxInputTextMemoRow(title: "Коментарии", maxCount: 1000, value: "")
 
-    var dayElectricCountRow = BxInputTextRow(title: "День", subtitle: "целые числа, без дробных", maxCount: 10, value: "")
-    var nightElectricCountRow = BxInputTextRow(title: "Ночь", subtitle: "целые числа, без дробных", maxCount: 10, value: "")
-    
-    let isSendingToUpravdomRow = BxInputCheckRow(title: "Управдом", value: true)
-    let isSendingToRKSRow = BxInputCheckRow(title: "РКС", value: true)
-    
-    var waterCounters: [WaterCounterViewModel] = []
-    
-    // Internal data for requests:
+    let electricAccountNumberRow = BxInputTextRow(title: "Лицевой счет", subtitle: "как правило 8 цифр", maxCount: 20, value: "")
+    let electricCounterNumberRow = BxInputTextRow(title: "Номер счётчика", maxCount: 20, value: "")
+    let dayElectricCountRow = BxInputTextRow(title: "День", subtitle: "целые числа, без дробных", maxCount: 10, value: "")
+    let nightElectricCountRow = BxInputTextRow(title: "Ночь", subtitle: "для однофазного счетчика оставте пустым", maxCount: 10, value: "")
     
     private(set) var form_build_id: String?
     private(set) var honeypot_time: String?
     private(set) var form_id: String?
+    private(set) var waterCounters: [WaterCounterViewModel] = []
     
     private let urls = [
         "https://upravdom63.ru/",
         "https://upravdom63.ru/passport"
     ]
+    
+    let upravdomService = UpravdomSendDataService()
+    private lazy var servicesRows : [CheckProviderProtocol] = [
+        CheckProviderRow(RKSSendDataService()),
+        CheckProviderRow(upravdomService)
+    ]
     private var currentUrl: String? = nil
     
-    let sendFooter: UIView = {
-        let foother = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        foother.backgroundColor = .clear
-        
-        let btSend = UIButton(frame: CGRect(x: 20, y: 10, width: 60, height: 40))
-        btSend.layer.cornerRadius = 8
-        btSend.backgroundColor = Settings.Color.brand
-        btSend.setTitleColor(.white, for: .normal)
-        btSend.setTitleColor(.yellow, for: .highlighted)
-        btSend.setTitle("Отправить показания", for: .normal)
-        btSend.addTarget(self, action: #selector(start), for: .touchUpInside)
-        
-        foother.addSubview(btSend)
-        btSend.translatesAutoresizingMaskIntoConstraints = false
-        btSend.leadingAnchor.constraint(equalTo: foother.leadingAnchor, constant: 20).isActive = true
-        btSend.trailingAnchor.constraint(equalTo: foother.trailingAnchor, constant: -20).isActive = true
-        btSend.topAnchor.constraint(equalTo: foother.topAnchor, constant: 10).isActive = true
-        btSend.bottomAnchor.constraint(equalTo: foother.bottomAnchor, constant: -30).isActive = true
-        btSend.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        btSend.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        return foother
-    }()
+    let sendFooter: UIView = UIButton.createOnView(title: "Отправить показания", target: self, action: #selector(start))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        isEstimatedContent = false
+        isEstimatedContent = true
         
         homeNumberRow.textSettings.keyboardType = .numberPad
         flatNumberRow.textSettings.keyboardType = .numberPad
         dayElectricCountRow.textSettings.keyboardType = .numberPad
         nightElectricCountRow.textSettings.keyboardType = .numberPad
         
-        updateData()
         
-        startRow.isImmediatelyDeselect = true
-        startRow.handler = {[weak self] _ in
-            self?.start()
-        }
+        updateData()
         
         URLSessionConfiguration.default.timeoutIntervalForRequest = 60
         
@@ -104,19 +89,28 @@ class CountersViewController: BxInputController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firstLoad()
+        if isEditing {
+            firstLoad()
+        }
     }
     
     func updateData() {
         
         var flatEntity = FlatEntity()
         
-        if let entity = DatabaseManager.shared.commonRealm.objects(FlatEntity.self).first {
+        if id.isEmpty == false, let entity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id)
+        {
+            flatEntity = entity
+        } else if let entity = DatabaseManager.shared.commonRealm.objects(FlatEntity.self).filter("sentDate == nil").first {
             flatEntity = entity
         } else {
             DatabaseManager.shared.commonRealm.beginWrite()
             flatEntity.id = UUID().uuidString
-            flatEntity.order = 1
+            flatEntity.order = 1 // for a future multi flat
+            // New counters sending to all Services:
+            flatEntity.serviceProvidersToSending = servicesRows.map{ row -> String in
+                return row.serviceName
+            }.joined(separator: String(FlatEntity.serviceProvidersToSendingDevider))
             DatabaseManager.shared.commonRealm.add(flatEntity, update: .all)
             do {
                 try DatabaseManager.shared.commonRealm.commitWrite()
@@ -158,26 +152,72 @@ class CountersViewController: BxInputController {
             sections.append(waterCounter.section)
         }
         
-        if waterCounters.count < waterCounterMaxCount {
+        // New Water Counter
+        if waterCounters.count < waterCounterMaxCount && isEditing {
             let waterCounter = WaterCounterViewModel()
             
             waterCounters.append(waterCounter)
             sections.append(waterCounter.section)
         }
         
-        // for a future
-        //sections.append(BxInputSection(headerText: "Куда отправляем", rows: [isSendingToUpravdomRow, isSendingToRKSRow], footerText: nil))
-
-        sections.append(BxInputSection(headerText: "Проверьте данные и нажмите:", rows: [], footerText: nil))
-        sections.append(BxInputSection(header: BxInputSectionView(sendFooter), rows: []))
+        servicesRows.forEach{ row in
+            row.updateValue(flatEntity)
+        }
+        let servicesSection = BxInputSection(headerText: "Куда отправляем", rows: servicesRows, footerText: "Выберите поставщиков комунальных услуг, для которых требуется отправлять показания приборов")
+        sections.append(servicesSection)
+        
+        
+        if isEditing {
+            sections.append(BxInputSection(headerText: "Проверьте данные и нажмите:", rows: [], footerText: nil))
+            sections.append(BxInputSection(header: BxInputSectionView(sendFooter), rows: []))
+        }
         
         self.sections = sections
+        updateCheckers()
+        setEnabled(isEditing, with: .none)
+    }
+    
+    func updateCheckers(){
+        for row in servicesRows {
+            row.addCheckers(for: self)
+        }
+    }
+    
+    func branchAllFlatData(){
+        if let flatEntity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id)
+        {
+            DatabaseManager.shared.commonRealm.beginWrite()
+            let flatEntity = FlatEntity(value: flatEntity)
+            flatEntity.id = UUID().uuidString
+            flatEntity.sentDate = Date()
+            let waterCounters: [WaterCounterEntity] = flatEntity.waterCounters.map{ counter in
+                let counter = WaterCounterEntity(value: counter)
+                counter.id = UUID().uuidString
+                DatabaseManager.shared.commonRealm.add(counter, update: .error)
+                return counter
+            }
+            flatEntity.waterCounters.removeAll()
+            flatEntity.waterCounters.append(objectsIn: waterCounters)
+            DatabaseManager.shared.commonRealm.add(flatEntity, update: .error)
+            do {
+                try DatabaseManager.shared.commonRealm.commitWrite()
+            } catch let error {
+                DatabaseManager.shared.commonRealm.cancelWrite()
+                showAlert(title: "Ошибка данных", message: "Данные в телефоне сохранены не будут: \(error)")
+            }
+            newBranchHandler?()
+        } else {
+            showAlert(title: "Ошибка данных", message: "Данные в телефоне сохранены не будут")
+        }
     }
     
     func saveFlatData(){
         if let flatEntity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id)
         {
             DatabaseManager.shared.commonRealm.beginWrite()
+            
+            flatEntity.sentDate = nil
+            
             flatEntity.surname = surnameRow.value ?? ""
             flatEntity.name = nameRow.value ?? ""
             flatEntity.patronymic = patronymicRow.value ?? ""
@@ -192,6 +232,14 @@ class CountersViewController: BxInputController {
             
             flatEntity.dayElectricCount = dayElectricCountRow.value ?? ""
             flatEntity.nightElectricCount = nightElectricCountRow.value ?? ""
+            
+            flatEntity.serviceProvidersToSending = servicesRows.compactMap{ row -> String? in
+                if row.value {
+                    return row.serviceName
+                }
+                return nil
+            }.joined(separator: String(FlatEntity.serviceProvidersToSendingDevider))
+            
             DatabaseManager.shared.commonRealm.add(flatEntity, update: .modified)
             do {
                 try DatabaseManager.shared.commonRealm.commitWrite()
@@ -205,13 +253,34 @@ class CountersViewController: BxInputController {
     }
     
     func saveData(waterCounter: WaterCounterViewModel){
-        if let _ = DatabaseManager.shared.commonRealm.object(ofType: WaterCounterEntity.self, forPrimaryKey: waterCounter.id)
+        guard let flatEntity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id) else
+        {
+            return
+        }
+        if let waterCounterEntity = DatabaseManager.shared.commonRealm.object(ofType: WaterCounterEntity.self, forPrimaryKey: waterCounter.id)
         {
             DatabaseManager.shared.commonRealm.beginWrite()
-            let waterCounterEntity = waterCounter.entity
-            DatabaseManager.shared.commonRealm.add(waterCounterEntity, update: .modified)
+            var isRemove = false
+            if waterCounter.isValid {
+                let waterCounterEntity = waterCounter.entity
+                DatabaseManager.shared.commonRealm.add(waterCounterEntity, update: .modified)
+            } else {
+                if let index = flatEntity.waterCounters.index(of: waterCounterEntity){
+                    flatEntity.waterCounters.remove(at: index)
+                    isRemove = true
+                }
+                var index = 1
+                flatEntity.waterCounters.forEach { entity in
+                    flatEntity.order = index
+                    index += 1
+                }
+                DatabaseManager.shared.commonRealm.delete(waterCounterEntity)
+            }
             do {
                 try DatabaseManager.shared.commonRealm.commitWrite()
+                if isRemove {
+                    updateData()
+                }
             } catch let error {
                 DatabaseManager.shared.commonRealm.cancelWrite()
                 showAlert(title: "Ошибка данных", message: "Данные в телефоне сохранены не будут: \(error)")
@@ -220,13 +289,11 @@ class CountersViewController: BxInputController {
             DatabaseManager.shared.commonRealm.beginWrite()
             let waterCounterEntity = waterCounter.entity
             waterCounterEntity.id = UUID().uuidString
-            let waterCounterOrder : Int = DatabaseManager.shared.commonRealm.objects(WaterCounterEntity.self).sorted(byKeyPath: "order").last?.order ?? 0
+            
+            let waterCounterOrder : Int = flatEntity.waterCounters.max(of: \.order) ?? 0
             waterCounterEntity.order = waterCounterOrder + 1
             DatabaseManager.shared.commonRealm.add(waterCounterEntity, update: .all)
-            if let flatEntity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id)
-            {
-                flatEntity.waterCounters.append(waterCounterEntity)
-            }
+            flatEntity.waterCounters.append(waterCounterEntity)
             do {
                 try DatabaseManager.shared.commonRealm.commitWrite()
                 updateData()
@@ -366,30 +433,33 @@ class CountersViewController: BxInputController {
     }
     
     func startServices() {
-        guard hasUpravdomData, let currentUrl = currentUrl else {
-            showAlert(title: "Ошибка", message: "Данные в Управдома невозможно отправить.\nОбратитесь в поддержку.")
+
+        upravdomService.url = currentUrl ?? urls.first ?? ""
+        
+        var services : [Promise<Data>] = []
+        servicesRows.forEach{ row in
+            row.update(services: &services, input: self)
+        }
+        guard services.count > 0 else {
+            showAlert(title: "Ошибка", message: "Выберите хотябы одного провайдера в 'Куда отправляем'")
             return
         }
-        
-        CircularSpinner.show("Передача показаний", animated: true, type: .indeterminate, showDismissButton: false)
-        
-        let services : [Promise<Data>] = [
-            UpravdomSendDataService(url: currentUrl).start(with: self),
-            RKSSendDataService().start(with: self)
-        ]
         when(fulfilled: services)
         .done {[weak self] datas in
+            self?.branchAllFlatData()
             CircularSpinner.hide()
-            self?.showAlert(title: "Bingo!", message: "Ваши показания успешно отправлены")
+            self?.showAlert(title: "Bingo!", message: "Ваши показания успешно отправлены"){
+                self?.navigationController?.popViewController(animated: true)
+            }
         }.catch {[weak self] error in
             CircularSpinner.hide()
             self?.showAlert(title: "Ошибка", message: error.localizedDescription)
         }
     }
     
-    func showAlert(title: String, message: String){
+    func showAlert(title: String, message: String, handler : (() -> Void)? = nil){
         let okAction = UIAlertAction(title: "OK", style: .default) {[weak self] _ in
-            self?.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: handler)
         }
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -397,6 +467,10 @@ class CountersViewController: BxInputController {
         present(alertController, animated: true, completion: nil)
     }
     
+    
+
 
 }
+
+
 

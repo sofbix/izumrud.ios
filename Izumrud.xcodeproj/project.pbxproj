@@ -10,9 +10,14 @@
 		03059B1AF15625CC47DAD2DB /* Pods_Izumrud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */; };
 		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
 		C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */; };
-		C39AEA50262EBB4E000109E9 /* CountersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA4E262EBB4E000109E9 /* CountersViewController.swift */; };
 		C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */; };
-		E30F303125926359000DD810 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303025926359000DD810 /* Service.swift */; };
+		C3AAFF0A2745982B002900DB /* SendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF092745982B002900DB /* SendDataService.swift */; };
+		C3AAFF0F2745991D002900DB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF0C2745991D002900DB /* String.swift */; };
+		C3AAFF102745991D002900DB /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF0D2745991D002900DB /* UIButton.swift */; };
+		C3AAFF112745991D002900DB /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF0E2745991D002900DB /* DateFormatter.swift */; };
+		C3AAFF152745996C002900DB /* CheckProviderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF132745996C002900DB /* CheckProviderRow.swift */; };
+		C3AAFF1727459B3E002900DB /* FlatCountersDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */; };
+		C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1927459E12002900DB /* HistoryTableController.swift */; };
 		E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */; };
 		E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303A25927BC9000DD810 /* RKSSendDataService.swift */; };
 		E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3214DC324C4B66B00872B81 /* AppDelegate.swift */; };
@@ -30,9 +35,14 @@
 		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterCounterViewModel.swift; sourceTree = "<group>"; };
-		C39AEA4E262EBB4E000109E9 /* CountersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountersViewController.swift; sourceTree = "<group>"; };
 		C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
-		E30F303025926359000DD810 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		C3AAFF092745982B002900DB /* SendDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendDataService.swift; sourceTree = "<group>"; };
+		C3AAFF0C2745991D002900DB /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		C3AAFF0D2745991D002900DB /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		C3AAFF0E2745991D002900DB /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		C3AAFF132745996C002900DB /* CheckProviderRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckProviderRow.swift; sourceTree = "<group>"; };
+		C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatCountersDetailsController.swift; sourceTree = "<group>"; };
+		C3AAFF1927459E12002900DB /* HistoryTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableController.swift; sourceTree = "<group>"; };
 		E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomSendDataService.swift; sourceTree = "<group>"; };
 		E30F303A25927BC9000DD810 /* RKSSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSSendDataService.swift; sourceTree = "<group>"; };
 		E3214DC024C4B66B00872B81 /* Izumrud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Izumrud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +81,7 @@
 			children = (
 				C39AEA53262EBB99000109E9 /* Contacts */,
 				C39AEA4C262EBB4E000109E9 /* Counters */,
+				C3AAFF1827459E12002900DB /* History */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -78,8 +89,9 @@
 		C39AEA4C262EBB4E000109E9 /* Counters */ = {
 			isa = PBXGroup;
 			children = (
+				C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */,
 				C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */,
-				C39AEA4E262EBB4E000109E9 /* CountersViewController.swift */,
+				C3AAFF132745996C002900DB /* CheckProviderRow.swift */,
 			);
 			path = Counters;
 			sourceTree = "<group>";
@@ -90,6 +102,24 @@
 				C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		C3AAFF0B2745991D002900DB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C3AAFF0C2745991D002900DB /* String.swift */,
+				C3AAFF0D2745991D002900DB /* UIButton.swift */,
+				C3AAFF0E2745991D002900DB /* DateFormatter.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C3AAFF1827459E12002900DB /* History */ = {
+			isa = PBXGroup;
+			children = (
+				C3AAFF1927459E12002900DB /* HistoryTableController.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		DCF38B662D059D5522903D2B /* Pods */ = {
@@ -123,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				E3863D5724F7BB2F00C3C0B0 /* DB */,
+				C3AAFF0B2745991D002900DB /* Extensions */,
 				E3863D5A24F7BCF900C3C0B0 /* Network */,
 				C39AEA47262EB878000109E9 /* Features */,
 				E3214DC324C4B66B00872B81 /* AppDelegate.swift */,
@@ -148,7 +179,7 @@
 		E3863D5A24F7BCF900C3C0B0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				E30F303025926359000DD810 /* Service.swift */,
+				C3AAFF092745982B002900DB /* SendDataService.swift */,
 				E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */,
 				E30F303A25927BC9000DD810 /* RKSSendDataService.swift */,
 			);
@@ -271,16 +302,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */,
+				C3AAFF102745991D002900DB /* UIButton.swift in Sources */,
+				C3AAFF152745996C002900DB /* CheckProviderRow.swift in Sources */,
 				C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */,
 				C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */,
+				C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */,
 				E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */,
 				E3863D5924F7BB4D00C3C0B0 /* DatabaseManager.swift in Sources */,
 				E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */,
+				C3AAFF0F2745991D002900DB /* String.swift in Sources */,
 				E3863D5E24F7C05600C3C0B0 /* WaterCounterEntity.swift in Sources */,
 				C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */,
+				C3AAFF1727459B3E002900DB /* FlatCountersDetailsController.swift in Sources */,
+				C3AAFF112745991D002900DB /* DateFormatter.swift in Sources */,
 				E3863D5C24F7BDB200C3C0B0 /* FlatEntity.swift in Sources */,
-				E30F303125926359000DD810 /* Service.swift in Sources */,
-				C39AEA50262EBB4E000109E9 /* CountersViewController.swift in Sources */,
+				C3AAFF0A2745982B002900DB /* SendDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

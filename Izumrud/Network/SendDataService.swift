@@ -1,5 +1,5 @@
 //
-//  Service.swift
+//  SendDataService.swift
 //  Izumrud
 //
 //  Created by Sergey Balalaev on 22.12.2020.
@@ -9,40 +9,65 @@
 import Foundation
 import PromiseKit
 import Alamofire
+import CircularSpinner
+import BxInputController
 
-protocol Service {
-    
-    associatedtype Input
-    
-    var title: String {get}
-    
-    func map(_ input: Input) -> Promise<Data>
-    
-    func checkInputData(_ data: Input) -> String?
-    func checkOutputData(with data: Data) -> String?
+struct ProgressService {
+
+    func start(with title: String) -> Promise<Data> {
+        return Promise { seal in
+            #warning("May be is sync? Please fixed and test! I think it can show only first message")
+            DispatchQueue.main.async {
+                CircularSpinner.show(title, animated: true, type: .indeterminate, showDismissButton: false)
+                seal.fulfill(Data())
+            }
+        }
+    }
     
 }
 
-
-extension Service {
+protocol SendDataService {
     
-    // default realization have not input error
-    func checkInputData(_ data: Input) -> String? {
-        return nil
+    var name: String {get}
+    var title: String {get}
+    
+    var days: Range<Int> {get}
+    
+    associatedtype Input
+
+    func map(_ input: Input) -> Promise<Data>
+    
+    func addCheckers(for input: Input)
+    
+    func checkOutputData(with data: Data) -> String?
+    
+    func firstlyCheckAvailable() -> String?
+}
+
+
+extension SendDataService {
+    
+    // default realization has not input error
+    func addCheckers(for input: Input) {
+        //
     }
     
-    // default realization have not output error
+    // default realization has not output error
     func checkOutputData(with data: Data) -> String? {
         return nil
     }
     
-    func start(with input: Input) -> Promise<Data> {
-        if var errorMessage = self.checkInputData(input) {
-            if errorMessage.isEmpty {
-                errorMessage = "Ошибка входных данных"
-            }
-            return error(with: errorMessage)
+    // default realization has error for dayes range
+    func firstlyCheckAvailable() -> String? {
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: Date())
+        if day < days.lowerBound || day > days.upperBound {
+            return "Принимает с \(days.lowerBound) по \(days.upperBound) число"
         }
+        return nil
+    }
+    
+    func start(with input: Input) -> Promise<Data> {
         return map(input)
     }
     

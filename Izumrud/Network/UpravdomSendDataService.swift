@@ -10,18 +10,17 @@ import Foundation
 import PromiseKit
 import Alamofire
 
-struct UpravdomSendDataService : Service {
+class UpravdomSendDataService : SendDataService {
     
     
-    typealias Input = CountersViewController
+    typealias Input = FlatCountersDetailsController
     
     
     let title: String = "Управдом"
-    let url: String
+    let name: String = "Upravdom"
+    let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 20))
     
-    init(url: String){
-        self.url = url
-    }
+    var url: String = ""
     
     
     func map(_ input: Input) -> Promise<Data> {

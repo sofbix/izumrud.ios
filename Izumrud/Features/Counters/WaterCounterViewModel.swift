@@ -1,9 +1,8 @@
 //
 //  WaterCounterViewModel.swift
-//  Izumrud
+//  SamaraCounter
 //
-//  Created by Sergey Balalaev on 20.04.2021.
-//  Copyright © 2021 Byterix. All rights reserved.
+//  Created by Sergey Balalaev on 21.04.2021.
 //
 
 import Foundation
@@ -49,11 +48,8 @@ class WaterCounterViewModel {
         result.order = order
         result.name = nameRow.value ?? ""
 
-        #warning("need throw exception if isn't Int value")
         result.hotCount = hotCountRow.value ?? ""
         result.hotSerialNumber = hotSerialNumberRow.value ?? ""
-        
-        #warning("need throw exception if isn't Int value")
         result.coldCount = coldCountRow.value ?? ""
         result.coldSerialNumber = coldSerialNumberRow.value ?? ""
         

@@ -1,19 +1,19 @@
 PODS:
   - Alamofire (4.9.1)
-  - BxInputController/Common (2.19.0):
+  - BxInputController/Common (2.19.1):
     - BxObjC/Common
     - BxObjC/Control/Navigation
     - BxObjC/Control/Rate
     - BxObjC/Control/ShakeAnimation
     - BxObjC/Control/TextView
     - BxTextField
-  - BxObjC/Common (1.7.0)
-  - BxObjC/Control/Navigation (1.7.0):
+  - BxObjC/Common (1.9.3)
+  - BxObjC/Control/Navigation (1.9.3):
     - BxObjC/Common
     - BxObjC/Control/ShakeAnimation
-  - BxObjC/Control/Rate (1.7.0)
-  - BxObjC/Control/ShakeAnimation (1.7.0)
-  - BxObjC/Control/TextView (1.7.0)
+  - BxObjC/Control/Rate (1.9.3)
+  - BxObjC/Control/ShakeAnimation (1.9.3)
+  - BxObjC/Control/TextView (1.9.3)
   - BxTextField (1.11)
   - CircularSpinner (1.4.2)
   - CodableAlamofire (1.1.2):
@@ -30,11 +30,11 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.15.3):
     - PromiseKit/CorePromise
-  - Realm (10.10.0):
-    - Realm/Headers (= 10.10.0)
-  - Realm/Headers (10.10.0)
-  - RealmSwift (10.10.0):
-    - Realm (= 10.10.0)
+  - Realm (10.20.0):
+    - Realm/Headers (= 10.20.0)
+  - Realm/Headers (10.20.0)
+  - RealmSwift (10.20.0):
+    - Realm (= 10.20.0)
   - RSLoadingView (1.1.3)
   - XMLDictionary (1.4.1)
 
@@ -78,8 +78,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  BxInputController: 4f570ee2ffcdd6c0f36434902e6f97df029e0994
-  BxObjC: bfbb9716513900c893899e63833d5e469ca48a3e
+  BxInputController: 218d9c6b42c984083d17ad99b2c6808d0bb874a8
+  BxObjC: aec2f74a8046843ed752eade94874d5dea0e6a15
   BxTextField: baba0ef872edf277d5e240bbbf66b8e428a17acc
   CircularSpinner: adfe477ac5a7b95dcae8af50311a3465f9557291
   CodableAlamofire: b7adfb2e5e980392014b4b3f3b8b62c01b9de4aa
@@ -87,11 +87,11 @@ SPEC CHECKSUMS:
   GTProgressBar: a480283ecb0ada50de16c71e634892826928f640
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
-  Realm: f501df41a4222c67850c77cf135d472192ecf294
-  RealmSwift: c69aadfc7db0d60075178d037c2f34ada73d5201
+  Realm: ae32bdc1da7d19c7617e0400201a77acd4a211b9
+  RealmSwift: c95eec6a712924870b2e36c4c081d63ec07e5414
   RSLoadingView: c7749afdd455229643e8f34277d0695973a15b1a
   XMLDictionary: fa07b6ff422b3a91d47a5de9bc82e3fc04fbd167
 
 PODFILE CHECKSUM: bda0c19646b0c729a48a84f37cdac06c860fc7fd
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

@@ -71,11 +71,12 @@ extension SendDataService {
         return map(input)
     }
     
+    func errorObject(with message: String) -> NSError {
+        return NSError(domain: self.title, code: 412, userInfo: [NSLocalizedDescriptionKey: message])
+    }
+    
     func error(with message: String) -> Promise<Data> {
-        let error = NSError(domain: self.title, code: 412, userInfo: [NSLocalizedDescriptionKey: message])
-        return Promise { seal in
-            seal.reject(error)
-        }
+        return Promise(error: errorObject(with: message))
     }
     
     func service(_ urlRequest: URLRequest) -> Promise<Data> {

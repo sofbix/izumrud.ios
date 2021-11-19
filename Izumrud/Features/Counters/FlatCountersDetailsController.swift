@@ -81,6 +81,8 @@ class FlatCountersDetailsController: BxInputController {
         dayElectricCountRow.textSettings.keyboardType = .numberPad
         nightElectricCountRow.textSettings.keyboardType = .numberPad
         
+        esPlusAccountNumberRow.textSettings.keyboardType = .numberPad
+        
         
         updateData()
         
@@ -132,6 +134,7 @@ class FlatCountersDetailsController: BxInputController {
         phoneNumberRow.value = flatEntity.phoneNumber
         emailRow.value = flatEntity.email
         rksAccountNumberRow.value = flatEntity.rksAccountNumber
+        esPlusAccountNumberRow.value = flatEntity.esPlusAccountNumber
         commentsRow.value = flatEntity.comments
         
         dayElectricCountRow.value = "\(flatEntity.dayElectricCount)"
@@ -139,7 +142,7 @@ class FlatCountersDetailsController: BxInputController {
         
         var sections = [
             BxInputSection(headerText: "Данные собственника",
-                           rows: [surnameRow, nameRow, patronymicRow, homeNumberRow, flatNumberRow, phoneNumberRow, emailRow, rksAccountNumberRow],
+                           rows: [surnameRow, nameRow, patronymicRow, homeNumberRow, flatNumberRow, phoneNumberRow, emailRow, rksAccountNumberRow, esPlusAccountNumberRow],
                            footerText: nil),
             BxInputSection(headerText: "Комментарии для УК", rows: [commentsRow], footerText: nil),
             BxInputSection(headerText: "Показания электрического счётчика", rows: [dayElectricCountRow, nightElectricCountRow], footerText: nil)
@@ -227,6 +230,7 @@ class FlatCountersDetailsController: BxInputController {
             flatEntity.phoneNumber = phoneNumberRow.value ?? ""
             flatEntity.email = emailRow.value ?? ""
             flatEntity.rksAccountNumber = rksAccountNumberRow.value ?? ""
+            flatEntity.esPlusAccountNumber = esPlusAccountNumberRow.value ?? ""
             flatEntity.comments = commentsRow.value ?? ""
             
             #warning("Please check dayElectricCountRow & nightElectricCountRow to Int values")

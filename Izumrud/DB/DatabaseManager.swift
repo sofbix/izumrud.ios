@@ -51,7 +51,7 @@ class DatabaseManager {
                 inMemoryIdentifier: nil,
                 encryptionKey: nil,
                 readOnly: false,
-                schemaVersion: 6,
+                schemaVersion: 7,
                 migrationBlock: nil,
                 deleteRealmIfMigrationNeeded: false,
                 objectTypes: nil)

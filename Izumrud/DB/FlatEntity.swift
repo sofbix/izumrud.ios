@@ -32,6 +32,8 @@ class FlatEntity: Object {
     
     @objc dynamic var rksAccountNumber: String = ""
     
+    @objc dynamic var esPlusAccountNumber: String = ""
+    
     @objc dynamic var serviceProvidersToSending: String = ""
 
     @objc dynamic var sentDate: Date?

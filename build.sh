@@ -1,10 +1,10 @@
 
 #
 #  build.sh
-#  version 2.1.2
+#  version 2.2
 #
 #  Created by Sergey Balalaev on 20.08.15.
-#  Copyright (c) 2015-2021 ByteriX. All rights reserved.
+#  Copyright (c) 2015-2022 ByteriX. All rights reserved.
 #
 
 PROJECT_NAME=""
@@ -14,8 +14,11 @@ SETUP_VERSION=auto
 IS_PODS_INIT=false
 IS_TAG_VERSION=false
 HAS_BITCODE=false
+HAS_TESTING=false
+HAS_IPA_BUILD=true
 OUTPUT_NAME=""
 TEAM_ID=""
+TEST_DESTINATION="platform=iOS Simulator,name=iPhone 13"
 
 EXPORT_PLIST=""
 PROVISIONING_PROFILE="" #reserver
@@ -55,7 +58,7 @@ case $key in
     -u|--user)
     USERNAME="$2"
     PASSWORD="$3"
-    if [ PASSWORD == "" ]; then
+    if [ "$PASSWORD" == "" ]; then
         echo "ERROR: $1 need 2 parameters"
         exit
     fi
@@ -95,6 +98,18 @@ case $key in
     HAS_BITCODE=true
     shift # past argument
     ;;
+    -test|--test)
+    TEST_VALUE="$2"
+    HAS_TESTING=true
+    HAS_IPA_BUILD=false
+    if [ "$TEST_VALUE" == "" ]; then
+        echo "WARNING: $1 need 1 parameter: test platform. Default is ${TEST_DESTINATION}"
+    else
+        TEST_DESTINATION="$TEST_VALUE"
+    fi
+    shift # past argument
+    shift # past value
+    ;;
     -h|--help)
     echo ""
     echo "Help for call build script with parameters:"
@@ -109,6 +124,7 @@ case $key in
     echo "  -ip, --initPods      : If selected then will update Pods as is as from 'Pods.lock' in a start. Default is not selected."
     echo "  -at, --addTag        : If selected then will add Tag after build. Default is not selected."
     echo "  -bc, --bitcode       : If selected then will export with bitcode (when defined team). Default is not selected."
+    echo "  -test, --test        : If selected then will build and run tests for special destination who you can choise. Default is not selected. Example of destination: 'platform=iOS Simulator,name=iPhone 12,OS=14.0'"
     echo ""
     echo "Emample: sh build.sh -p ProjectName -ip -t --version auto\n\n"
     exit 0
@@ -150,6 +166,14 @@ if [ "$EXPORT_PLIST" == "" ]; then
     else
         EXPORT_PLIST="./AppStore.plist"
     fi
+fi
+
+if [ -d "${PROJECT_NAME}.xcworkspace" ]; then
+    XCODE_PROJECT="-workspace ${PROJECT_NAME}.xcworkspace"
+    echo "Using for workspace: ${XCODE_PROJECT}\n"
+else
+    XCODE_PROJECT="-project ${PROJECT_NAME}.xcodeproj"
+    echo "Start for project: ${XCODE_PROJECT}\n"
 fi
 
 # Setup version
@@ -199,20 +223,12 @@ createIPA()
     local EXPORT_PLIST=$3
     local PROVISIONING_PROFILE=$4
 
-    ACTION="clean archive"
+    local ACTION="clean archive"
     APP="${BUILD_DIR}/${CONFIGURATION_NAME}-iphoneos/${PROJECT_NAME}.app"
     ARCHIVE_PATH="${BUILD_DIR}/${SCHEME_NAME}.xcarchive"
     
     clearCurrentBuild
     mkdir -p "${APP_CURRENT_BUILD_PATH}"
-
-    if [ -d "${PROJECT_NAME}.xcworkspace" ]; then
-        XCODE_PROJECT="-workspace ${PROJECT_NAME}.xcworkspace"
-        echo "Start for workspace!!!\n"
-    else
-        XCODE_PROJECT="-project ${PROJECT_NAME}.xcodeproj"
-        echo "Start for workspace!!!\n"
-    fi
     
     PROVISIONING_PROFILE_PARAMS=""
     if [ "${PROVISIONING_PROFILE}" != "" ]; then
@@ -252,6 +268,19 @@ createIPA()
 
 }
 
+tests(){
+    echo "Strarting Tests with distination: ${TEST_DESTINATION}\n\n"
+    local ACTION="clean build test"
+    xcodebuild \
+    $ACTION \
+    $XCODE_PROJECT \
+    -scheme ${SCHEME_NAME} \
+    -destination "${TEST_DESTINATION}"
+
+    checkExit
+    echo "Tests finished ${PROJECT_NAME}\n\n"
+}
+
 createIpaAndSave(){
     local CONFIGURATION_NAME=$1
     local SCHEME_NAME=$2
@@ -276,8 +305,8 @@ createIpaAndSave(){
 }
 
 tagCommit(){
-    git tag -f -a "${BUILD_VERSION_TAG_GROUP_NAME}/${CURRENT_PROJECT_VERSION}" -m build
-    git push -f --tags
+	git tag -f -a "${BUILD_VERSION_TAG_GROUP_NAME}/${CURRENT_PROJECT_VERSION}" -m build
+	git push -f --tags
     checkExit
     echo "Tag addition complete"
 }
@@ -333,15 +362,15 @@ copyToDownload(){
 }
 
 podSetup(){
-    if [ -f Podfile.lock ]; then
-        rm -rf ~/Library/Caches/CocoaPods
-        rm -rf Pods
-        pod install --repo-update
-        checkExit
-    elif [ -f Podfile ]; then
-        pod update
-        checkExit
-    fi
+	if [ -f Podfile.lock ]; then
+		rm -rf ~/Library/Caches/CocoaPods
+		rm -rf Pods
+	    pod install --repo-update
+	    checkExit
+	elif [ -f Podfile ]; then
+		pod update
+		checkExit
+	fi
 }
 
 uploadToStore(){
@@ -365,7 +394,13 @@ echo "SCHEME_NAME          = ${SCHEME_NAME}"
 echo "OUTPUT_NAME          = ${OUTPUT_NAME}"
 cat "$APP_CONFIG_PATH"
 
-createIpaAndSave "${CONFIGURATION_NAME}" "${SCHEME_NAME}" "${EXPORT_PLIST}" "${PROVISIONING_PROFILE}"
+if $HAS_TESTING ; then
+    tests
+fi
+
+if $HAS_IPA_BUILD ; then
+    createIpaAndSave "${CONFIGURATION_NAME}" "${SCHEME_NAME}" "${EXPORT_PLIST}" "${PROVISIONING_PROFILE}"
+fi
 
 if [ "$USERNAME" != "" ] ; then
     echo ""

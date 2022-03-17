@@ -378,17 +378,22 @@ class FlatCountersDetailsController: BxInputController {
             .response
         {[weak self] (response) in
             
+            guard let this = self else {
+                return
+            }
+            
             if let error = response.error {
                 
-                self?.showAlert(title: "Ошибка", message: error.localizedDescription)
-                
-                CircularSpinner.hide()
-            } else if let data = response.data {
-                
-                guard let this = self else {
+                if isNeedShowError {
+                    this.showAlert(title: "Ошибка", message: error.localizedDescription)
+                } else {
+                    this.tryFirstLoad()
                     return
                 }
                 
+                CircularSpinner.hide()
+            } else if let data = response.data {
+
                 var errorMessage: String? = nil
                 
                 do {

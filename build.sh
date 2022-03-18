@@ -1,7 +1,7 @@
 
 #
 #  build.sh
-#  version 2.2
+#  version 2.3
 #
 #  Created by Sergey Balalaev on 20.08.15.
 #  Copyright (c) 2015-2022 ByteriX. All rights reserved.
@@ -19,12 +19,18 @@ HAS_IPA_BUILD=true
 OUTPUT_NAME=""
 TEAM_ID=""
 TEST_DESTINATION="platform=iOS Simulator,name=iPhone 13"
+SRC_DIR="${PWD}"
 
 EXPORT_PLIST=""
 PROVISIONING_PROFILE="" #reserver
 
 USERNAME=""
 PASSWORD=""
+API_KEY=""
+API_ISSUER=""
+AUTH_KEY=""
+
+GOOGLE_SERVICE_PLIST=""
 
 # get parameters of script
 
@@ -66,6 +72,19 @@ case $key in
     shift # past value 1
     shift # past value 2
     ;;
+    -key|--key)
+    API_KEY="$2"
+    API_ISSUER="$3"
+    AUTH_KEY="$4"
+    if [ "$AUTH_KEY" == "" ]; then
+        echo "ERROR: $1 need 3 parameters"
+        exit
+    fi
+    shift # past argument
+    shift # past value 1
+    shift # past value 2
+    shift # past value 3
+    ;;
     -v|--version)
     SETUP_VERSION="$2"
     shift # past argument
@@ -83,6 +102,11 @@ case $key in
     ;;
     -ep|--exportPlist)
     EXPORT_PLIST="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -gsp|--googlePlist)
+    GOOGLE_SERVICE_PLIST=$2
     shift # past argument
     shift # past value
     ;;
@@ -117,10 +141,12 @@ case $key in
     echo "  -c, --configuration  : name of configuration. Default is Release."
     echo "  -s, --scheme         : name of target scheme. Default is the same as project name."
     echo "  -u, --user           : 2 params: login password. It specialized user, who created in Connection of developer programm. If defined then App will be uploaded to Store."
+    echo "  -key, --key          : 3 params: apiKey, apiIssuer and path to key with p8. It specialized user, who created in Connection of developer programm. If defined then App will be uploaded to Store."
     echo "  -v, --version        : number of bundle version of the App. If has 'auto' value then will be detected from tags. Default auto."
     echo "  -o, --output         : name of out ipa file. Default is SchemeName.ipa."
     echo "  -t, --team           : team identifier of your developer program for a upload IPA to Connection AppSore. If defined -ep doesn't meater and export plist will created automaticle."
-    echo "  -ep, --exportPlist   : export plist file. When team is empty has default value of AdHoc.plist or AppStore.plist when defined -u/--user."
+    echo "  -ep, --exportPlist   : export plist file. When team is empty has default value of AdHoc.plist or AppStore.plist when defined -t/--team."
+    echo "  -gsp, --googlePlist  : path to GoogleService.plist with information for sending to Firebase/Crashlytics"
     echo "  -ip, --initPods      : If selected then will update Pods as is as from 'Pods.lock' in a start. Default is not selected."
     echo "  -at, --addTag        : If selected then will add Tag after build. Default is not selected."
     echo "  -bc, --bitcode       : If selected then will export with bitcode (when defined team). Default is not selected."
@@ -141,7 +167,7 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 # Initalize
 
-APP_BUILD_PATH="${PWD}/.build"
+APP_BUILD_PATH="${SRC_DIR}/.build"
 BUILD_DIR="${APP_BUILD_PATH}/xcode"
 APP_CURRENT_BUILD_PATH="${APP_BUILD_PATH}/Current"
 APP_CONFIG_PATH="./build.config"
@@ -224,7 +250,8 @@ createIPA()
     local PROVISIONING_PROFILE=$4
 
     local ACTION="clean archive"
-    APP="${BUILD_DIR}/${CONFIGURATION_NAME}-iphoneos/${PROJECT_NAME}.app"
+    APP_DIR="${BUILD_DIR}/${CONFIGURATION_NAME}-iphoneos"
+    APP="${APP_DIR}/${PROJECT_NAME}.app"
     ARCHIVE_PATH="${BUILD_DIR}/${SCHEME_NAME}.xcarchive"
     
     clearCurrentBuild
@@ -266,6 +293,17 @@ createIPA()
     checkExit
     echo "Created .ipa for ${PROJECT_NAME}\n"
 
+    if [ "$GOOGLE_SERVICE_PLIST" != "" ] ; then
+        uploadSymbolesToFirebase
+    fi
+}
+
+uploadSymbolesToFirebase(){
+    echo "dSYMs files uploading to Firebase/Crashlytics"
+    find "${APP_DIR}" -name "*.dSYM" | xargs -I \{\}  echo \{\} 
+    find "${APP_DIR}" -name "*.dSYM" | xargs -I \{\} "${SRC_DIR}/Pods/FirebaseCrashlytics/upload-symbols" -gsp "${SRC_DIR}/${GOOGLE_SERVICE_PLIST}" -p ios \{\}
+    checkExit
+    echo "dSYMs uploaded to Firebase for ${PROJECT_NAME}\n"
 }
 
 tests(){
@@ -278,7 +316,7 @@ tests(){
     -destination "${TEST_DESTINATION}"
 
     checkExit
-    echo "Tests finished ${PROJECT_NAME}\n\n"
+    echo "Tests finished for ${PROJECT_NAME}\n\n"
 }
 
 createIpaAndSave(){
@@ -373,8 +411,18 @@ podSetup(){
 	fi
 }
 
-uploadToStore(){
+uploadToStoreUser(){
     xcrun altool --upload-app -f "${IPA_PATH}" -u $USERNAME -p $PASSWORD
+    checkExit
+    echo "Application uploading finished with success"
+}
+
+uploadToStoreKey(){
+    KEYS_DIR="${PWD}/private_keys"
+    rm -rf "${KEYS_DIR}"
+    mkdir -p "${KEYS_DIR}"
+    cp -f "${AUTH_KEY}" "${KEYS_DIR}/AuthKey_${API_KEY}.p8"
+    xcrun altool --upload-app -f "${IPA_PATH}" -t "iOS" --apiKey "${API_KEY}" --apiIssuer "${API_ISSUER}"
     checkExit
     echo "Application uploading finished with success"
 }
@@ -406,9 +454,14 @@ if [ "$USERNAME" != "" ] ; then
     echo ""
     echo "Starting upload to store:"
     echo "USERNAME          = ${USERNAME}"
-    echo "PASSWORD          = ${PASSWORD}"
 
-    uploadToStore
+    uploadToStoreUser
+elif [ "$API_KEY" != "" ] ; then
+    echo ""
+    echo "Starting upload to store:"
+    echo "API KEY          = ${API_KEY}"
+
+    uploadToStoreKey
 fi
 
 if $IS_TAG_VERSION ; then

@@ -63,6 +63,7 @@ class FlatCountersDetailsController: BxInputController {
     
     let upravdomService = UpravdomSendDataService()
     private lazy var servicesRows : [CheckProviderProtocol] = [
+        CheckProviderRow(BusinesCenterService()),
         CheckProviderRow(upravdomService),
         CheckProviderRow(RKSSendDataService()),
         CheckProviderRow(EsPlusSendDataService())

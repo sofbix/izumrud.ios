@@ -19,6 +19,7 @@
 		C3AAFF1727459B3E002900DB /* FlatCountersDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */; };
 		C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1927459E12002900DB /* HistoryTableController.swift */; };
 		C3AAFF1C2746C4D1002900DB /* EsPlusSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1B2746C4D1002900DB /* EsPlusSendDataService.swift */; };
+		C3F52085283581E000534408 /* BusinesCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F52084283581E000534408 /* BusinesCenterService.swift */; };
 		E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */; };
 		E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303A25927BC9000DD810 /* RKSSendDataService.swift */; };
 		E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3214DC324C4B66B00872B81 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 		C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatCountersDetailsController.swift; sourceTree = "<group>"; };
 		C3AAFF1927459E12002900DB /* HistoryTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableController.swift; sourceTree = "<group>"; };
 		C3AAFF1B2746C4D1002900DB /* EsPlusSendDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsPlusSendDataService.swift; sourceTree = "<group>"; };
+		C3F52084283581E000534408 /* BusinesCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinesCenterService.swift; sourceTree = "<group>"; };
 		E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomSendDataService.swift; sourceTree = "<group>"; };
 		E30F303A25927BC9000DD810 /* RKSSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSSendDataService.swift; sourceTree = "<group>"; };
 		E3214DC024C4B66B00872B81 /* Izumrud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Izumrud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,6 +187,7 @@
 				C3AAFF092745982B002900DB /* SendDataService.swift */,
 				E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */,
 				E30F303A25927BC9000DD810 /* RKSSendDataService.swift */,
+				C3F52084283581E000534408 /* BusinesCenterService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3F52085283581E000534408 /* BusinesCenterService.swift in Sources */,
 				E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */,
 				C3AAFF102745991D002900DB /* UIButton.swift in Sources */,
 				C3AAFF152745996C002900DB /* CheckProviderRow.swift in Sources */,
@@ -476,7 +480,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byterix.izumrud;
 				PRODUCT_NAME = Izumrud;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -499,7 +503,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byterix.izumrud;
 				PRODUCT_NAME = Izumrud;
 				PROVISIONING_PROFILE_SPECIFIER = "";

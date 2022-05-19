@@ -11,7 +11,12 @@ import PromiseKit
 import MessageUI
 
 class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControllerDelegate {
+    
+    var result: Promise<Data>?
+    
     func map(_ input: FlatCountersDetailsController) -> Promise<Data> {
+        
+        result = nil
         
         if MFMailComposeViewController.canSendMail() {
             
@@ -54,14 +59,42 @@ class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControl
 
             input.present(mailComposeViewController, animated: true, completion: nil)
 
+        } else {
+            error("Почта не настроена для отправки показаний")
         }
         
-        return .value(Data())
+        return Promise<Data>{[weak self] resolver in
+            DispatchQueue.global(qos: .utility).async {[weak self] in
+                while(self != nil && self?.result == nil){
+                    sleep(1)
+                }
+                self?.result?.done { data in
+                    resolver.fulfill(data)
+                }.catch{ error in
+                    resolver.reject(error)
+                }
+            }
+        }
+    }
+    
+    func error(_ message: String){
+        let error = NSError(domain: self.title, code: 412, userInfo: [NSLocalizedDescriptionKey: message])
+        result = .init(error: error)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
 
-         controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true) {[weak self] in
+            if let error = error {
+                self?.result = Promise<Data>(error: error)
+            } else {
+                if result == .sent {
+                    self?.result = .value(Data())
+                } else {
+                    self?.error("Показания не были отправлены почтой")
+                }
+            }
+        }
 
     }
     

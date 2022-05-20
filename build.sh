@@ -412,7 +412,7 @@ podSetup(){
 }
 
 uploadToStoreUser(){
-    xcrun altool --upload-app -f "${IPA_PATH}" -u $USERNAME -p $PASSWORD
+    xcrun altool --upload-app -f "${IPA_PATH}" -t "iOS" -u $USERNAME -p $PASSWORD
     checkExit
     echo "Application uploading finished with success"
 }

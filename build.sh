@@ -1,7 +1,7 @@
 
 #
 #  build.sh
-#  version 2.3
+#  version 2.3.1
 #
 #  Created by Sergey Balalaev on 20.08.15.
 #  Copyright (c) 2015-2022 ByteriX. All rights reserved.
@@ -412,7 +412,7 @@ podSetup(){
 }
 
 uploadToStoreUser(){
-    xcrun altool --upload-app -f "${IPA_PATH}" -u $USERNAME -p $PASSWORD
+    xcrun altool --upload-app -f "${IPA_PATH}" -t "iOS" -u $USERNAME -p $PASSWORD
     checkExit
     echo "Application uploading finished with success"
 }

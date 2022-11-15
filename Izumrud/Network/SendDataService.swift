@@ -26,7 +26,7 @@ struct ProgressService {
     
 }
 
-protocol SendDataService {
+protocol SendDataService: Any {
     
     var name: String {get}
     var title: String {get}
@@ -95,15 +95,28 @@ extension SendDataService {
     private func map(_ request: DataRequest) -> Promise<Data> {
         return Promise { seal in
             request.response{ (response) in
-                
+
                 if let error = response.error {
-                    
                     seal.reject(error)
-                } else if let data = response.data {
-                    
+                    return
+                }
+                
+                guard let httpResponse = response.response else {
+                    seal.reject(NSError(domain: self.title, code: 404, userInfo: [NSLocalizedDescriptionKey: "\(self.title): Нет ответа от сервера"]))
+                    return
+                }
+                let status = httpResponse.statusCode
+                if self.isError(statusCode: status) {
+                    let localizedMessage = HTTPURLResponse.localizedString(forStatusCode: status)
+                    let message = "\(self.title): \(localizedMessage) (\(status))"
+                    seal.reject(NSError(domain: self.title, code: status, userInfo: [NSLocalizedDescriptionKey: message]))
+                    return
+                }
+                
+                if let data = response.data {
                     if var errorMessage = self.checkOutputData(with: data) {
                         if errorMessage.isEmpty {
-                            errorMessage = "Данные не переданы"
+                            errorMessage = "\(self.title): Данные не переданы"
                         }
                         let error = NSError(domain: self.title, code: 412, userInfo: [NSLocalizedDescriptionKey: errorMessage])
                         seal.reject(error)
@@ -113,6 +126,10 @@ extension SendDataService {
                 }
             }
         }
+    }
+    
+    private func isError(statusCode: Int) -> Bool {
+        statusCode >= 300 || statusCode < 200
     }
     
 }

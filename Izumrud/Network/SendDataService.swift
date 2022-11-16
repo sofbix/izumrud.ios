@@ -79,20 +79,21 @@ extension SendDataService {
         return Promise(error: errorObject(with: message))
     }
     
-    func service(_ urlRequest: URLRequest) -> Promise<Data> {
-        return map(Alamofire.SessionManager.default.request(urlRequest))
+    func service(_ urlRequest: URLRequest, isNeedCheckOutput: Bool = true) -> Promise<Data> {
+        return map(Alamofire.SessionManager.default.request(urlRequest), isNeedCheckOutput: isNeedCheckOutput)
     }
     
     func service(_ url: URLConvertible,
                  method: HTTPMethod = .get,
                  parameters: Parameters? = nil,
                  encoding: ParameterEncoding = URLEncoding.default,
-                 headers: HTTPHeaders? = nil) -> Promise<Data>
+                 headers: HTTPHeaders? = nil,
+                 isNeedCheckOutput: Bool = true) -> Promise<Data>
     {
-        return map(Alamofire.SessionManager.default.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers))
+        return map(Alamofire.SessionManager.default.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers), isNeedCheckOutput: isNeedCheckOutput)
     }
     
-    private func map(_ request: DataRequest) -> Promise<Data> {
+    private func map(_ request: DataRequest, isNeedCheckOutput: Bool = true) -> Promise<Data> {
         return Promise { seal in
             request.response{ (response) in
 
@@ -114,7 +115,7 @@ extension SendDataService {
                 }
                 
                 if let data = response.data {
-                    if var errorMessage = self.checkOutputData(with: data) {
+                    if isNeedCheckOutput, var errorMessage = self.checkOutputData(with: data) {
                         if errorMessage.isEmpty {
                             errorMessage = "\(self.title): Данные не переданы"
                         }

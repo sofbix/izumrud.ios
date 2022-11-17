@@ -11,10 +11,6 @@ target 'Izumrud' do
   # Networking
   pod 'Alamofire'
   pod 'PromiseKit'
-  pod 'CodableAlamofire'
-
-  # User Data
-  pod 'KeychainAccess'
 
   # Data base
   pod 'RealmSwift'
@@ -25,11 +21,8 @@ target 'Izumrud' do
   
   # XML
   pod 'Fuzi'
-  pod 'XMLDictionary'
   
   # Progress
-  pod 'RSLoadingView'
-  pod 'GTProgressBar'
   pod 'CircularSpinner', :git => 'https://github.com/Byterix/CircularSpinner.git'
 
 end

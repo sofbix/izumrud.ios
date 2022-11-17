@@ -16,11 +16,7 @@ PODS:
   - BxObjC/Control/TextView (1.9.3)
   - BxTextField (1.11)
   - CircularSpinner (1.4.2)
-  - CodableAlamofire (1.1.2):
-    - Alamofire (~> 4.0)
   - Fuzi (3.1.3)
-  - GTProgressBar (0.3.3)
-  - KeychainAccess (4.2.2)
   - PromiseKit (6.18.1):
     - PromiseKit/CorePromise (= 6.18.1)
     - PromiseKit/Foundation (= 6.18.1)
@@ -35,21 +31,14 @@ PODS:
   - Realm/Headers (10.32.3)
   - RealmSwift (10.32.3):
     - Realm (= 10.32.3)
-  - RSLoadingView (1.1.3)
-  - XMLDictionary (1.4.1)
 
 DEPENDENCIES:
   - Alamofire
   - BxInputController/Common
   - CircularSpinner (from `https://github.com/Byterix/CircularSpinner.git`)
-  - CodableAlamofire
   - Fuzi
-  - GTProgressBar
-  - KeychainAccess
   - PromiseKit
   - RealmSwift
-  - RSLoadingView
-  - XMLDictionary
 
 SPEC REPOS:
   trunk:
@@ -57,15 +46,10 @@ SPEC REPOS:
     - BxInputController
     - BxObjC
     - BxTextField
-    - CodableAlamofire
     - Fuzi
-    - GTProgressBar
-    - KeychainAccess
     - PromiseKit
     - Realm
     - RealmSwift
-    - RSLoadingView
-    - XMLDictionary
 
 EXTERNAL SOURCES:
   CircularSpinner:
@@ -82,16 +66,11 @@ SPEC CHECKSUMS:
   BxObjC: aec2f74a8046843ed752eade94874d5dea0e6a15
   BxTextField: baba0ef872edf277d5e240bbbf66b8e428a17acc
   CircularSpinner: adfe477ac5a7b95dcae8af50311a3465f9557291
-  CodableAlamofire: b7adfb2e5e980392014b4b3f3b8b62c01b9de4aa
   Fuzi: 4c10d6449c0b49a85cd75b13844c559c0fc71220
-  GTProgressBar: a480283ecb0ada50de16c71e634892826928f640
-  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   PromiseKit: 49d70c53d5d20e346beaea4b276b5dd2ab446bb4
   Realm: fdf6732924dc5e69e30e0db2c11e869f92b53f3d
   RealmSwift: 7c181da8fa1c2fe613656a77c198d6a3dc3879a1
-  RSLoadingView: c7749afdd455229643e8f34277d0695973a15b1a
-  XMLDictionary: fa07b6ff422b3a91d47a5de9bc82e3fc04fbd167
 
-PODFILE CHECKSUM: bda0c19646b0c729a48a84f37cdac06c860fc7fd
+PODFILE CHECKSUM: 937259e480cc34e9f658a249f1d813d9f43f5f4b
 
 COCOAPODS: 1.11.3

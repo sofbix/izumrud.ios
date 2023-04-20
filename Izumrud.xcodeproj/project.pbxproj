@@ -36,6 +36,7 @@
 		68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Izumrud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C339F67F29C830970095534F /* Izumrud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Izumrud.entitlements; sourceTree = "<group>"; };
 		C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterCounterViewModel.swift; sourceTree = "<group>"; };
 		C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		C3AAFF092745982B002900DB /* SendDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendDataService.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 		E3214DC224C4B66B00872B81 /* Izumrud */ = {
 			isa = PBXGroup;
 			children = (
+				C339F67F29C830970095534F /* Izumrud.entitlements */,
 				E3863D5724F7BB2F00C3C0B0 /* DB */,
 				C3AAFF0B2745991D002900DB /* Extensions */,
 				E3863D5A24F7BCF900C3C0B0 /* Network */,
@@ -471,6 +473,7 @@
 			baseConfigurationReference = AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Izumrud/Izumrud.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -494,6 +497,7 @@
 			baseConfigurationReference = 551223946D067F81B005C56F /* Pods-Izumrud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Izumrud/Izumrud.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;

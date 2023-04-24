@@ -62,7 +62,7 @@ extension SendDataService {
         let calendar = Calendar.current
         let day = calendar.component(.day, from: Date())
         if day < days.lowerBound || day > days.upperBound {
-            return "Принимает с \(days.lowerBound) по \(days.upperBound) число"
+            return "принимает с \(days.lowerBound) по \(days.upperBound) число"
         }
         return nil
     }

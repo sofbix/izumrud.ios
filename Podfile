@@ -13,7 +13,7 @@ target 'Izumrud' do
   pod 'PromiseKit'
 
   # Data base
-  pod 'RealmSwift'
+  pod 'RealmSwift', '= 10.32.3'
 
   # UI
   pod 'BxInputController/Common'
@@ -25,4 +25,12 @@ target 'Izumrud' do
   # Progress
   pod 'CircularSpinner', :git => 'https://github.com/Byterix/CircularSpinner.git'
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+    end
+  end
 end

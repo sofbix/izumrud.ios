@@ -61,16 +61,17 @@ class FlatCountersDetailsController: BxInputController {
         "https://upravdom63.ru/passport"
     ]
     
-    let upravdomService = UpravdomSendDataService()
+    private let upravdomService = UpravdomSendDataService()
+    private lazy var upravdomRow = CheckProviderRow(upravdomService)
     private lazy var servicesRows : [CheckProviderProtocol] = [
         CheckProviderRow(BusinesCenterService()),
-        CheckProviderRow(upravdomService),
+        upravdomRow,
         CheckProviderRow(RKSSendDataService()),
         CheckProviderRow(EsPlusSendDataService())
     ]
     private var currentUrl: String? = nil
     
-    let sendFooter: UIView = UIButton.createOnView(title: "Отправить показания", target: self, action: #selector(start))
+    private lazy var sendFooter: UIView = UIButton.createOnView(title: "Отправить показания", target: self, action: #selector(start))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +94,11 @@ class FlatCountersDetailsController: BxInputController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if isEditing {
+        firstLoadIfNeed()
+    }
+
+    func firstLoadIfNeed(){
+        if isEditing, upravdomRow.value, hasUpravdomData == false {
             firstLoad()
         }
     }
@@ -323,6 +328,7 @@ class FlatCountersDetailsController: BxInputController {
     
     override func didChangeValue(for row: BxInputValueRow) {
         super.didChangeValue(for: row)
+        firstLoadIfNeed()
         saveData(for: row)
     }
     
@@ -398,7 +404,7 @@ class FlatCountersDetailsController: BxInputController {
                 var errorMessage: String? = nil
                 
                 do {
-                  let document = try XMLDocument(data: data)
+                    let document = try XMLDocument(data: data)
                     
                     let node = document.css("input")
                     for item in node {
@@ -420,8 +426,12 @@ class FlatCountersDetailsController: BxInputController {
                     errorMessage = error.localizedDescription
                 }
                 
-                if this.hasUpravdomData == false {
-                    errorMessage = "Данные с Управдома не получены.\nОбратитесь в поддержку."
+                if errorMessage == nil, this.hasUpravdomData == false {
+                    if let errorMessage = this.upravdomService.firstlyCheckAvailable() {
+                        this.showAlert(title: "Предупреждение", message: this.upravdomService.title + " " + errorMessage)
+                    } else {
+                        errorMessage = "Данные с Управдома не получены.\nОбратитесь в поддержку."
+                    }
                 }
                 
                 if let errorMessage = errorMessage {

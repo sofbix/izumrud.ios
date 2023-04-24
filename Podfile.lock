@@ -38,7 +38,7 @@ DEPENDENCIES:
   - CircularSpinner (from `https://github.com/Byterix/CircularSpinner.git`)
   - Fuzi
   - PromiseKit
-  - RealmSwift
+  - RealmSwift (= 10.32.3)
 
 SPEC REPOS:
   trunk:
@@ -71,6 +71,6 @@ SPEC CHECKSUMS:
   Realm: fdf6732924dc5e69e30e0db2c11e869f92b53f3d
   RealmSwift: 7c181da8fa1c2fe613656a77c198d6a3dc3879a1
 
-PODFILE CHECKSUM: 937259e480cc34e9f658a249f1d813d9f43f5f4b
+PODFILE CHECKSUM: 24676c6c993b8397cdb6a1c0574da7fecf5fa5cc
 
 COCOAPODS: 1.11.3

@@ -25,12 +25,23 @@ target 'Izumrud' do
   # Progress
   pod 'CircularSpinner', :git => 'https://github.com/Byterix/CircularSpinner.git'
 
+  post_install do |installer|
+    # https://stackoverflow.com/questions/60162347/how-to-silence-xcode-11-4-warnings-about-mobilecoreservices-and-assetslibrary
+    #installer.pods_project.frameworks_group['iOS']['MobileCoreServices.framework'].remove_from_project
+    installer.pods_project.targets.each do |target|
+      disable_codesign_for_resource_bundle(target)
+      target.build_configurations.each do |config|
+        config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+      end
+    end
+  end
+
 end
 
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
-    end
+def disable_codesign_for_resource_bundle(target)
+  return unless target.respond_to?(:product_type) && target.product_type == 'com.apple.product-type.bundle'
+
+  target.build_configurations.each do |config|
+    config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
   end
 end

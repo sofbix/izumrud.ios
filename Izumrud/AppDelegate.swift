@@ -31,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    // deep link
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return true
+    }
+
+    // universal link
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     {
         return true

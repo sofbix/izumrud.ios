@@ -8,6 +8,7 @@
 
 import UIKit
 import CircularSpinner
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,6 +34,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // deep link
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if url.host == "app" {
+
+            guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+                return true
+            }
+
+            if url.path == "/newFlatCounters" {
+                //
+            } else if url.path == "/flatCounters/new" {
+                if let rootController: HistoryTableController = NavigationUtils.findController() {
+                    NavigationUtils.openTab(with: rootController)
+                    let viewController = FlatCountersDetailsController()
+                    viewController.isEditing = true
+                    viewController.title = "Новые показания"
+                    viewController.newBranchHandler = {
+                        rootController.refresh()
+                    }
+                    rootController.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+        }
         return true
     }
 

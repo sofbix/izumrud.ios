@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		03059B1AF15625CC47DAD2DB /* Pods_Izumrud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */; };
+		C31F9CF92A05240200BCBAF3 /* NavigationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F9CF82A05240200BCBAF3 /* NavigationUtils.swift */; };
+		C31F9CFB2A05327300BCBAF3 /* NavigationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */; };
 		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
 		C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */; };
 		C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */; };
@@ -35,6 +37,8 @@
 		551223946D067F81B005C56F /* Pods-Izumrud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.release.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.release.xcconfig"; sourceTree = "<group>"; };
 		68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Izumrud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
+		C31F9CF82A05240200BCBAF3 /* NavigationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtils.swift; sourceTree = "<group>"; };
+		C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C339F67F29C830970095534F /* Izumrud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Izumrud.entitlements; sourceTree = "<group>"; };
 		C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterCounterViewModel.swift; sourceTree = "<group>"; };
@@ -79,6 +83,15 @@
 				68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C31F9CF72A0523FA00BCBAF3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C31F9CF82A05240200BCBAF3 /* NavigationUtils.swift */,
+				C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C39AEA47262EB878000109E9 /* Features */ = {
@@ -159,6 +172,7 @@
 			children = (
 				C339F67F29C830970095534F /* Izumrud.entitlements */,
 				E3863D5724F7BB2F00C3C0B0 /* DB */,
+				C31F9CF72A0523FA00BCBAF3 /* Utils */,
 				C3AAFF0B2745991D002900DB /* Extensions */,
 				E3863D5A24F7BCF900C3C0B0 /* Network */,
 				C39AEA47262EB878000109E9 /* Features */,
@@ -317,6 +331,7 @@
 				C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */,
 				C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */,
 				E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */,
+				C31F9CF92A05240200BCBAF3 /* NavigationUtils.swift in Sources */,
 				C3AAFF1C2746C4D1002900DB /* EsPlusSendDataService.swift in Sources */,
 				E3863D5924F7BB4D00C3C0B0 /* DatabaseManager.swift in Sources */,
 				E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */,
@@ -327,6 +342,7 @@
 				C3AAFF112745991D002900DB /* DateFormatter.swift in Sources */,
 				E3863D5C24F7BDB200C3C0B0 /* FlatEntity.swift in Sources */,
 				C3AAFF0A2745982B002900DB /* SendDataService.swift in Sources */,
+				C31F9CFB2A05327300BCBAF3 /* NavigationRoute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

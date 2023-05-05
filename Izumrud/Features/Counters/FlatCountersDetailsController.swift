@@ -94,12 +94,12 @@ class FlatCountersDetailsController: BxInputController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firstLoadIfNeed()
+        firstLoadUpravdomIfNeed()
     }
 
-    func firstLoadIfNeed(){
+    func firstLoadUpravdomIfNeed(){
         if isEditing, upravdomRow.value, hasUpravdomData == false {
-            firstLoad()
+            firstLoadUpravdom()
         }
     }
     
@@ -328,7 +328,9 @@ class FlatCountersDetailsController: BxInputController {
     
     override func didChangeValue(for row: BxInputValueRow) {
         super.didChangeValue(for: row)
-        firstLoadIfNeed()
+        if row === upravdomRow {
+            firstLoadUpravdomIfNeed()
+        }
         saveData(for: row)
     }
     
@@ -351,16 +353,16 @@ class FlatCountersDetailsController: BxInputController {
         "Upgrade-Insecure-Requests" : "1"
     ]
     
-    private func firstLoad(){
+    private func firstLoadUpravdom(){
         CircularSpinner.show("Получаю данные с Управдома", animated: true, type: .indeterminate, showDismissButton: false)
         currentUrl = nil
         form_build_id = nil
         honeypot_time = nil
         form_id = nil
-        tryFirstLoad()
+        tryFirstLoadUpravdom()
     }
     
-    private func tryFirstLoad(){
+    private func tryFirstLoadUpravdom(){
         var isNeedShowError = false
         if let currentUrl = currentUrl {
             if let index = urls.firstIndex(of: currentUrl) {
@@ -394,7 +396,7 @@ class FlatCountersDetailsController: BxInputController {
                 if isNeedShowError {
                     this.showAlert(title: "Ошибка", message: error.localizedDescription)
                 } else {
-                    this.tryFirstLoad()
+                    this.tryFirstLoadUpravdom()
                     return
                 }
                 
@@ -438,7 +440,7 @@ class FlatCountersDetailsController: BxInputController {
                     if isNeedShowError {
                         this.showAlert(title: "Ошибка", message: errorMessage)
                     } else {
-                        this.tryFirstLoad()
+                        this.tryFirstLoadUpravdom()
                         return
                     }
                 }

@@ -103,6 +103,14 @@ class FlatCountersDetailsController: BxInputController {
             firstLoadUpravdom()
         }
     }
+
+    private func updateRow(_ row: BxInputTextRow, with fieldName: String, defaultValue: String) {
+        if let value = fields[fieldName] {
+            row.value = value
+        } else {
+            row.value = defaultValue
+        }
+    }
     
     private func updateData() {
         
@@ -132,20 +140,19 @@ class FlatCountersDetailsController: BxInputController {
         
         id = flatEntity.id
         order = flatEntity.order
-        
-        surnameRow.value = flatEntity.surname
-        nameRow.value = flatEntity.name
-        patronymicRow.value = flatEntity.patronymic
-        homeNumberRow.value = flatEntity.homeNumber
-        flatNumberRow.value = flatEntity.flatNumber
-        phoneNumberRow.value = flatEntity.phoneNumber
-        emailRow.value = flatEntity.email
-        rksAccountNumberRow.value = flatEntity.rksAccountNumber
-        esPlusAccountNumberRow.value = flatEntity.esPlusAccountNumber
-        commentsRow.value = flatEntity.comments
-        
-        dayElectricCountRow.value = "\(flatEntity.dayElectricCount)"
-        nightElectricCountRow.value = "\(flatEntity.nightElectricCount)"
+
+        updateRow(surnameRow, with: "surname", defaultValue: flatEntity.surname)
+        updateRow(nameRow, with: "name", defaultValue: flatEntity.name)
+        updateRow(patronymicRow, with: "patronymic", defaultValue: flatEntity.patronymic)
+        updateRow(homeNumberRow, with: "homeNumber", defaultValue: flatEntity.homeNumber)
+        updateRow(flatNumberRow, with: "flatNumber", defaultValue: flatEntity.flatNumber)
+        updateRow(phoneNumberRow, with: "phoneNumber", defaultValue: flatEntity.phoneNumber)
+        updateRow(emailRow, with: "email", defaultValue: flatEntity.email)
+        updateRow(rksAccountNumberRow, with: "rksAccountNumber", defaultValue: flatEntity.rksAccountNumber)
+        updateRow(esPlusAccountNumberRow, with: "esPlusAccountNumber", defaultValue: flatEntity.esPlusAccountNumber)
+        updateRow(commentsRow, with: "comments", defaultValue: flatEntity.comments)
+        updateRow(dayElectricCountRow, with: "dayElectricCount", defaultValue: flatEntity.dayElectricCount)
+        updateRow(nightElectricCountRow, with: "nightElectricCount", defaultValue: flatEntity.nightElectricCount)
         
         var sections = [
             BxInputSection(headerText: "Данные собственника",

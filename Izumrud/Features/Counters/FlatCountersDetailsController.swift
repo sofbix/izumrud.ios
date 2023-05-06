@@ -163,8 +163,8 @@ class FlatCountersDetailsController: BxInputController {
         ]
         
         waterCounters = []
-        for waterCounterEntity in flatEntity.waterCounters {
-            let waterCounter = WaterCounterViewModel(entity: waterCounterEntity)
+        for (index, waterCounterEntity) in flatEntity.waterCounters.enumerated() {
+            let waterCounter = WaterCounterViewModel(entity: waterCounterEntity, fields: fields, index: index)
             
             waterCounters.append(waterCounter)
             sections.append(waterCounter.section)

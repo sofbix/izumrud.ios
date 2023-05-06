@@ -22,6 +22,7 @@ class FlatCountersDetailsController: BxInputController {
     
     var id: String = ""
     var order: Int = 0
+    var components: URLComponents? = nil
     
     override var isEditing: Bool {
         didSet {
@@ -103,7 +104,7 @@ class FlatCountersDetailsController: BxInputController {
         }
     }
     
-    func updateData() {
+    private func updateData() {
         
         var flatEntity = FlatEntity()
         
@@ -180,6 +181,16 @@ class FlatCountersDetailsController: BxInputController {
         if isEditing {
             sections.append(BxInputSection(headerText: "Проверьте данные и нажмите:", rows: [], footerText: nil))
             sections.append(BxInputSection(header: BxInputSectionView(sendFooter), rows: []))
+        }
+
+        if let queryItems = components?.queryItems {
+            for queryItem in queryItems {
+                if queryItem.name == "dayElectricCount", let dayElectricCount = queryItem.value, dayElectricCount.isEmpty == false {
+                    dayElectricCountRow.value = dayElectricCount
+                } else if queryItem.name == "nightElectricCount", let nightElectricCount = queryItem.value, nightElectricCount.isEmpty == false {
+                    nightElectricCountRow.value = nightElectricCount
+                }
+            }
         }
         
         self.sections = sections

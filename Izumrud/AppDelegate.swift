@@ -34,24 +34,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // deep link
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        if url.host == "app" {
-
-            guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-                return true
-            }
-
+        if url.host == "presentation" {
             if url.path == "/newFlatCounters" {
-                //
-            } else if url.path == "/flatCounters/new" {
-                if let rootController: HistoryTableController = NavigationUtils.findController() {
-                    NavigationUtils.openTab(with: rootController)
+                if let rootController = NavigationUtils.tabBarController {
+                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
                     let viewController = FlatCountersDetailsController()
-                    viewController.isEditing = true
-                    viewController.title = "Новые показания"
-                    viewController.newBranchHandler = {
-                        rootController.refresh()
-                    }
-                    rootController.navigationController?.pushViewController(viewController, animated: true)
+                    let navigationController = UINavigationController(rootViewController: viewController)
+                    let flatCountersController: HistoryTableController? = NavigationUtils.findController()
+                    NavigationRoute.newFlatCounters(for: viewController, root: flatCountersController, components: components)
+                    rootController.present(navigationController, animated: true)
+                }
+            }
+        } else if url.host == "navigation" {
+            if url.path == "/flatCounters/new" {
+                if let rootController: HistoryTableController = NavigationUtils.findController() {
+                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+                    let viewController = FlatCountersDetailsController()
+                    NavigationRoute.newFlatCounters(for: viewController, root: rootController, components: components)
+                    rootController.navigationController?.popToRootViewController(animated: false)
+                    rootController.navigationController?.pushViewController(viewController, animated: false)
+                    NavigationUtils.openTab(with: rootController)
                 }
             }
         }

@@ -10,6 +10,27 @@ import Foundation
 
 struct NavigationRoute {
 
-    //
+    static func newFlatCounters(for viewController: FlatCountersDetailsController,
+                                root historyController: HistoryTableController? = nil,
+                                components: URLComponents? = nil)
+    {
+        viewController.isEditing = true
+        viewController.title = "Новые показания"
+        viewController.components = components
+        viewController.newBranchHandler = {[weak historyController] in
+            historyController?.refresh()
+        }
+    }
+
+    static func detailsFlatCounters(for viewController: FlatCountersDetailsController, entity: FlatEntity)
+    {
+        viewController.isEditing = false
+        if let sentDate = entity.sentDate {
+            viewController.title = "Показания от " + DateFormatter.shortDateTimeFormatter.string(from: sentDate)
+        } else {
+            viewController.title = "Отправленные показания"
+        }
+        viewController.id = entity.id
+    }
 
 }

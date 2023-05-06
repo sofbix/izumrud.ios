@@ -65,19 +65,9 @@ class HistoryTableController: UITableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? FlatCountersDetailsController {
             if segue.identifier == newSegue {
-                controller.isEditing = true
-                controller.title = "Новые показания"
-                controller.newBranchHandler = {[weak self] in
-                    self?.refresh()
-                }
+                NavigationRoute.newFlatCounters(for: controller, root: self)
             } else if segue.identifier == detailsSegue, let entity = sender as? FlatEntity {
-                controller.isEditing = false
-                if let sentDate = entity.sentDate {
-                    controller.title = "Показания от " + DateFormatter.shortDateTimeFormatter.string(from: sentDate)
-                } else {
-                    controller.title = "Отправленные показания"
-                }
-                controller.id = entity.id
+                NavigationRoute.detailsFlatCounters(for: controller, entity: entity)
             }
         }
     }

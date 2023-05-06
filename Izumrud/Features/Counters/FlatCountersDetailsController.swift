@@ -22,7 +22,7 @@ class FlatCountersDetailsController: BxInputController {
     
     var id: String = ""
     var order: Int = 0
-    var components: URLComponents? = nil
+    var fields: [String: String] = [:]
     
     override var isEditing: Bool {
         didSet {
@@ -183,14 +183,11 @@ class FlatCountersDetailsController: BxInputController {
             sections.append(BxInputSection(header: BxInputSectionView(sendFooter), rows: []))
         }
 
-        if let queryItems = components?.queryItems {
-            for queryItem in queryItems {
-                if queryItem.name == "dayElectricCount", let dayElectricCount = queryItem.value, dayElectricCount.isEmpty == false {
-                    dayElectricCountRow.value = dayElectricCount
-                } else if queryItem.name == "nightElectricCount", let nightElectricCount = queryItem.value, nightElectricCount.isEmpty == false {
-                    nightElectricCountRow.value = nightElectricCount
-                }
-            }
+        if let dayElectricCount = fields["dayElectricCount"] {
+            dayElectricCountRow.value = dayElectricCount
+        }
+        if let nightElectricCount = fields["nightElectricCount"] {
+            nightElectricCountRow.value = nightElectricCount
         }
         
         self.sections = sections

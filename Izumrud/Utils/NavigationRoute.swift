@@ -16,7 +16,11 @@ struct NavigationRoute {
     {
         viewController.isEditing = true
         viewController.title = "Новые показания"
-        viewController.components = components
+        viewController.fields = components?.queryItems?.reduce(into:[String: String]()) { result, component in
+            if let value = component.value, !value.isEmpty {
+                result[component.name] = value
+            }
+        } ?? [:]
         viewController.newBranchHandler = {[weak historyController] in
             historyController?.refresh()
         }

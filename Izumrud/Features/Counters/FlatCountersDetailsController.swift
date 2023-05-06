@@ -98,7 +98,7 @@ class FlatCountersDetailsController: BxInputController {
         firstLoadUpravdomIfNeed()
     }
 
-    func firstLoadUpravdomIfNeed(){
+    private func firstLoadUpravdomIfNeed(){
         if isEditing, upravdomRow.value, hasUpravdomData == false {
             firstLoadUpravdom()
         }
@@ -198,13 +198,13 @@ class FlatCountersDetailsController: BxInputController {
         setEnabled(isEditing, with: .none)
     }
     
-    func updateCheckers(){
+    private func updateCheckers(){
         for row in servicesRows {
             row.addCheckers(for: self)
         }
     }
     
-    func branchAllFlatData(){
+    private func branchAllFlatData(){
         if let flatEntity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id)
         {
             DatabaseManager.shared.commonRealm.beginWrite()
@@ -232,7 +232,7 @@ class FlatCountersDetailsController: BxInputController {
         }
     }
     
-    func saveFlatData(){
+    private func saveFlatData(){
         if let flatEntity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id)
         {
             DatabaseManager.shared.commonRealm.beginWrite()
@@ -274,7 +274,7 @@ class FlatCountersDetailsController: BxInputController {
         }
     }
     
-    func saveData(waterCounter: WaterCounterViewModel){
+    private func saveData(waterCounter: WaterCounterViewModel){
         guard let flatEntity = DatabaseManager.shared.commonRealm.object(ofType: FlatEntity.self, forPrimaryKey: id) else
         {
             return
@@ -326,7 +326,7 @@ class FlatCountersDetailsController: BxInputController {
         }
     }
     
-    func saveData(for row: BxInputValueRow) {
+    private func saveData(for row: BxInputValueRow) {
         if let waterCounter = waterCounters.first(where: { (waterCounter) -> Bool in
             return waterCounter.contains(row)
         })
@@ -346,11 +346,11 @@ class FlatCountersDetailsController: BxInputController {
     }
     
     @objc
-    func start() {
+    private func start() {
         startServices()
     }
     
-    let headers = [
+    private let headers = [
         "Host" : "upravdom63.ru",
         "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0",
         "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -462,11 +462,11 @@ class FlatCountersDetailsController: BxInputController {
         }
     }
     
-    var hasUpravdomData: Bool {
+    private var hasUpravdomData: Bool {
         return form_build_id != nil && honeypot_time != nil && form_id != nil
     }
     
-    func startServices() {
+    private func startServices() {
 
         upravdomService.url = currentUrl ?? urls.first ?? ""
         
@@ -491,7 +491,7 @@ class FlatCountersDetailsController: BxInputController {
         }
     }
     
-    func showAlert(title: String, message: String, handler : (() -> Void)? = nil){
+    private func showAlert(title: String, message: String, handler : (() -> Void)? = nil){
         let okAction = UIAlertAction(title: "OK", style: .default) {[weak self] _ in
             self?.dismiss(animated: true, completion: handler)
         }

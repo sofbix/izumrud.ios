@@ -11,40 +11,40 @@ import BxInputController
 
 class ContactsViewController: BxInputController {
     
-    static let iconSize = CGSize(width: 24, height: 24)
+    private static let iconSize = CGSize(width: 24, height: 24)
     
-    let upravdomWebSiteRow = BxInputIconActionRow<String>(
+    private let upravdomWebSiteRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "WebIcon"), iconSize: iconSize,
         title: "Сайт", subtitle: "https://upravdom63.ru/")
-    let upravdomControlRoomPhoneRow = BxInputIconActionRow<String>(
+    private let upravdomControlRoomPhoneRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "PhoneIcon"), iconSize: iconSize,
         title: "Диспетчерская", subtitle: "tel://+7(846)313-18-75")
-    let upravdomElevatorRepairPhoneRow = BxInputIconActionRow<String>(
+    private let upravdomElevatorRepairPhoneRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "PhoneIcon"), iconSize: iconSize,
         title: "ЛифтРемонт", subtitle: "tel://+7(846)240-14-33")
-    let upravdomOfficePhoneRow = BxInputIconActionRow<String>(
+    private let upravdomOfficePhoneRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "PhoneIcon"), iconSize: iconSize,
         title: "Офис", subtitle: "tel://+7(846)247-54-45")
-    let upravdomMailRow = BxInputIconActionRow<String>(
+    private let upravdomMailRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "MailIcon"), iconSize: iconSize,
         title: "Почта", subtitle: "mailto:upravdom-63@yandex.ru")
     
-    let bcWebSiteRow = BxInputIconActionRow<String>(
+    private let bcWebSiteRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "WebIcon"), iconSize: iconSize,
         title: "Сайт", subtitle: "https://vk.com/uk_bc63")
-    let bcControlRoomPhone1Row = BxInputIconActionRow<String>(
+    private let bcControlRoomPhone1Row = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "PhoneIcon"), iconSize: iconSize,
         title: "Диспетчерская", subtitle: "tel://+7(846)313-13-86")
-    let bcControlRoomPhone2Row = BxInputIconActionRow<String>(
+    private let bcControlRoomPhone2Row = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "PhoneIcon"), iconSize: iconSize,
         title: "Диспетчерская", subtitle: "tel://+7(846)313-13-87")
-    let bcOfficePhoneRow = BxInputIconActionRow<String>(
+    private let bcOfficePhoneRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "PhoneIcon"), iconSize: iconSize,
         title: "Офис", subtitle: "tel://+7(846)279-07-45")
-    let bcMailRow = BxInputIconActionRow<String>(
+    private let bcMailRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "MailIcon"), iconSize: iconSize,
         title: "Почта", subtitle: "mailto:2007biznesproffi071@mail.ru")
-    let bcMailCounterRow = BxInputIconActionRow<String>(
+    private let bcMailCounterRow = BxInputIconActionRow<String>(
         icon: #imageLiteral(resourceName: "MailIcon"), iconSize: iconSize,
         title: "Показания", subtitle: "mailto:data_5proseka@mail.ru")
 
@@ -58,7 +58,7 @@ class ContactsViewController: BxInputController {
         
     }
     
-    func updateData() {
+    private func updateData() {
         let handler = { (row: BxInputActionRow) in
             if let row = row as? BxInputIconActionRow<String>, let url = URL(string: row.subtitle ?? "") {
                 UIApplication.shared.openURL(url)

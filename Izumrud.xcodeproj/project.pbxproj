@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,7 @@
 		C3AAFF1727459B3E002900DB /* FlatCountersDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */; };
 		C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1927459E12002900DB /* HistoryTableController.swift */; };
 		C3AAFF1C2746C4D1002900DB /* EsPlusSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1B2746C4D1002900DB /* EsPlusSendDataService.swift */; };
+		C3EE617E2A081AB200BB3260 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */; };
 		C3F52085283581E000534408 /* BusinesCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F52084283581E000534408 /* BusinesCenterService.swift */; };
 		E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */; };
 		E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303A25927BC9000DD810 /* RKSSendDataService.swift */; };
@@ -51,6 +52,7 @@
 		C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatCountersDetailsController.swift; sourceTree = "<group>"; };
 		C3AAFF1927459E12002900DB /* HistoryTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableController.swift; sourceTree = "<group>"; };
 		C3AAFF1B2746C4D1002900DB /* EsPlusSendDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsPlusSendDataService.swift; sourceTree = "<group>"; };
+		C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		C3F52084283581E000534408 /* BusinesCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinesCenterService.swift; sourceTree = "<group>"; };
 		E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomSendDataService.swift; sourceTree = "<group>"; };
 		E30F303A25927BC9000DD810 /* RKSSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSSendDataService.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		C39AEA47262EB878000109E9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				C3EE617C2A081A8F00BB3260 /* Statistics */,
 				C39AEA53262EBB99000109E9 /* Contacts */,
 				C39AEA4C262EBB4E000109E9 /* Counters */,
 				C3AAFF1827459E12002900DB /* History */,
@@ -138,6 +141,14 @@
 				C3AAFF1927459E12002900DB /* HistoryTableController.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		C3EE617C2A081A8F00BB3260 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */,
+			);
+			path = Statistics;
 			sourceTree = "<group>";
 		};
 		DCF38B662D059D5522903D2B /* Pods */ = {
@@ -236,8 +247,9 @@
 		E3214DB824C4B66B00872B81 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Byterix;
 				TargetAttributes = {
 					E3214DBF24C4B66B00872B81 = {
@@ -254,6 +266,8 @@
 				Base,
 			);
 			mainGroup = E3214DB724C4B66B00872B81;
+			packageReferences = (
+			);
 			productRefGroup = E3214DC124C4B66B00872B81 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -329,6 +343,7 @@
 				C3AAFF152745996C002900DB /* CheckProviderRow.swift in Sources */,
 				C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */,
 				C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */,
+				C3EE617E2A081AB200BB3260 /* StatisticsViewController.swift in Sources */,
 				C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */,
 				E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */,
 				C31F9CF92A05240200BCBAF3 /* NavigationUtils.swift in Sources */,

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Ya-fw-fTW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4Ya-fw-fTW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,7 +15,7 @@
                 <navigationController id="Rf3-KV-ey6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Показания" image="CounterTab" id="3za-N5-Du7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pf3-ML-FKb">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -38,6 +38,7 @@
                     <connections>
                         <segue destination="Rf3-KV-ey6" kind="relationship" relationship="viewControllers" id="JU9-Rd-Dca"/>
                         <segue destination="3hM-7I-8m6" kind="relationship" relationship="viewControllers" id="4lo-3m-VE1"/>
+                        <segue destination="6yf-4b-ixO" kind="relationship" relationship="viewControllers" id="s71-Km-m1w"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atf-oy-8RA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -50,7 +51,7 @@
                 <navigationController id="3hM-7I-8m6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Контакты" image="ContactsTab" id="IES-uy-ZJM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ux3-ZX-7pw">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -80,21 +81,21 @@
         <!--Показания счетчиков-->
         <scene sceneID="iAq-wH-g2w">
             <objects>
-                <tableViewController id="hkX-fm-cJZ" customClass="HistoryTableController" customModule="SamaraCounter" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hkX-fm-cJZ" customClass="HistoryTableController" customModule="Izumrud" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="4Rd-Ly-Gce">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="HistoryCell" textLabel="JHS-NT-CjL" rowHeight="50" style="IBUITableViewCellStyleDefault" id="4Cs-zH-Iv5">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Cs-zH-Iv5" id="uIl-6Y-vvk">
-                                    <rect key="frame" x="0.0" y="0.0" width="384.5" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383.5" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JHS-NT-CjL">
-                                            <rect key="frame" x="20" y="0.0" width="356.5" height="50"/>
+                                            <rect key="frame" x="20" y="0.0" width="355.5" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
@@ -124,7 +125,7 @@
         <!--Новые показания-->
         <scene sceneID="hg0-uJ-rFa">
             <objects>
-                <viewController id="snU-3R-Kv9" customClass="FlatCountersDetailsController" customModule="SamaraCounter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="snU-3R-Kv9" customClass="FlatCountersDetailsController" customModule="Izumrud" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q5F-eX-lho">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,13 +140,58 @@
             </objects>
             <point key="canvasLocation" x="1106" y="138"/>
         </scene>
+        <!--Потребление-->
+        <scene sceneID="tBo-Bx-PMD">
+            <objects>
+                <navigationController id="6yf-4b-ixO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Потребление" image="StatisticTab" id="Riw-ji-LsX"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VsP-PA-GBj">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hYJ-GP-qd3" kind="relationship" relationship="rootViewController" id="DzP-aW-2TV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mSh-My-aAg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-800" y="1529"/>
+        </scene>
+        <!--Статистика потребления-->
+        <scene sceneID="Crl-fW-tOt">
+            <objects>
+                <viewController id="hYJ-GP-qd3" customClass="StatisticsViewController" customModule="Izumrud" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KjQ-Qa-u7U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="uN5-qv-lcQ" customClass="CombinedChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="safeArea" id="hJK-XA-kOt"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vyc-ek-LvW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Статистика потребления" id="Ajm-Ge-UoL"/>
+                    <connections>
+                        <outlet property="electricChartView" destination="uN5-qv-lcQ" id="qfP-Lp-Bfd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fcn-wl-38T" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="1529"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="grj-XQ-lq8"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="ContactsTab" width="33.333332061767578" height="33.333332061767578"/>
-        <image name="CounterTab" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="ContactsTab" width="32" height="32"/>
+        <image name="CounterTab" width="32" height="32"/>
+        <image name="StatisticTab" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

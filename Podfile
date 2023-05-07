@@ -16,6 +16,7 @@ target 'Izumrud' do
   pod 'RealmSwift', '= 10.32.3'
 
   # UI
+  pod 'Charts', :git => 'https://github.com/corteggo/Charts', :tag => 'v3.6.1'
   pod 'BxInputController/Common'
   #pod 'BxInputController/Photo' need rights in Info.plist
   

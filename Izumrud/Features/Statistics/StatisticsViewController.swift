@@ -14,6 +14,8 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
 
     @IBOutlet var electricChartView: CombinedChartView!
 
+    @IBOutlet var waterChartView: CombinedChartView!
+
 
     var firstColor: UIColor {
         .blue
@@ -78,31 +80,39 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         //isEstimatedContent = false
 
         updateChart(electricChartView)
+        updateChart(waterChartView)
 
         updateData()
 
     }
 
     private func updateData() {
-        let lineCharts : [LineChartDataSet] = electricLines()
 
-        let lineChart = LineChartData(dataSets: lineCharts)
+        updateData(electricChartView, lines: electricLines(), bars: electricBars())
+
+        updateData(waterChartView, lines: waterLines(), bars: waterBars())
+
+        sections = [
+            BxInputSection(headerText: "Электрический счётчик:", rows: []),
+            BxInputSection(headerView: electricChartView, rows: []),
+            BxInputSection(headerText: "Водные счётчики:", rows: []),
+            BxInputSection(headerView: waterChartView, rows: [])
+        ]
+    }
+
+    private func updateData(_ chartView: CombinedChartView, lines: [LineChartDataSet], bars: [BarChartDataSet]) {
+        let lineChart = LineChartData(dataSets: lines)
         lineChart.setValueFont(.systemFont(ofSize: 10))
 
-        let barChart = BarChartData(dataSets: electricBars())
+        let barChart = BarChartData(dataSets: bars)
         barChart.setValueFont(.systemFont(ofSize: 10))
-        barChart.barWidth = 2000000
+        barChart.barWidth = 2000000 //  magic number ~ half month in second
 
         let combineData = CombinedChartData()
         combineData.lineData = lineChart
         combineData.barData = barChart
 
-        electricChartView.data = combineData
-
-        sections = [
-            BxInputSection(headerText: "Электрический счётчик:", rows: []),
-            BxInputSection(headerView: electricChartView, rows: [])
-        ]
+        chartView.data = combineData
     }
 
     private func electricLines() -> [LineChartDataSet]
@@ -178,6 +188,93 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         let allCountSet = BarChartDataSet(entries: allCountData, label: "")
         allCountSet.axisDependency = .right
         allCountSet.stackLabels = ["Частота ночного потребления", "Частота дневного потребления"]
+        allCountSet.colors = [secondBarColor, firstBarColor]
+        allCountSet.valueTextColor = Settings.Color.secondAccent
+        return [allCountSet]
+    }
+
+    private func waterLines() -> [LineChartDataSet]
+    {
+        let flatEntities = DatabaseManager.shared.commonRealm.objects(FlatEntity.self).filter("sentDate != nil").sorted(byKeyPath: "sentDate")
+
+        var coldWaterCountData: [ChartDataEntry] = []
+        var hotWaterCountData: [ChartDataEntry] = []
+        for entities in flatEntities {
+            let x = entities.sentDate?.timeIntervalSinceReferenceDate ?? Settings.startCompanyDate.timeIntervalSinceReferenceDate
+            var coldWaterCount = 0.0
+            var hotWaterCount = 0.0
+            for waterCounter in entities.waterCounters {
+                coldWaterCount +=  Double(waterCounter.coldCount) ?? 0.0
+                hotWaterCount +=  Double(waterCounter.hotCount) ?? 0.0
+            }
+            coldWaterCountData.append(ChartDataEntry(x: Double(x), y: coldWaterCount))
+            hotWaterCountData.append(ChartDataEntry(x: Double(x), y: hotWaterCount))
+        }
+
+        let coldWaterCountSet = LineChartDataSet(entries: coldWaterCountData, label: "Общее потребление холодной воды")
+        coldWaterCountSet.axisDependency = .left
+        coldWaterCountSet.setColor(firstColor)
+        coldWaterCountSet.setCircleColor(firstColor)
+        coldWaterCountSet.lineWidth = 2
+        coldWaterCountSet.circleRadius = 3
+        coldWaterCountSet.fillAlpha = 65/255
+        coldWaterCountSet.fillColor = firstColor
+        coldWaterCountSet.highlightColor = Settings.Color.brand
+        coldWaterCountSet.drawCircleHoleEnabled = false
+        coldWaterCountSet.drawValuesEnabled = true
+        coldWaterCountSet.mode = .horizontalBezier
+        coldWaterCountSet.valueTextColor = Settings.Color.brand
+
+        let hotWaterCountSet = LineChartDataSet(entries: hotWaterCountData, label: "Общее ночное горячей воды")
+        hotWaterCountSet.axisDependency = .left
+        hotWaterCountSet.setColor(secondColor)
+        hotWaterCountSet.setCircleColor(secondColor)
+        hotWaterCountSet.lineWidth = 2
+        hotWaterCountSet.circleRadius = 3
+        hotWaterCountSet.fillAlpha = 65/255
+        hotWaterCountSet.fillColor = secondColor
+        hotWaterCountSet.highlightColor = Settings.Color.brand
+        hotWaterCountSet.drawCircleHoleEnabled = false
+        hotWaterCountSet.drawValuesEnabled = true
+        hotWaterCountSet.mode = .horizontalBezier
+        hotWaterCountSet.valueTextColor = Settings.Color.brand
+
+        return [coldWaterCountSet, hotWaterCountSet]
+    }
+
+    private func waterBars() -> [BarChartDataSet]
+    {
+        let flatEntities = DatabaseManager.shared.commonRealm.objects(FlatEntity.self).filter("sentDate != nil").sorted(byKeyPath: "sentDate")
+
+        var allCountData: [BarChartDataEntry] = []
+
+        var coldWaterCountData: [BarChartDataEntry] = []
+        var hotWaterCountData: [BarChartDataEntry] = []
+
+        var lastColdWaterCount: Double = 0.0
+        var lastHotWaterCount: Double = 0.0
+
+        for entity in flatEntities {
+            let x = entity.sentDate?.timeIntervalSinceReferenceDate ?? Settings.startCompanyDate.timeIntervalSinceReferenceDate
+            var coldWaterCount = 0.0
+            var hotWaterCount = 0.0
+            for waterCounter in entity.waterCounters {
+                coldWaterCount +=  Double(waterCounter.coldCount) ?? 0.0
+                hotWaterCount +=  Double(waterCounter.hotCount) ?? 0.0
+            }
+            coldWaterCountData.append(BarChartDataEntry(x: Double(x), y: coldWaterCount - lastColdWaterCount))
+            hotWaterCountData.append(BarChartDataEntry(x: Double(x), y: hotWaterCount - lastHotWaterCount))
+
+
+            allCountData.append(BarChartDataEntry(x: Double(x), yValues: [hotWaterCount - lastHotWaterCount, coldWaterCount - lastColdWaterCount]))
+
+            lastColdWaterCount = coldWaterCount
+            lastHotWaterCount = hotWaterCount
+        }
+
+        let allCountSet = BarChartDataSet(entries: allCountData, label: "")
+        allCountSet.axisDependency = .right
+        allCountSet.stackLabels = ["Частота потребления горячей воды", "Частота потребления холодной воды"]
         allCountSet.colors = [secondBarColor, firstBarColor]
         allCountSet.valueTextColor = Settings.Color.secondAccent
         return [allCountSet]

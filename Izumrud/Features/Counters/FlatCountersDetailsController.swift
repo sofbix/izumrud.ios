@@ -151,6 +151,7 @@ class FlatCountersDetailsController: BxInputController {
         updateRow(rksAccountNumberRow, with: "rksAccountNumber", defaultValue: flatEntity.rksAccountNumber)
         updateRow(esPlusAccountNumberRow, with: "esPlusAccountNumber", defaultValue: flatEntity.esPlusAccountNumber)
         updateRow(commentsRow, with: "comments", defaultValue: flatEntity.comments)
+
         updateRow(dayElectricCountRow, with: "dayElectricCount", defaultValue: flatEntity.dayElectricCount)
         updateRow(nightElectricCountRow, with: "nightElectricCount", defaultValue: flatEntity.nightElectricCount)
         
@@ -188,13 +189,6 @@ class FlatCountersDetailsController: BxInputController {
         if isEditing {
             sections.append(BxInputSection(headerText: "Проверьте данные и нажмите:", rows: [], footerText: nil))
             sections.append(BxInputSection(header: BxInputSectionView(sendFooter), rows: []))
-        }
-
-        if let dayElectricCount = fields["dayElectricCount"] {
-            dayElectricCountRow.value = dayElectricCount
-        }
-        if let nightElectricCount = fields["nightElectricCount"] {
-            nightElectricCountRow.value = nightElectricCount
         }
         
         self.sections = sections

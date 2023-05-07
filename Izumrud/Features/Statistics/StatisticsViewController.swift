@@ -111,11 +111,8 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
 
         var dayElectricCountData: [ChartDataEntry] = []
         var nightElectricCountData: [ChartDataEntry] = []
-        var totalY = 0.0
         for entities in flatEntities {
             let x = entities.sentDate?.timeIntervalSinceReferenceDate ?? Settings.startCompanyDate.timeIntervalSinceReferenceDate
-            //let y =
-            //totalY = totalY + Double(y)
             dayElectricCountData.append(ChartDataEntry(x: Double(x), y: Double(entities.dayElectricCount) ?? 0.0))
             nightElectricCountData.append(ChartDataEntry(x: Double(x), y: Double(entities.nightElectricCount) ?? 0.0))
         }
@@ -177,24 +174,6 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
             lastDayElectricCount = dayElectricCount
             lastNightElectricCount = nightElectricCount
         }
-
-//        let dayElectricCountSet = BarChartDataSet(entries: dayElectricCountData, label: "Дневное потребление")
-//        dayElectricCountSet.axisDependency = .right
-//        dayElectricCountSet.setColor(dayColor)
-//        dayElectricCountSet.stackLabels = ["day"]
-//        dayElectricCountSet.colors = [ dayColor ]
-//        dayElectricCountSet.valueTextColor = UIColor(red: 61/255, green: 165/255, blue: 255/255, alpha: 1)
-//        //dayElectricCountSet.valueFont = Settings.Font.chartLabel
-//
-//
-//        let nightElectricCountSet = BarChartDataSet(entries: nightElectricCountData, label: "Ночное потребление")
-//        nightElectricCountSet.axisDependency = .right
-//        nightElectricCountSet.setColor(nightColor)
-//        dayElectricCountSet.stackLabels = ["night"]
-//        dayElectricCountSet.colors = [ nightColor ]
-//        dayElectricCountSet.valueTextColor = UIColor(red: 61/255, green: 165/255, blue: 255/255, alpha: 1)
-//
-//        return [dayElectricCountSet, nightElectricCountSet]
 
         let allCountSet = BarChartDataSet(entries: allCountData, label: "")
         allCountSet.axisDependency = .right

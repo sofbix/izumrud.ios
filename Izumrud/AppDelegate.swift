@@ -28,42 +28,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let _ = DatabaseManager.shared
         
         window?.makeKey()
+
+        if let activityDictionary = launchOptions?[UIApplication.LaunchOptionsKey.userActivityDictionary] as? [AnyHashable: Any],
+            let userActivity = activityDictionary ["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity ?? nil
+        {
+            handleUniversalUrl(userActivity: userActivity)
+        }
         
         return true
     }
 
     // deep link
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        if url.host == "presentation" {
-            if url.path == "/newFlatCounters" {
-                if let rootController = NavigationUtils.tabBarController {
-                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                    let viewController = FlatCountersDetailsController()
-                    let navigationController = UINavigationController(rootViewController: viewController)
-                    let flatCountersController: HistoryTableController? = NavigationUtils.findController()
-                    NavigationRoute.newFlatCounters(for: viewController, root: flatCountersController, components: components)
-                    rootController.present(navigationController, animated: true)
-                }
-            }
-        } else if url.host == "navigation" {
-            if url.path == "/flatCounters/new" {
-                if let rootController: HistoryTableController = NavigationUtils.findController() {
-                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                    let viewController = FlatCountersDetailsController()
-                    NavigationRoute.newFlatCounters(for: viewController, root: rootController, components: components)
-                    rootController.navigationController?.popToRootViewController(animated: false)
-                    rootController.navigationController?.pushViewController(viewController, animated: false)
-                    NavigationUtils.openTab(with: rootController)
-                }
-            }
+        guard url.host == "app" else {
+            return true
         }
+        handle(with: url)
         return true
     }
 
     // universal link
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
     {
+        return handleUniversalUrl(userActivity: userActivity)
+    }
+
+    @discardableResult
+    private func handleUniversalUrl(userActivity: NSUserActivity) -> Bool {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let url = userActivity.webpageURL,
+              url.host == "byterix.com"
+        else {
+            return false
+        }
+        handle(with: url)
         return true
+    }
+
+    private func handle(with url: URL) {
+        if url.path.hasSuffix("/presentation/newFlatCounters"){
+            NavigationRoute.openPresentationNewFlatCounters(url: url)
+        } else if url.path.hasSuffix("/navigation/flatCounters/new"){
+            NavigationRoute.openNavigationNewFlatCounters(url: url)
+        }
     }
 
 }

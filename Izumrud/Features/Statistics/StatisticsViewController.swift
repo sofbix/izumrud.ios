@@ -56,7 +56,7 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         l.drawInside = false
 
         let xAxis = chartView.xAxis
-        xAxis.labelFont = .systemFont(ofSize: 16)
+        xAxis.labelFont = .systemFont(ofSize: 14)
         xAxis.labelTextColor = UIColor.gray
         xAxis.labelPosition = .bottom
         xAxis.drawAxisLineEnabled = false
@@ -87,12 +87,11 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         let lineCharts : [LineChartDataSet] = electricLines()
 
         let lineChart = LineChartData(dataSets: lineCharts)
-        lineChart.setValueTextColor(.gray)
-        lineChart.setValueFont(.systemFont(ofSize: 14))
+        //lineChart.setValueTextColor(.gray)
+        lineChart.setValueFont(.systemFont(ofSize: 10))
 
         let barChart = BarChartData(dataSets: electricBars())
-        //barChart.setValueTextColor(.gray)
-        //barChart.setValueFont(.systemFont(ofSize: 14))
+        barChart.setValueFont(.systemFont(ofSize: 10))
         barChart.barWidth = 2000000
 
         let combineData = CombinedChartData()
@@ -130,9 +129,9 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         dayElectricCountSet.circleRadius = 3
         dayElectricCountSet.fillAlpha = 65/255
         dayElectricCountSet.fillColor = firstColor
-        dayElectricCountSet.highlightColor = UIColor(red: 244/255, green: 117/255, blue: 117/255, alpha: 1)
+        dayElectricCountSet.highlightColor = Settings.Color.brand
         dayElectricCountSet.drawCircleHoleEnabled = false
-        dayElectricCountSet.drawValuesEnabled = false
+        dayElectricCountSet.drawValuesEnabled = true
         dayElectricCountSet.mode = .horizontalBezier
         dayElectricCountSet.valueTextColor = Settings.Color.brand
 
@@ -144,9 +143,9 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         nightElectricCountSet.circleRadius = 3
         nightElectricCountSet.fillAlpha = 65/255
         nightElectricCountSet.fillColor = secondColor
-        nightElectricCountSet.highlightColor = Settings.Color.secondAccent
+        nightElectricCountSet.highlightColor = Settings.Color.brand
         nightElectricCountSet.drawCircleHoleEnabled = false
-        nightElectricCountSet.drawValuesEnabled = false
+        nightElectricCountSet.drawValuesEnabled = true
         nightElectricCountSet.mode = .horizontalBezier
         nightElectricCountSet.valueTextColor = Settings.Color.brand
 

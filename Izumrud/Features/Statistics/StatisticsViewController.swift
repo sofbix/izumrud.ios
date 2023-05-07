@@ -14,9 +14,6 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
 
     @IBOutlet var electricChartView: CombinedChartView!
 
-    var chartView: CombinedChartView! {
-        electricChartView
-    }
 
     var firstColor: UIColor {
         .blue
@@ -34,12 +31,7 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         .red.withAlphaComponent(0.5)
     }
 
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        //isEstimatedContent = false
-
+    func updateChart(_ chartView: CombinedChartView) {
         chartView.delegate = self
         chartView.chartDescription?.enabled = false
         chartView.dragEnabled = true
@@ -78,6 +70,14 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         rightAxis.drawGridLinesEnabled = true
         rightAxis.granularityEnabled = true
         rightAxis.valueFormatter = self
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        //isEstimatedContent = false
+
+        updateChart(electricChartView)
 
         updateData()
 
@@ -87,7 +87,6 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         let lineCharts : [LineChartDataSet] = electricLines()
 
         let lineChart = LineChartData(dataSets: lineCharts)
-        //lineChart.setValueTextColor(.gray)
         lineChart.setValueFont(.systemFont(ofSize: 10))
 
         let barChart = BarChartData(dataSets: electricBars())
@@ -98,7 +97,7 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         combineData.lineData = lineChart
         combineData.barData = barChart
 
-        chartView.data = combineData
+        electricChartView.data = combineData
 
         sections = [
             BxInputSection(headerText: "Электрический счётчик:", rows: []),
@@ -210,10 +209,8 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
 
 extension StatisticsViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        if axis == chartView.xAxis {
+        if axis is XAxis {
             return Settings.shortDateFormatter.string(from: Date(timeIntervalSinceReferenceDate: value))
-        } else if axis == chartView.leftAxis {
-            return String(value)
         } else {
             return String(value)
         }

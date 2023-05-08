@@ -225,7 +225,7 @@ class StatisticsViewController: BxInputController, ChartViewDelegate {
         coldWaterCountSet.mode = .horizontalBezier
         coldWaterCountSet.valueTextColor = Settings.Color.brand
 
-        let hotWaterCountSet = LineChartDataSet(entries: hotWaterCountData, label: "Общее ночное горячей воды")
+        let hotWaterCountSet = LineChartDataSet(entries: hotWaterCountData, label: "Общее потребление горячей воды")
         hotWaterCountSet.axisDependency = .left
         hotWaterCountSet.setColor(secondColor)
         hotWaterCountSet.setCircleColor(secondColor)

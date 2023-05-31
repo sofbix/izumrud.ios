@@ -17,13 +17,10 @@ class UpravdomSendDataService : SendDataService {
     let name: String = "Upravdom"
     let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 20))
     
-    private var url: String {
-        return currentUrl ?? urls.first ?? ""
-    }
 
-    private(set) var form_build_id: String?
-    private(set) var honeypot_time: String?
-    private(set) var form_id: String?
+    private var form_build_id: String?
+    private var honeypot_time: String?
+    private var form_id: String?
     private let urls = [
         "https://upravdom63.ru/",
         "https://upravdom63.ru/passport"
@@ -71,13 +68,15 @@ class UpravdomSendDataService : SendDataService {
                 #warning("3th counter should all empty values, or 2th for realy one. Please will add it if need. Without dobavit_schyotchik_hvs_(3/2) each other")
             }
         }
-        
-        //let request = try! URLRequest(url: "https://upravdom63.ru/", method: .post)
+
+        let url = currentUrl ?? urls.first ?? ""
+
+        //let request = try! URLRequest(url: url, method: .post)
         //let encode = try! URLEncoding.default.encode(request , with: parameters)
         //let stringData = String(data: encode.httpBody!, encoding: .utf8)!
         //print("\(stringData)")
-        
-        return service(self.url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+
+        return service(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers)
 
     }
     

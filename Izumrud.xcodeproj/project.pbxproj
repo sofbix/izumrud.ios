@@ -10,6 +10,7 @@
 		03059B1AF15625CC47DAD2DB /* Pods_Izumrud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */; };
 		C31F9CF92A05240200BCBAF3 /* NavigationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F9CF82A05240200BCBAF3 /* NavigationUtils.swift */; };
 		C31F9CFB2A05327300BCBAF3 /* NavigationRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */; };
+		C3242B2A2A27D06500DEE2B0 /* ProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3242B292A27D06500DEE2B0 /* ProgressService.swift */; };
 		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
 		C39AEA4F262EBB4E000109E9 /* WaterCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */; };
 		C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */; };
@@ -40,6 +41,7 @@
 		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
 		C31F9CF82A05240200BCBAF3 /* NavigationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtils.swift; sourceTree = "<group>"; };
 		C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
+		C3242B292A27D06500DEE2B0 /* ProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressService.swift; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C339F67F29C830970095534F /* Izumrud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Izumrud.entitlements; sourceTree = "<group>"; };
 		C39AEA4D262EBB4E000109E9 /* WaterCounterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterCounterViewModel.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			children = (
 				C31F9CF82A05240200BCBAF3 /* NavigationUtils.swift */,
 				C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */,
+				C3242B292A27D06500DEE2B0 /* ProgressService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3242B2A2A27D06500DEE2B0 /* ProgressService.swift in Sources */,
 				C3F52085283581E000534408 /* BusinesCenterService.swift in Sources */,
 				E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */,
 				C3AAFF102745991D002900DB /* UIButton.swift in Sources */,

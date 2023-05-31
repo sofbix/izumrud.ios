@@ -8,7 +8,6 @@
 import Foundation
 import PromiseKit
 import Alamofire
-import SwiftUI
 
 protocol EsPlusCounter{
     var identifier: String {get}

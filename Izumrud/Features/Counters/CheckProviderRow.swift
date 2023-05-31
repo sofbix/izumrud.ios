@@ -93,7 +93,7 @@ extension CheckProviderRow: CheckProviderProtocol
     func firstLoadUpdate(services: inout [Promise<Data>], input: SendDataServiceInput) {
         if value {
             if isNeedFirstLoad, let firstLoadPromise = service.firstLoad(with: input) {
-                services.append(ProgressService().start(with: "Загрузка для " + service.title))
+                services.append(ProgressService().start(with: service.title + ": загрузка"))
                 services.append(firstLoadPromise)
             }
         }

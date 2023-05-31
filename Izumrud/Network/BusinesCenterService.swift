@@ -14,7 +14,7 @@ class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControl
     
     var result: Promise<Data>?
     
-    func map(_ input: FlatCountersDetailsController) -> Promise<Data> {
+    func map(_ input: SendDataServiceInput) -> Promise<Data> {
         
         result = nil
         
@@ -57,7 +57,7 @@ class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControl
              mailComposeViewController.setSubject("Показания сч-ов для УК БЦ")
              mailComposeViewController.setMessageBody(body, isHTML: false)
 
-            input.present(mailComposeViewController, animated: true, completion: nil)
+            NavigationUtils.navigationController?.present(mailComposeViewController, animated: true, completion: nil)
 
         } else {
             error("Почта не настроена для отправки показаний")
@@ -97,9 +97,6 @@ class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControl
         }
 
     }
-    
-    typealias Input = FlatCountersDetailsController
-    
     
     let title: String = "Бизнес-центер"
     let name: String = "BusinesCenter"

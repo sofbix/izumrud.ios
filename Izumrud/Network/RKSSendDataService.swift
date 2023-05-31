@@ -14,14 +14,11 @@ import BxInputController
 struct RKSSendDataService : SendDataService {
     
     
-    typealias Input = FlatCountersDetailsController
-    
-    
     let name: String = "RKS"
     let title: String = "РКС"
     let days = Range<Int>(uncheckedBounds: (lower: 7, upper: 23))
     
-    func addCheckers(for input: Input){
+    func addCheckers(for input: SendDataServiceInput){
         let rksAccountNumberChecker = BxInputBlockChecker(row: input.rksAccountNumberRow, subtitle: "Введите 15 значный номер с нулями в начале", handler: { row in
             let value = input.rksAccountNumberRow.value ?? ""
             
@@ -33,7 +30,7 @@ struct RKSSendDataService : SendDataService {
         input.addChecker(rksAccountNumberChecker, for: input.rksAccountNumberRow)
     }
     
-    func map(_ input: Input) -> Promise<Data> {
+    func map(_ input: SendDataServiceInput) -> Promise<Data> {
         
         
         let headers = [

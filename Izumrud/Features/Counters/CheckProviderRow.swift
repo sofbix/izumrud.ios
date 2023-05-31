@@ -13,12 +13,14 @@ protocol CheckProviderProtocol : BxInputRow {
     var value: Bool {get}
     
     var serviceName: String {get}
-    
-    func update(services: inout [Promise<Data>], input: FlatCountersDetailsController)
-    
+
     func updateValue(_ entity: FlatEntity)
     
-    func addCheckers(for input: FlatCountersDetailsController)
+    func addCheckers(for input: SendDataServiceInput)
+    func startUpdate(services: inout [Promise<Data>], input: SendDataServiceInput)
+
+    var isNeedFirstLoad: Bool {get}
+    func firstLoadUpdate(services: inout [Promise<Data>], input: SendDataServiceInput)
 }
 
 class CheckProviderRow<T: SendDataService>: BxInputCheckRow
@@ -51,29 +53,11 @@ class CheckProviderRow<T: SendDataService>: BxInputCheckRow
         }
         return checker
     }
-    
-}
 
-extension CheckProviderRow: CheckProviderProtocol where T.Input == FlatCountersDetailsController
-{
-    
-    func addCheckers(for input: FlatCountersDetailsController)
-    {
-        input.addChecker(createSelfChecker(), for: self)
-        service.addCheckers(for: input)
-    }
-    
-    func update(services: inout [Promise<Data>], input: FlatCountersDetailsController) {
-        if value {
-            services.append(ProgressService().start(with: "Передача в " + service.title))
-            services.append(service.start(with: input))
-        }
-    }
-    
     var serviceName: String {
         return service.name
     }
-    
+
     func updateValue(_ entity: FlatEntity) {
         let serviceProvidersToSending = entity.serviceProvidersToSending
         guard serviceProvidersToSending.isEmpty == false else {
@@ -83,5 +67,35 @@ extension CheckProviderRow: CheckProviderProtocol where T.Input == FlatCountersD
         let services = serviceProvidersToSending.split(separator: FlatEntity.serviceProvidersToSendingDevider)
         value = services.contains(Substring(serviceName))
     }
+
+    var isNeedFirstLoad: Bool {
+        return service.isNeedFirstLoad
+    }
     
+}
+
+extension CheckProviderRow: CheckProviderProtocol
+{
+
+    func addCheckers(for input: SendDataServiceInput)
+    {
+        input.addChecker(createSelfChecker(), for: self)
+        service.addCheckers(for: input)
+    }
+
+    func startUpdate(services: inout [Promise<Data>], input: SendDataServiceInput) {
+        if value {
+            services.append(ProgressService().start(with: "Передача в " + service.title))
+            services.append(service.start(with: input))
+        }
+    }
+
+    func firstLoadUpdate(services: inout [Promise<Data>], input: SendDataServiceInput) {
+        if value {
+            if isNeedFirstLoad, let firstLoadPromise = service.firstLoad(with: input) {
+                services.append(ProgressService().start(with: "Загрузка для " + service.title))
+                services.append(firstLoadPromise)
+            }
+        }
+    }
 }

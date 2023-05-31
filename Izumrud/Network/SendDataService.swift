@@ -9,6 +9,30 @@
 import Foundation
 import PromiseKit
 import Alamofire
+import BxInputController
+
+protocol SendDataServiceInput: Any {
+    var surnameRow: BxInputTextRow {get}
+    var nameRow: BxInputTextRow {get}
+    var patronymicRow: BxInputTextRow {get}
+    var streetRow: BxInputTextRow {get}
+    var homeNumberRow: BxInputTextRow {get}
+    var flatNumberRow: BxInputTextRow {get}
+    var phoneNumberRow: BxInputFormattedTextRow {get}
+    var emailRow: BxInputTextRow {get}
+    var rksAccountNumberRow: BxInputTextRow {get}
+    var esPlusAccountNumberRow: BxInputTextRow {get}
+    var commentsRow: BxInputTextMemoRow {get}
+
+    var electricAccountNumberRow: BxInputTextRow {get}
+    var electricCounterNumberRow: BxInputTextRow {get}
+    var dayElectricCountRow: BxInputTextRow {get}
+    var nightElectricCountRow: BxInputTextRow {get}
+
+    var waterCounters: [WaterCounterViewModel] {get}
+
+    func addChecker(_ checker: BxInputRowChecker, for row: BxInputRow)
+}
 
 protocol SendDataService: Any {
     
@@ -16,23 +40,24 @@ protocol SendDataService: Any {
     var title: String {get}
     
     var days: Range<Int> {get}
-    
-    associatedtype Input
 
-    func map(_ input: Input) -> Promise<Data>
+    func map(_ input: SendDataServiceInput) -> Promise<Data>
     
-    func addCheckers(for input: Input)
+    func addCheckers(for input: SendDataServiceInput)
     
     func checkOutputData(with data: Data) -> String?
     
     func firstlyCheckAvailable() -> String?
+
+    var isNeedFirstLoad: Bool {get}
+    func firstLoad(with input: SendDataServiceInput) -> Promise<Data>?
 }
 
 
 extension SendDataService {
     
     // default realization has not input error
-    func addCheckers(for input: Input) {
+    func addCheckers(for input: SendDataServiceInput) {
         //
     }
     
@@ -51,7 +76,7 @@ extension SendDataService {
         return nil
     }
     
-    func start(with input: Input) -> Promise<Data> {
+    func start(with input: SendDataServiceInput) -> Promise<Data> {
         return map(input)
     }
     
@@ -115,6 +140,13 @@ extension SendDataService {
     
     private func isError(statusCode: Int) -> Bool {
         statusCode >= 300 || statusCode < 200
+    }
+
+    var isNeedFirstLoad: Bool {
+        return false
+    }
+    func firstLoad(with input: SendDataServiceInput) -> Promise<Data>? {
+        return nil
     }
     
 }

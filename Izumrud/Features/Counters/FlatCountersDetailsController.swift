@@ -11,10 +11,9 @@ import UIKit
 import BxInputController
 import CircularSpinner
 import Alamofire
-import Fuzi
 import PromiseKit
 
-class FlatCountersDetailsController: BxInputController {
+class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     
     let waterCounterMaxCount = 3
     
@@ -51,26 +50,15 @@ class FlatCountersDetailsController: BxInputController {
     let electricCounterNumberRow = BxInputTextRow(title: "Номер счётчика", maxCount: 20, value: "")
     let dayElectricCountRow = BxInputTextRow(title: "День", subtitle: "целые числа, без дробных", maxCount: 10, value: "")
     let nightElectricCountRow = BxInputTextRow(title: "Ночь", subtitle: "для однофазного счетчика оставте пустым", maxCount: 10, value: "")
-    
-    private(set) var form_build_id: String?
-    private(set) var honeypot_time: String?
-    private(set) var form_id: String?
+
     private(set) var waterCounters: [WaterCounterViewModel] = []
-    
-    private let urls = [
-        "https://upravdom63.ru/",
-        "https://upravdom63.ru/passport"
-    ]
-    
-    private let upravdomService = UpravdomSendDataService()
-    private lazy var upravdomRow = CheckProviderRow(upravdomService)
+
     private lazy var servicesRows : [CheckProviderProtocol] = [
         CheckProviderRow(BusinesCenterService()),
-        upravdomRow,
+        CheckProviderRow(UpravdomSendDataService()),
         CheckProviderRow(RKSSendDataService()),
         CheckProviderRow(EsPlusSendDataService())
     ]
-    private var currentUrl: String? = nil
     
     private lazy var sendFooter: UIView = UIButton.createOnView(title: "Отправить показания", target: self, action: #selector(start))
 
@@ -95,13 +83,7 @@ class FlatCountersDetailsController: BxInputController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firstLoadUpravdomIfNeed()
-    }
-
-    private func firstLoadUpravdomIfNeed(){
-        if isEditing, upravdomRow.value, hasUpravdomData == false {
-            firstLoadUpravdom()
-        }
+        firstLoadIfNeeded(servicesRows)
     }
 
     private func updateRow(_ row: BxInputTextRow, with fieldName: String, defaultValue: String) {
@@ -337,8 +319,8 @@ class FlatCountersDetailsController: BxInputController {
     
     override func didChangeValue(for row: BxInputValueRow) {
         super.didChangeValue(for: row)
-        if row === upravdomRow {
-            firstLoadUpravdomIfNeed()
+        if let checkProviderRow = row as? CheckProviderProtocol {
+            firstLoadIfNeeded([checkProviderRow])
         }
         saveData(for: row)
     }
@@ -348,129 +330,28 @@ class FlatCountersDetailsController: BxInputController {
         startServices()
     }
     
-    private let headers = [
-        "Host" : "upravdom63.ru",
-        "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0",
-        "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language" : "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
-        "Accept-Encoding" : "gzip, deflate, br",
-        "Content-Type" : "application/x-www-form-urlencoded",
-        //"Content-Length" : "1086",
-        "Origin" : "https://upravdom63.ru",
-        "Connection" : "keep-alive",
-        "Referer" : "https://upravdom63.ru/",
-        "Upgrade-Insecure-Requests" : "1"
-    ]
-    
-    private func firstLoadUpravdom(){
-        CircularSpinner.show("Получаю данные с Управдома", animated: true, type: .indeterminate, showDismissButton: false)
-        currentUrl = nil
-        form_build_id = nil
-        honeypot_time = nil
-        form_id = nil
-        tryFirstLoadUpravdom()
-    }
-    
-    private func tryFirstLoadUpravdom(){
-        var isNeedShowError = false
-        if let currentUrl = currentUrl {
-            if let index = urls.firstIndex(of: currentUrl) {
-                if index + 1 < urls.count {
-                    self.currentUrl = urls[index + 1]
-                    if self.currentUrl == urls.last {
-                        isNeedShowError = true
-                    }
-                } else {
-                    isNeedShowError = true
-                }
-            }
-        } else {
-            currentUrl = urls.first
-            if urls.count < 2 {
-                isNeedShowError = true
-            }
-        }
-        
-        Alamofire.SessionManager.default
-            .request(currentUrl!, method: .get, headers: headers)
-            .response
-        {[weak self] (response) in
-            
-            guard let this = self else {
-                return
-            }
-            
-            if let error = response.error {
-                
-                if isNeedShowError {
-                    this.showAlert(title: "Ошибка", message: error.localizedDescription)
-                } else {
-                    this.tryFirstLoadUpravdom()
-                    return
-                }
-                
-                CircularSpinner.hide()
-            } else if let data = response.data {
+    private func firstLoadIfNeeded(_ servicesRows : [CheckProviderProtocol]) {
+        var services : [Promise<Data>] = []
 
-                var errorMessage: String? = nil
-                
-                do {
-                    let document = try XMLDocument(data: data)
-                    
-                    let node = document.css("input")
-                    for item in node {
-                        if let name = item.attr("name"), let value = item.attr("value") {
-                            if name == "form_build_id" {
-                                print("form_build_id : \(value)")
-                                this.form_build_id = value
-                            } else if name == "honeypot_time" {
-                                print("honeypot_time : \(value)")
-                                this.honeypot_time = value
-                            } else if name == "form_id" {
-                                print("form_id : \(value)")
-                                this.form_id = value
-                            }
-                        }
-                    }
-                    
-                } catch let error {
-                    errorMessage = error.localizedDescription
-                }
-                
-                if errorMessage == nil, this.hasUpravdomData == false {
-                    if let errorMessage = this.upravdomService.firstlyCheckAvailable() {
-                        this.showAlert(title: "Предупреждение", message: this.upravdomService.title + " " + errorMessage)
-                    } else {
-                        errorMessage = "Данные с Управдома не получены.\nОбратитесь в поддержку."
-                    }
-                }
-                
-                if let errorMessage = errorMessage {
-                    if isNeedShowError {
-                        this.showAlert(title: "Ошибка", message: errorMessage)
-                    } else {
-                        this.tryFirstLoadUpravdom()
-                        return
-                    }
-                }
-                
-                CircularSpinner.hide()
-                
+        servicesRows.forEach{ row in
+            if isEditing, row.value {
+                row.firstLoadUpdate(services: &services, input: self)
             }
         }
-    }
-    
-    private var hasUpravdomData: Bool {
-        return form_build_id != nil && honeypot_time != nil && form_id != nil
+        when(fulfilled: services)
+        .done { datas in
+            CircularSpinner.hide()
+        }.catch {[weak self] error in
+            CircularSpinner.hide()
+            self?.showAlert(title: "Ошибка", message: error.localizedDescription)
+        }
     }
     
     private func startServices() {
-
-        upravdomService.url = currentUrl ?? urls.first ?? ""
         
         var services : [Promise<Data>] = []
         servicesRows.forEach{ row in
-            row.update(services: &services, input: self)
+            row.startUpdate(services: &services, input: self)
         }
         guard services.count > 0 else {
             showAlert(title: "Ошибка", message: "Выберите хотябы одного провайдера в 'Куда отправляем'")

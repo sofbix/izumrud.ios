@@ -17,14 +17,11 @@ protocol EsPlusCounter{
 struct EsPlusSendDataService : SendDataService {
     
     
-    typealias Input = FlatCountersDetailsController
-    
-    
     let name: String = "EsPlus"
     let title: String = "T+"
     let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 25))
     
-    func addCheckers(for input: FlatCountersDetailsController) {
+    func addCheckers(for input: SendDataServiceInput) {
         #warning("need check Int value of counters value")
     }
     
@@ -61,7 +58,7 @@ struct EsPlusSendDataService : SendDataService {
         let counters: [Counter]?
     }
     
-    func url(_ input: Input) -> String {
+    func url(_ input: SendDataServiceInput) -> String {
         if isKP24(input) {
             return "https://samara.esplus.ru/local/include/ajax/lk/TransRead/TransReadMetersKP24.php"
         }
@@ -69,7 +66,7 @@ struct EsPlusSendDataService : SendDataService {
     }
     
     // Все дело в том, что сервисы Т+ по разному работают с разными идентификаторами и соответственно вызывают разные сервисы с разными ответами, пришлось тоже закостылить
-    func isKP24(_ input: Input) -> Bool {
+    func isKP24(_ input: SendDataServiceInput) -> Bool {
         let number = input.esPlusAccountNumberRow.value ?? ""
         // это точно квартплата
         if number.count == 11 && number.isNumber {
@@ -84,7 +81,7 @@ struct EsPlusSendDataService : SendDataService {
         "Cookie" : "BITRIX_SM_REGION=samara; BITRIX_SM_GUEST_ID=45522622; BITRIX_SM_LAST_VISIT=19.11.2021+21%3A08%3A17; BITRIX_SM_LAST_ADV=7; BITRIX_CONVERSION_CONTEXT_s1=%7B%22ID%22%3A7%2C%22EXPIRE%22%3A1637355540%2C%22UNIQUE%22%3A%5B%22conversion_visit_day%22%5D%7D; BX_USER_ID=a76f4426683dd762e62d6e8e931cb0b3; _ga=GA1.2.882972400.1635106065; _ym_uid=1635106065753404634; _ym_d=1635106065; _fbp=fb.1.1635106064865.1365375347; PHPSESSID=55f76f809a031e22371e118ba1281a9b; INVOLVE_SESSION_MONITOR=1; _gid=GA1.2.212971121.1637343798; _ym_isad=2; _gat_gtag_UA_112818786_12=1"
     ]
     
-    func mapCounters(_ input: Input, outputCounters: [EsPlusCounter]) -> Promise<Data> {
+    func mapCounters(_ input: SendDataServiceInput, outputCounters: [EsPlusCounter]) -> Promise<Data> {
         var body = "sessid=a289233cfe33cde50d08d7d1fb5185c9&status=GET_COUNTERS&nlsid=\(input.esPlusAccountNumberRow.value ?? "")"
         
         var counters: [String] = []
@@ -126,7 +123,7 @@ struct EsPlusSendDataService : SendDataService {
         }
     }
     
-    func map(_ input: Input) -> Promise<Data> {
+    func map(_ input: SendDataServiceInput) -> Promise<Data> {
 
         let body = "sessid=a289233cfe33cde50d08d7d1fb5185c9&status=GET_COUNTERS&nlsid=\(input.esPlusAccountNumberRow.value ?? "")&get_counters=Y&PR=0"
         var request = try! URLRequest(url: url(input), method: .post, headers: headers)

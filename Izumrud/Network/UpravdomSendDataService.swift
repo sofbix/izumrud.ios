@@ -96,7 +96,12 @@ class UpravdomSendDataService : SendDataService {
         return "Ошибка отправки для Управдома. Нет данных."
     }
 
-    private let headers = [
+}
+
+// first load
+extension UpravdomSendDataService {
+
+    private static let firstLoadHeaders = [
         "Host" : "upravdom63.ru",
         "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0",
         "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -109,11 +114,6 @@ class UpravdomSendDataService : SendDataService {
         "Referer" : "https://upravdom63.ru/",
         "Upgrade-Insecure-Requests" : "1"
     ]
-    
-}
-
-// first load
-extension UpravdomSendDataService {
 
     private func firstLoadUpravdom() -> Promise<Data>{
         currentUrl = nil
@@ -146,7 +146,7 @@ extension UpravdomSendDataService {
         return Promise { seal in
 
             Alamofire.SessionManager.default
-                .request(currentUrl!, method: .get, headers: headers)
+                .request(currentUrl!, method: .get, headers: Self.firstLoadHeaders)
                 .response
             {[weak self] (response) in
 

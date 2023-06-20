@@ -362,10 +362,13 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
         servicesRows.forEach{ row in
             row.startUpdate(services: &services, input: self)
         }
+        #if DEBUG
+        #else
         guard services.count > 0 else {
             showAlert(title: "Ошибка", message: "Выберите хотябы одного провайдера в 'Куда отправляем'")
             return
         }
+        #endif
         when(fulfilled: services)
         .done {[weak self] datas in
             self?.branchAllFlatData()

@@ -26,8 +26,9 @@ struct SamGESSendDataService : SendDataService {
             return value.isNumber
         })
         input.addChecker(electricAccountNumberChecker, for: input.electricAccountNumberRow)
-        
-        input.addChecker(BxInputEmptyValueChecker(row: input.electricCounterNumberRow, placeholder: "Значение должно быть не пустым"), for: input.electricCounterNumberRow)
+
+        // Now don't need use from request
+        //input.addChecker(BxInputEmptyValueChecker(row: input.electricCounterNumberRow, placeholder: "Значение должно быть не пустым"), for: input.electricCounterNumberRow)
         
         let dayElectricCountChecker = BxInputBlockChecker(row: input.dayElectricCountRow, subtitle: "Укажите целочисленное значение счетчика", handler: { row in
             let value = input.dayElectricCountRow.value ?? ""
@@ -118,7 +119,9 @@ struct SamGESSendDataService : SendDataService {
                 return nil
             } else if stringData.contains("недоступно 1 день") {
                 return "\(self.title): Показания уже были переданы, следующий прием через день"
-            } else{
+            } else if stringData.contains("По техническим причинам передача показаний невозможна. Попробуйте передать показания позже") {
+                return "\(self.title): Какие-то технические проблемы. Возможно неверный лицевой счёт."
+            } else {
                 print(stringData)
                 return "Что то пошло не так с СамГЭС"
             }

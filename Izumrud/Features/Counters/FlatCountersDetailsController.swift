@@ -336,6 +336,10 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     
     @objc
     private func start() {
+        guard checkAllRows() else {
+            showAlert(title: "Ошибка", message: "Проверьте данные...")
+            return
+        }
         startServices()
     }
     
@@ -357,7 +361,6 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     }
     
     private func startServices() {
-        
         var services : [Promise<Data>] = []
         servicesRows.forEach{ row in
             row.startUpdate(services: &services, input: self)

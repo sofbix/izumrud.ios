@@ -26,7 +26,9 @@ class FlatEntity: Object {
     @objc dynamic var phoneNumber: String = ""
     @objc dynamic var email: String = ""
     @objc dynamic var comments: String = ""
-    
+
+    @objc dynamic var electricAccountNumber: String = ""
+    @objc dynamic var electricCounterNumber: String = ""
     @objc dynamic var dayElectricCount: String = ""
     @objc dynamic var nightElectricCount: String = ""
     

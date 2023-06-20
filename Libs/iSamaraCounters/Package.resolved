@@ -1,0 +1,50 @@
+{
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "747c8db8d57b68d5e35275f10c92d55f982adbd4",
+        "version" : "4.9.1"
+      }
+    },
+    {
+      "identity" : "bxinputcontroller",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ByteriX/BxInputController.git",
+      "state" : {
+        "revision" : "e592547265e35a86a500340e72ead9e8b0b19711",
+        "version" : "2.21.3"
+      }
+    },
+    {
+      "identity" : "bxobjc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ByteriX/BxObjC.git",
+      "state" : {
+        "revision" : "b64a52271414c5e4e486ce402d22b54caef5c5f3",
+        "version" : "1.10.4"
+      }
+    },
+    {
+      "identity" : "bxtextfield",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ByteriX/BxTextField.git",
+      "state" : {
+        "revision" : "44754e3528d84046c17aa8430b888417b25481c1",
+        "version" : "1.12.4"
+      }
+    },
+    {
+      "identity" : "promisekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mxcl/PromiseKit",
+      "state" : {
+        "revision" : "8a98e31a47854d3180882c8068cc4d9381bf382d",
+        "version" : "6.22.1"
+      }
+    }
+  ],
+  "version" : 2
+}

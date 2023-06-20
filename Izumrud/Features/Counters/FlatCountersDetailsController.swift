@@ -12,6 +12,7 @@ import BxInputController
 import CircularSpinner
 import Alamofire
 import PromiseKit
+//import iSamaraCounters
 
 class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     
@@ -54,10 +55,10 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     private(set) var waterCounters: [WaterCounterViewModel] = []
 
     private lazy var servicesRows : [CheckProviderProtocol] = [
-        CheckProviderRow(BusinesCenterService()),
-        CheckProviderRow(UpravdomSendDataService()),
+        CheckProviderRow(SamGESSendDataService()),
         CheckProviderRow(RKSSendDataService()),
-        CheckProviderRow(EsPlusSendDataService())
+        CheckProviderRow(EsPlusSendDataService()),
+        CheckProviderRow(UpravdomSendDataService()),
     ]
     
     private lazy var sendFooter: UIView = UIButton.createOnView(title: "Отправить показания", target: self, action: #selector(start))
@@ -69,6 +70,9 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
         
         homeNumberRow.textSettings.keyboardType = .numberPad
         flatNumberRow.textSettings.keyboardType = .numberPad
+
+        electricAccountNumberRow.textSettings.keyboardType = .numberPad
+        electricCounterNumberRow.textSettings.keyboardType = .decimalPad
         dayElectricCountRow.textSettings.keyboardType = .numberPad
         nightElectricCountRow.textSettings.keyboardType = .numberPad
         
@@ -134,6 +138,9 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
         updateRow(esPlusAccountNumberRow, with: "esPlusAccountNumber", defaultValue: flatEntity.esPlusAccountNumber)
         updateRow(commentsRow, with: "comments", defaultValue: flatEntity.comments)
 
+
+        updateRow(electricAccountNumberRow, with: "electricAccountNumber", defaultValue: flatEntity.electricAccountNumber)
+        updateRow(electricCounterNumberRow, with: "electricCounterNumber", defaultValue: flatEntity.electricCounterNumber)
         updateRow(dayElectricCountRow, with: "dayElectricCount", defaultValue: flatEntity.dayElectricCount)
         updateRow(nightElectricCountRow, with: "nightElectricCount", defaultValue: flatEntity.nightElectricCount)
         
@@ -142,7 +149,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
                            rows: [surnameRow, nameRow, patronymicRow, homeNumberRow, flatNumberRow, phoneNumberRow, emailRow, rksAccountNumberRow, esPlusAccountNumberRow],
                            footerText: nil),
             BxInputSection(headerText: "Комментарии для УК", rows: [commentsRow], footerText: nil),
-            BxInputSection(headerText: "Показания электрического счётчика", rows: [dayElectricCountRow, nightElectricCountRow], footerText: nil)
+            BxInputSection(headerText: "Показания электрического счётчика", rows: [electricAccountNumberRow, electricCounterNumberRow, dayElectricCountRow, nightElectricCountRow], footerText: nil)
         ]
         
         waterCounters = []
@@ -231,7 +238,9 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
             flatEntity.comments = commentsRow.value ?? ""
             
             #warning("Please check dayElectricCountRow & nightElectricCountRow to Int values")
-            
+
+            flatEntity.electricAccountNumber = electricAccountNumberRow.value ?? ""
+            flatEntity.electricCounterNumber = electricCounterNumberRow.value ?? ""
             flatEntity.dayElectricCount = dayElectricCountRow.value ?? ""
             flatEntity.nightElectricCount = nightElectricCountRow.value ?? ""
             

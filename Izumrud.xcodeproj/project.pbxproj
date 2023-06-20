@@ -22,6 +22,7 @@
 		C3AAFF1727459B3E002900DB /* FlatCountersDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */; };
 		C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1927459E12002900DB /* HistoryTableController.swift */; };
 		C3AAFF1C2746C4D1002900DB /* EsPlusSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1B2746C4D1002900DB /* EsPlusSendDataService.swift */; };
+		C3D8E4552A41A16B000896CB /* SamGESSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D8E4542A41A16B000896CB /* SamGESSendDataService.swift */; };
 		C3EE617E2A081AB200BB3260 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */; };
 		C3F52085283581E000534408 /* BusinesCenterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F52084283581E000534408 /* BusinesCenterService.swift */; };
 		E30F303425926FF6000DD810 /* UpravdomSendDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */; };
@@ -54,6 +55,8 @@
 		C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatCountersDetailsController.swift; sourceTree = "<group>"; };
 		C3AAFF1927459E12002900DB /* HistoryTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableController.swift; sourceTree = "<group>"; };
 		C3AAFF1B2746C4D1002900DB /* EsPlusSendDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsPlusSendDataService.swift; sourceTree = "<group>"; };
+		C3B8E3262A365AFF000A66A6 /* iSamaraCounters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = iSamaraCounters; path = Libs/iSamaraCounters; sourceTree = "<group>"; };
+		C3D8E4542A41A16B000896CB /* SamGESSendDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamGESSendDataService.swift; sourceTree = "<group>"; };
 		C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		C3F52084283581E000534408 /* BusinesCenterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinesCenterService.swift; sourceTree = "<group>"; };
 		E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomSendDataService.swift; sourceTree = "<group>"; };
@@ -97,6 +100,14 @@
 				C3242B292A27D06500DEE2B0 /* ProgressService.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		C393E5992A35006F006D9900 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				C3B8E3262A365AFF000A66A6 /* iSamaraCounters */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		C39AEA47262EB878000109E9 /* Features */ = {
@@ -166,6 +177,7 @@
 		E3214DB724C4B66B00872B81 = {
 			isa = PBXGroup;
 			children = (
+				C393E5992A35006F006D9900 /* Packages */,
 				E3214DC224C4B66B00872B81 /* Izumrud */,
 				E3214DC124C4B66B00872B81 /* Products */,
 				DCF38B662D059D5522903D2B /* Pods */,
@@ -218,6 +230,7 @@
 				E30F303325926FF6000DD810 /* UpravdomSendDataService.swift */,
 				E30F303A25927BC9000DD810 /* RKSSendDataService.swift */,
 				C3F52084283581E000534408 /* BusinesCenterService.swift */,
+				C3D8E4542A41A16B000896CB /* SamGESSendDataService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -240,6 +253,8 @@
 			dependencies = (
 			);
 			name = Izumrud;
+			packageProductDependencies = (
+			);
 			productName = Izumrud;
 			productReference = E3214DC024C4B66B00872B81 /* Izumrud.app */;
 			productType = "com.apple.product-type.application";
@@ -342,6 +357,7 @@
 			files = (
 				C3242B2A2A27D06500DEE2B0 /* ProgressService.swift in Sources */,
 				C3F52085283581E000534408 /* BusinesCenterService.swift in Sources */,
+				C3D8E4552A41A16B000896CB /* SamGESSendDataService.swift in Sources */,
 				E30F303B25927BC9000DD810 /* RKSSendDataService.swift in Sources */,
 				C3AAFF102745991D002900DB /* UIButton.swift in Sources */,
 				C3AAFF152745996C002900DB /* CheckProviderRow.swift in Sources */,
@@ -438,7 +454,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -493,7 +509,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -186,8 +186,11 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     }
     
     private func updateCheckers(){
+        self.removeAllCheckers()
         for row in servicesRows {
-            row.addCheckers(for: self)
+            if row.value {
+                row.addCheckers(for: self)
+            }
         }
     }
     
@@ -330,6 +333,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
         super.didChangeValue(for: row)
         if let checkProviderRow = row as? CheckProviderProtocol {
             firstLoadIfNeeded([checkProviderRow])
+            updateCheckers()
         }
         saveData(for: row)
     }

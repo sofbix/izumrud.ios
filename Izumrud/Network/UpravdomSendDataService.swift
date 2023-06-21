@@ -36,7 +36,7 @@ class UpravdomSendDataService : SendDataService {
         let form_id = "input.form_id"
 
         
-        let headers = [
+        let headers : HTTPHeaders = [
             "Content-Type" : "application/x-www-form-urlencoded"
         ]
         
@@ -101,7 +101,7 @@ class UpravdomSendDataService : SendDataService {
 // first load
 extension UpravdomSendDataService {
 
-    private static let firstLoadHeaders = [
+    private static let firstLoadHeaders : HTTPHeaders = [
         "Host" : "upravdom63.ru",
         "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0",
         "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -145,7 +145,7 @@ extension UpravdomSendDataService {
 
         return Promise { seal in
 
-            Alamofire.SessionManager.default
+            Alamofire.Session.default
                 .request(currentUrl!, method: .get, headers: Self.firstLoadHeaders)
                 .response
             {[weak self] (response) in

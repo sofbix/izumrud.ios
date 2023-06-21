@@ -75,7 +75,7 @@ struct EsPlusSendDataService : SendDataService {
         return false
     }
     
-    let headers = [
+    let headers : HTTPHeaders = [
         "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
         "Accept" : "application/json",
         "Cookie" : "BITRIX_SM_REGION=samara; BITRIX_SM_GUEST_ID=45522622; BITRIX_SM_LAST_VISIT=19.11.2021+21%3A08%3A17; BITRIX_SM_LAST_ADV=7; BITRIX_CONVERSION_CONTEXT_s1=%7B%22ID%22%3A7%2C%22EXPIRE%22%3A1637355540%2C%22UNIQUE%22%3A%5B%22conversion_visit_day%22%5D%7D; BX_USER_ID=a76f4426683dd762e62d6e8e931cb0b3; _ga=GA1.2.882972400.1635106065; _ym_uid=1635106065753404634; _ym_d=1635106065; _fbp=fb.1.1635106064865.1365375347; PHPSESSID=55f76f809a031e22371e118ba1281a9b; INVOLVE_SESSION_MONITOR=1; _gid=GA1.2.212971121.1637343798; _ym_isad=2; _gat_gtag_UA_112818786_12=1"

@@ -62,7 +62,7 @@ struct SamGESSendDataService : SendDataService {
             account.removeFirst()
         }
         
-        let getHeaders = [
+        let getHeaders : HTTPHeaders = [
             "Host" : "lk.samges.ru"
         ]
         
@@ -97,7 +97,7 @@ struct SamGESSendDataService : SendDataService {
                 return .init(error: NSError(domain: self.title, code: 404, userInfo: [NSLocalizedDescriptionKey: "\(self.title): Неверный запрос на сервер"]))
             }
             
-            let headers = [
+            let headers : HTTPHeaders = [
                 "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
                 "Content-Length" : "\(bodyData.count)",
                 "Host" : "lk.samges.ru"

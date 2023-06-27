@@ -9,6 +9,7 @@
 import Foundation
 import BxInputController
 import Charts
+import UIKit
 
 class StatisticsViewController: BxInputController, ChartViewDelegate {
 

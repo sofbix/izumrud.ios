@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "charts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/corteggo/Charts",
+      "state" : {
+        "revision" : "6e4dcf45ec24ee6f2a37aacde54a580dd118978e",
+        "version" : "3.6.1"
+      }
+    },
+    {
       "identity" : "circularspinner",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ByteriX/CircularSpinner.git",

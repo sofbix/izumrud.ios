@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ByteriX/BxInputController.git",
       "state" : {
-        "revision" : "2d14595845dada37877281adc58b14fd1fa47304",
-        "version" : "2.21.2"
+        "branch" : "master",
+        "revision" : "e0497712f9d5194c0a32129d76e1cfcb67a83fda"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ByteriX/BxObjC.git",
       "state" : {
-        "revision" : "4b1db825b64742f6e0b7ebc9358256c4c99abf4a",
-        "version" : "1.10.1"
+        "branch" : "master",
+        "revision" : "179c7ef5e0bbd0e988aaca2787218f36dd30c0f9"
       }
     },
     {
@@ -34,6 +34,15 @@
       "state" : {
         "revision" : "44754e3528d84046c17aa8430b888417b25481c1",
         "version" : "1.12.4"
+      }
+    },
+    {
+      "identity" : "fuzi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cezheng/Fuzi.git",
+      "state" : {
+        "revision" : "f08c8323da21e985f3772610753bcfc652c2103f",
+        "version" : "3.1.3"
       }
     },
     {

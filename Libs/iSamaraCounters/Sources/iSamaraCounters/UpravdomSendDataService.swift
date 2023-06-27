@@ -56,14 +56,13 @@ class UpravdomSendDataService : SendDataService {
         
         for waterCounter in input.waterCounters {
             if waterCounter.isValid { #warning("Has problem with checking realy params. Order can be invalided.")
-                let entity = waterCounter.entity
-                parameters["no_schyotchika_gvs_\(entity.order)"] = "\(entity.hotSerialNumber)"
-                parameters["pokazaniya_gvs_\(entity.order)"] = "\(entity.hotCount)"
-                parameters["no_schyotchika_hvs_\(entity.order)"] = "\(entity.coldSerialNumber)"
-                parameters["pokazaniya_hvs_\(entity.order)"] = "\(entity.coldCount)"
-                if entity.order > 1 {
-                    parameters["dobavit_schyotchik_gvs_\(entity.order)"] = "1"
-                    parameters["dobavit_schyotchik_hvs_\(entity.order)"] = "1"
+                parameters["no_schyotchika_gvs_\(waterCounter.order)"] = "\(waterCounter.hotSerialNumberRow.value ?? "")"
+                parameters["pokazaniya_gvs_\(waterCounter.order)"] = "\(waterCounter.hotCountRow.value ?? "")"
+                parameters["no_schyotchika_hvs_\(waterCounter.order)"] = "\(waterCounter.coldSerialNumberRow.value ?? "")"
+                parameters["pokazaniya_hvs_\(waterCounter.order)"] = "\(waterCounter.coldCountRow.value ?? "")"
+                if waterCounter.order > 1 {
+                    parameters["dobavit_schyotchik_gvs_\(waterCounter.order)"] = "1"
+                    parameters["dobavit_schyotchik_hvs_\(waterCounter.order)"] = "1"
                 }
                 #warning("3th counter should all empty values, or 2th for realy one. Please will add it if need. Without dobavit_schyotchik_hvs_(3/2) each other")
             }

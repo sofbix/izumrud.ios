@@ -23,14 +23,13 @@ class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControl
             var waterBody = ""
             for waterCounter in input.waterCounters {
                 if waterCounter.isValid { #warning("Has problem with checking realy params. Order can be invalided.")
-                    let entity = waterCounter.entity
                     waterBody +=
                         """
-                        Стояки № \(entity.order)
-                        Номер счетчика горячей воды: \(entity.hotSerialNumber)
-                        Значение счетчика горячей воды: \(entity.hotCount)
-                        Номер счетчика холодной воды: \(entity.coldSerialNumber)
-                        Значение счетчика холодной воды: \(entity.coldCount)
+                        Стояки № \(waterCounter.order)
+                        Номер счетчика горячей воды: \(waterCounter.hotSerialNumberRow.value ?? "")
+                        Значение счетчика горячей воды: \(waterCounter.hotCountRow.value ?? "")
+                        Номер счетчика холодной воды: \(waterCounter.coldSerialNumberRow.value ?? "")
+                        Значение счетчика холодной воды: \(waterCounter.coldCountRow.value ?? "")
                         
                         """
                     #warning("3th counter should all empty values, or 2th for realy one. Please will add it if need. Without dobavit_schyotchik_hvs_(3/2) each other")

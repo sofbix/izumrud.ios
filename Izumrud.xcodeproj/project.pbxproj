@@ -43,9 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		551223946D067F81B005C56F /* Pods-Izumrud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.release.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.release.xcconfig"; sourceTree = "<group>"; };
-		68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Izumrud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Izumrud.debug.xcconfig"; path = "Target Support Files/Pods-Izumrud/Pods-Izumrud.debug.xcconfig"; sourceTree = "<group>"; };
 		C31F9CF82A05240200BCBAF3 /* NavigationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtils.swift; sourceTree = "<group>"; };
 		C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
 		C323DC992A4B71B900DAF283 /* WaterCounterEntity+WaterCounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaterCounterEntity+WaterCounterViewModel.swift"; sourceTree = "<group>"; };
@@ -96,14 +93,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		81BC050D12CCBE24F22CDFCC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				68D5BE365928A76503BE63FB /* Pods_Izumrud.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C31F9CF72A0523FA00BCBAF3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,23 +166,12 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
-		DCF38B662D059D5522903D2B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */,
-				551223946D067F81B005C56F /* Pods-Izumrud.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		E3214DB724C4B66B00872B81 = {
 			isa = PBXGroup;
 			children = (
 				C393E5992A35006F006D9900 /* Packages */,
 				E3214DC224C4B66B00872B81 /* Izumrud */,
 				E3214DC124C4B66B00872B81 /* Products */,
-				DCF38B662D059D5522903D2B /* Pods */,
-				81BC050D12CCBE24F22CDFCC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,11 +233,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3214DD424C4B67100872B81 /* Build configuration list for PBXNativeTarget "Izumrud" */;
 			buildPhases = (
-				4754FCF17EE60A6185CE32EC /* [CP] Check Pods Manifest.lock */,
 				E3214DBC24C4B66B00872B81 /* Sources */,
 				E3214DBD24C4B66B00872B81 /* Frameworks */,
 				E3214DBE24C4B66B00872B81 /* Resources */,
-				9E649620EE5C8964CE703929 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,48 +306,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4754FCF17EE60A6185CE32EC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Izumrud-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9E649620EE5C8964CE703929 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Izumrud/Pods-Izumrud-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Izumrud/Pods-Izumrud-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Izumrud/Pods-Izumrud-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E3214DBC24C4B66B00872B81 /* Sources */ = {
@@ -545,7 +479,6 @@
 		};
 		E3214DD524C4B67100872B81 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AED31919A6166BD69249D47E /* Pods-Izumrud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Izumrud/Izumrud.entitlements;
@@ -569,7 +502,6 @@
 		};
 		E3214DD624C4B67100872B81 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 551223946D067F81B005C56F /* Pods-Izumrud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Izumrud/Izumrud.entitlements;

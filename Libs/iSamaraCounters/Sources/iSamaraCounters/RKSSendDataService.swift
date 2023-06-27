@@ -33,7 +33,7 @@ struct RKSSendDataService : SendDataService {
     func map(_ input: SendDataServiceInput) -> Promise<Data> {
         
         
-        let headers = [
+        let headers : HTTPHeaders = [
             "Content-Type" : "multipart/form-data; boundary=---------------------------207598656814045288261793191761",
             "Cookie" : "_ym_uid=1595532639642879152; _ym_d=1595532639; _ym_isad=1; PHPSESSID=f0hd9f3vmak8l4khjt2ac87ts0; _csrf=1b16c5592b7d182619cc6f6396cc26e8edcc52fc1a3a5960226d31afb49b7bc6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%223ZfJdPO2A1PgF4lw63FNASiO0-m9-j1h%22%3B%7D; hide_privacy=true"
         ]

@@ -89,7 +89,7 @@ extension SendDataService {
     }
     
     func service(_ urlRequest: URLRequest, isNeedCheckOutput: Bool = true) -> Promise<Data> {
-        return map(Alamofire.SessionManager.default.request(urlRequest), isNeedCheckOutput: isNeedCheckOutput)
+        return map(Alamofire.Session.default.request(urlRequest), isNeedCheckOutput: isNeedCheckOutput)
     }
     
     func service(_ url: URLConvertible,
@@ -99,7 +99,7 @@ extension SendDataService {
                  headers: HTTPHeaders? = nil,
                  isNeedCheckOutput: Bool = true) -> Promise<Data>
     {
-        return map(Alamofire.SessionManager.default.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers), isNeedCheckOutput: isNeedCheckOutput)
+        return map(Alamofire.Session.default.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers), isNeedCheckOutput: isNeedCheckOutput)
     }
     
     private func map(_ request: DataRequest, isNeedCheckOutput: Bool = true) -> Promise<Data> {

@@ -62,7 +62,7 @@ class ContactsViewController: BxInputController {
     private func updateData() {
         let handler = { (row: BxInputActionRow) in
             if let row = row as? BxInputIconActionRow<String>, let url = URL(string: row.subtitle ?? "") {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url)
             }
         }
         

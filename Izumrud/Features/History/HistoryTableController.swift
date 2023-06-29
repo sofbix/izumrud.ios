@@ -11,7 +11,6 @@ import RealmSwift
 
 class HistoryTableController: UITableViewController
 {
-    let newHeader: UIView = UIButton.createOnView(title: "Новые показания", target: self, action: #selector(new))
     let newSegue = "new"
     let detailsSegue = "details"
     
@@ -19,7 +18,7 @@ class HistoryTableController: UITableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.tableHeaderView = newHeader
+        self.tableView.tableHeaderView = UIButton.createOnView(title: "Новые показания", target: self, action: #selector(new))
         refresh()
     }
     

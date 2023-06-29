@@ -1,10 +1,10 @@
 
 #
 #  build.sh
-#  version 2.3.1
+#  version 2.4.2
 #
 #  Created by Sergey Balalaev on 20.08.15.
-#  Copyright (c) 2015-2022 ByteriX. All rights reserved.
+#  Copyright (c) 2015-2023 ByteriX. All rights reserved.
 #
 
 PROJECT_NAME=""
@@ -16,9 +16,11 @@ IS_TAG_VERSION=false
 HAS_BITCODE=false
 HAS_TESTING=false
 HAS_IPA_BUILD=true
+IS_APP_STORE=false
 OUTPUT_NAME=""
 TEAM_ID=""
-TEST_DESTINATION="platform=iOS Simulator,name=iPhone 13"
+TEST_DESTINATION="platform=iOS Simulator,name=iPhone 13,OS=15.0"
+TEST_PLAN=""
 SRC_DIR="${PWD}"
 
 EXPORT_PLIST=""
@@ -68,6 +70,7 @@ case $key in
         echo "ERROR: $1 need 2 parameters"
         exit
     fi
+    IS_APP_STORE=true
     shift # past argument
     shift # past value 1
     shift # past value 2
@@ -80,6 +83,7 @@ case $key in
         echo "ERROR: $1 need 3 parameters"
         exit
     fi
+    IS_APP_STORE=true
     shift # past argument
     shift # past value 1
     shift # past value 2
@@ -123,14 +127,20 @@ case $key in
     shift # past argument
     ;;
     -test|--test)
-    TEST_VALUE="$2"
+    TEST_VALUE=""
+    if [[ ! "$2" =~ ^- ]]; then
+        TEST_DESTINATION="$2"
+        TEST_VALUE="$2"
+    fi
     HAS_TESTING=true
     HAS_IPA_BUILD=false
-    if [ "$TEST_VALUE" == "" ]; then
-        echo "WARNING: $1 need 1 parameter: test platform. Default is ${TEST_DESTINATION}"
-    else
-        TEST_DESTINATION="$TEST_VALUE"
+    shift # past argument
+    if [ "$TEST_VALUE" != "" ]; then
+        shift # past value
     fi
+    ;;
+    -tp|--testPlan)
+    TEST_PLAN="$2"
     shift # past argument
     shift # past value
     ;;
@@ -151,6 +161,7 @@ case $key in
     echo "  -at, --addTag        : If selected then will add Tag after build. Default is not selected."
     echo "  -bc, --bitcode       : If selected then will export with bitcode (when defined team). Default is not selected."
     echo "  -test, --test        : If selected then will build and run tests for special destination who you can choise. Default is not selected. Example of destination: 'platform=iOS Simulator,name=iPhone 12,OS=14.0'"
+    echo "  -tp, --testPlan      : If selected then with -test will use selected test plane after that"
     echo ""
     echo "Emample: sh build.sh -p ProjectName -ip -t --version auto\n\n"
     exit 0
@@ -194,7 +205,7 @@ if [ "$EXPORT_PLIST" == "" ]; then
     fi
 fi
 
-if [ -d "${PROJECT_NAME}.xcworkspace" ]; then
+if [ -f "${PROJECT_NAME}.xcworkspace/contents.xcworkspacedata" ]; then
     XCODE_PROJECT="-workspace ${PROJECT_NAME}.xcworkspace"
     echo "Using for workspace: ${XCODE_PROJECT}\n"
 else
@@ -307,13 +318,23 @@ uploadSymbolesToFirebase(){
 }
 
 tests(){
+    local TEST_ADDITION=""
+    local RESULT_PATH="${APP_BUILD_PATH}/tests"
+    if [ "$TEST_PLAN" == "" ]; then
+        echo "We have not test plan"
+    else
+        echo "We have test plan "$TEST_PLAN""
+        TEST_ADDITION="-testPlan "$TEST_PLAN""
+    fi
+    rm -rf "${RESULT_PATH}"
     echo "Strarting Tests with distination: ${TEST_DESTINATION}\n\n"
-    local ACTION="clean build test"
+    local ACTION="clean build test ${TEST_ADDITION}"
     xcodebuild \
     $ACTION \
     $XCODE_PROJECT \
     -scheme ${SCHEME_NAME} \
-    -destination "${TEST_DESTINATION}"
+    -destination "${TEST_DESTINATION}" \
+    -resultBundlePath "${RESULT_PATH}/${PROJECT_NAME}"
 
     checkExit
     echo "Tests finished for ${PROJECT_NAME}\n\n"
@@ -352,10 +373,10 @@ tagCommit(){
 createExportPlist(){
     local EXPORT_PLIST=$1
 
-    if [ "$USERNAME" == "" ]; then
-        SIGNING_METHOD=ad-hoc
-    else
+    if $IS_APP_STORE ; then
         SIGNING_METHOD=app-store
+    else
+        SIGNING_METHOD=ad-hoc
     fi
 
     cat > $EXPORT_PLIST << EOL

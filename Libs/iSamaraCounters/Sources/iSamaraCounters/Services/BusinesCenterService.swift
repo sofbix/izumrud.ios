@@ -10,11 +10,15 @@ import Foundation
 import PromiseKit
 import MessageUI
 
-class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControllerDelegate {
+public class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControllerDelegate {
+
+    public override init() {
+        super.init()
+    }
     
     var result: Promise<Data>?
     
-    func map(_ input: SendDataServiceInput) -> Promise<Data> {
+    public func map(_ input: SendDataServiceInput) -> Promise<Data> {
         
         result = nil
         
@@ -81,7 +85,7 @@ class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControl
         result = .init(error: error)
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
 
         controller.dismiss(animated: true) {[weak self] in
             if let error = error {
@@ -97,9 +101,9 @@ class BusinesCenterService : NSObject, SendDataService, MFMailComposeViewControl
 
     }
     
-    let title: String = "Бизнес-центер"
-    let name: String = "BusinesCenter"
-    let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 22))
+    public let title: String = "Бизнес-центер"
+    public let name: String = "BusinesCenter"
+    public let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 22))
     
     var url: String = ""
     

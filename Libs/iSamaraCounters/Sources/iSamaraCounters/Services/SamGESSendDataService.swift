@@ -10,13 +10,15 @@ import PromiseKit
 import Alamofire
 import BxInputController
 
-struct SamGESSendDataService : SendDataService {
+public struct SamGESSendDataService : SendDataService {
 
-    let name: String = "SamGES"
-    let title: String = "СамГЭС"
-    let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 25))
+    public init() {}
+
+    public let name: String = "SamGES"
+    public let title: String = "СамГЭС"
+    public let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 25))
     
-    func addCheckers(for input: SendDataServiceInput){
+    public func addCheckers(for input: SendDataServiceInput){
         let electricAccountNumberChecker = BxInputBlockChecker(row: input.electricAccountNumberRow, subtitle: "Введите непустой номер из чисел", handler: { row in
             let value = input.electricAccountNumberRow.value ?? ""
             
@@ -55,7 +57,7 @@ struct SamGESSendDataService : SendDataService {
         return "&counters%5B87278_\(index)%5D%5Bvalue%5D=\(value)&counters%5B87278_\(index)%5D%5BrowId%5D=87278&counters%5B87278_\(index)%5D%5Btarif%5D=\(index)"
     }
     
-    func map(_ input: SendDataServiceInput) -> Promise<Data> {
+    public func map(_ input: SendDataServiceInput) -> Promise<Data> {
         
         var account = input.electricAccountNumberRow.value ?? ""
         if account.first == "0" {
@@ -110,7 +112,7 @@ struct SamGESSendDataService : SendDataService {
         }
     }
     
-    func checkOutputData(with data: Data) -> String? {
+    public func checkOutputData(with data: Data) -> String? {
         
         if let stringData = String(data: data, encoding: .utf8)
             

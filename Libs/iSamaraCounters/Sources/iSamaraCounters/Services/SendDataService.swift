@@ -11,7 +11,7 @@ import PromiseKit
 import Alamofire
 import BxInputController
 
-protocol SendDataServiceInput: Any {
+public protocol SendDataServiceInput: Any {
     var surnameRow: BxInputTextRow {get}
     var nameRow: BxInputTextRow {get}
     var patronymicRow: BxInputTextRow {get}
@@ -34,7 +34,7 @@ protocol SendDataServiceInput: Any {
     func addChecker(_ checker: BxInputRowChecker, for row: BxInputRow)
 }
 
-protocol SendDataService: Any {
+public protocol SendDataService: Any {
     
     var name: String {get}
     var title: String {get}
@@ -54,7 +54,7 @@ protocol SendDataService: Any {
 }
 
 
-extension SendDataService {
+public extension SendDataService {
     
     // default realization has not input error
     func addCheckers(for input: SendDataServiceInput) {

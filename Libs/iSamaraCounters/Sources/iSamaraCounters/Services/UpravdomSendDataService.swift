@@ -11,11 +11,13 @@ import PromiseKit
 import Alamofire
 import Fuzi
 
-class UpravdomSendDataService : SendDataService {
+public class UpravdomSendDataService : SendDataService {
 
-    let title: String = "Управдом"
-    let name: String = "Upravdom"
-    let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 20))
+    public init() { }
+
+    public let title: String = "Управдом"
+    public let name: String = "Upravdom"
+    public let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 20))
     
 
     private var form_build_id: String?
@@ -28,7 +30,7 @@ class UpravdomSendDataService : SendDataService {
     private var currentUrl: String? = nil
     
     
-    func map(_ input: SendDataServiceInput) -> Promise<Data> {
+    public func map(_ input: SendDataServiceInput) -> Promise<Data> {
         
         
         let form_build_id = "input.form_build_id"
@@ -56,14 +58,13 @@ class UpravdomSendDataService : SendDataService {
         
         for waterCounter in input.waterCounters {
             if waterCounter.isValid { #warning("Has problem with checking realy params. Order can be invalided.")
-                let entity = waterCounter.entity
-                parameters["no_schyotchika_gvs_\(entity.order)"] = "\(entity.hotSerialNumber)"
-                parameters["pokazaniya_gvs_\(entity.order)"] = "\(entity.hotCount)"
-                parameters["no_schyotchika_hvs_\(entity.order)"] = "\(entity.coldSerialNumber)"
-                parameters["pokazaniya_hvs_\(entity.order)"] = "\(entity.coldCount)"
-                if entity.order > 1 {
-                    parameters["dobavit_schyotchik_gvs_\(entity.order)"] = "1"
-                    parameters["dobavit_schyotchik_hvs_\(entity.order)"] = "1"
+                parameters["no_schyotchika_gvs_\(waterCounter.order)"] = "\(waterCounter.hotSerialNumberRow.value ?? "")"
+                parameters["pokazaniya_gvs_\(waterCounter.order)"] = "\(waterCounter.hotCountRow.value ?? "")"
+                parameters["no_schyotchika_hvs_\(waterCounter.order)"] = "\(waterCounter.coldSerialNumberRow.value ?? "")"
+                parameters["pokazaniya_hvs_\(waterCounter.order)"] = "\(waterCounter.coldCountRow.value ?? "")"
+                if waterCounter.order > 1 {
+                    parameters["dobavit_schyotchik_gvs_\(waterCounter.order)"] = "1"
+                    parameters["dobavit_schyotchik_hvs_\(waterCounter.order)"] = "1"
                 }
                 #warning("3th counter should all empty values, or 2th for realy one. Please will add it if need. Without dobavit_schyotchik_hvs_(3/2) each other")
             }
@@ -80,7 +81,7 @@ class UpravdomSendDataService : SendDataService {
 
     }
     
-    func checkOutputData(with data: Data) -> String? {
+    public func checkOutputData(with data: Data) -> String? {
         
         if let stringData = String(data: data, encoding: .utf8)
             
@@ -101,7 +102,7 @@ class UpravdomSendDataService : SendDataService {
 // first load
 extension UpravdomSendDataService {
 
-    private static let firstLoadHeaders : HTTPHeaders = [
+    private static let firstLoadHeaders: HTTPHeaders = [
         "Host" : "upravdom63.ru",
         "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:74.0) Gecko/20100101 Firefox/74.0",
         "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -227,10 +228,10 @@ extension UpravdomSendDataService {
         return form_build_id != nil && honeypot_time != nil && form_id != nil
     }
 
-    var isNeedFirstLoad: Bool {
+    public var isNeedFirstLoad: Bool {
         return !hasUpravdomData
     }
-    func firstLoad(with input: SendDataServiceInput) -> Promise<Data>? {
+    public func firstLoad(with input: SendDataServiceInput) -> Promise<Data>? {
         return firstLoadUpravdom()
     }
 

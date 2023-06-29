@@ -8,27 +8,27 @@
 import Foundation
 import BxInputController
 
-class WaterCounterViewModel {
+public class WaterCounterViewModel {
     
-    var id: String = ""
-    var order: Int = 0
+    public var id: String = ""
+    public var order: Int = 0
     
-    var nameRow = BxInputTextRow(title: "Название", subtitle: "для себя", maxCount: 100, value: "")
+    public private(set) var nameRow = BxInputTextRow(title: "Название", subtitle: "для себя", maxCount: 100, value: "")
     
-    var hotCountRow = BxInputTextRow(title: "Показание горячей воды", subtitle: "Только целые числа, без дробных", maxCount: 10, value: "")
-    var hotSerialNumberRow = BxInputTextRow(title: "Номер сч-ка гор. воды", maxCount: 20, value: "")
+    public private(set) var hotCountRow = BxInputTextRow(title: "Показание горячей воды", subtitle: "Только целые числа, без дробных", maxCount: 10, value: "")
+    public private(set) var hotSerialNumberRow = BxInputTextRow(title: "Номер сч-ка гор. воды", maxCount: 20, value: "")
     
-    var coldCountRow = BxInputTextRow(title: "Показание холодной воды", subtitle: "Только целые числа, без дробных", maxCount: 10, value: "")
-    var coldSerialNumberRow = BxInputTextRow(title: "Номер сч-ка хол. воды", maxCount: 20, value: "")
+    public private(set) var coldCountRow = BxInputTextRow(title: "Показание холодной воды", subtitle: "Только целые числа, без дробных", maxCount: 10, value: "")
+    public private(set) var coldSerialNumberRow = BxInputTextRow(title: "Номер сч-ка хол. воды", maxCount: 20, value: "")
     
-    var section : BxInputSection {
+    public var section : BxInputSection {
         let title = (id == "") ? "Добавить счётчик воды" : "Счётчик воды № \(order)"
         return BxInputSection(headerText: title,
                               rows: [nameRow, coldCountRow, coldSerialNumberRow, hotCountRow, hotSerialNumberRow],
                               footerText: nil)
     }
     
-    func contains(_ row: BxInputRow) -> Bool
+    public func contains(_ row: BxInputRow) -> Bool
     {
         return self.nameRow === row ||
             self.coldCountRow === row ||
@@ -37,20 +37,20 @@ class WaterCounterViewModel {
             self.hotSerialNumberRow === row
     }
     
-    init() {
+    public init() {
         hotCountRow.textSettings.keyboardType = .numberPad
         coldCountRow.textSettings.keyboardType = .numberPad
     }
     
 
     
-    var isValid : Bool {
+    public var isValid : Bool {
         return (nameRow.value ?? "").isEmpty == false ||
             (hotCountRow.value ?? "").isEmpty == false || (hotSerialNumberRow.value ?? "").isEmpty == false ||
             (coldCountRow.value ?? "").isEmpty == false || (coldSerialNumberRow.value ?? "").isEmpty == false
     }
 
-    private func updateRow(_ row: BxInputTextRow, fields: [String: String], index: Int, with fieldName: String, defaultValue: String) {
+    public func updateRow(_ row: BxInputTextRow, fields: [String: String], index: Int, with fieldName: String, defaultValue: String) {
         if let value = fields["waterCounters[\(index)]\(fieldName)"] {
             row.value = value
         } else {

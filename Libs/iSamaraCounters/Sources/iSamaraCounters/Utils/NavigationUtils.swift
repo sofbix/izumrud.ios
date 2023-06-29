@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct NavigationUtils {
+public struct NavigationUtils {
 
-    static var firstWindow: UIWindow? {
+    public static var firstWindow: UIWindow? {
         if #available(iOS 13.0, *) {
             return UIApplication.shared
                 .connectedScenes.lazy
@@ -22,11 +22,11 @@ struct NavigationUtils {
         }
     }
 
-    static var rootController: UIViewController? {
+    public static var rootController: UIViewController? {
         firstWindow?.rootViewController
     }
 
-    static func findController<T: UIViewController>(viewController: UIViewController? = rootController) -> T? {
+    public static func findController<T: UIViewController>(viewController: UIViewController? = rootController) -> T? {
         guard let viewController = viewController else {
             return nil
         }
@@ -42,15 +42,15 @@ struct NavigationUtils {
         return nil
     }
 
-    static var navigationController: UINavigationController? {
+    public static var navigationController: UINavigationController? {
         findController()
     }
 
-    static var tabBarController: UITabBarController? {
+    public static var tabBarController: UITabBarController? {
         findController()
     }
 
-    static func openTab(with rootController: UIViewController) {
+    public static func openTab(with rootController: UIViewController) {
         guard let tabBarController = self.tabBarController else {
             return
         }

@@ -9,19 +9,21 @@ import Foundation
 import PromiseKit
 import Alamofire
 
-protocol EsPlusCounter{
+public protocol EsPlusCounter{
     var identifier: String {get}
     var number: String {get}
 }
 
-struct EsPlusSendDataService : SendDataService {
+public struct EsPlusSendDataService : SendDataService {
+
+    public init() {}
     
     
-    let name: String = "EsPlus"
-    let title: String = "T+"
-    let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 25))
+    public let name: String = "EsPlus"
+    public let title: String = "T+"
+    public let days = Range<Int>(uncheckedBounds: (lower: 15, upper: 25))
     
-    func addCheckers(for input: SendDataServiceInput) {
+    public func addCheckers(for input: SendDataServiceInput) {
         #warning("need check Int value of counters value")
     }
     
@@ -123,7 +125,7 @@ struct EsPlusSendDataService : SendDataService {
         }
     }
     
-    func map(_ input: SendDataServiceInput) -> Promise<Data> {
+    public func map(_ input: SendDataServiceInput) -> Promise<Data> {
 
         let body = "sessid=a289233cfe33cde50d08d7d1fb5185c9&status=GET_COUNTERS&nlsid=\(input.esPlusAccountNumberRow.value ?? "")&get_counters=Y&PR=0"
         var request = try! URLRequest(url: url(input), method: .post, headers: headers)
@@ -158,7 +160,7 @@ struct EsPlusSendDataService : SendDataService {
         let error: String?
     }
     
-    func checkOutputData(with data: Data) -> String? {
+    public func checkOutputData(with data: Data) -> String? {
         do {
             let output = try JSONDecoder().decode(Output.self, from: data)
             return output.error

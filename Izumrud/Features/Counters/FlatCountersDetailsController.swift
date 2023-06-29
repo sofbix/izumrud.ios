@@ -12,7 +12,7 @@ import BxInputController
 import CircularSpinner
 import Alamofire
 import PromiseKit
-//import iSamaraCounters
+import iSamaraCounters
 
 class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     

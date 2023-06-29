@@ -8,6 +8,7 @@
 import Foundation
 import BxInputController
 import PromiseKit
+import iSamaraCounters
 
 protocol CheckProviderProtocol : BxInputRow {
     

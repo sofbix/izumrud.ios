@@ -194,7 +194,7 @@ if [ "$EXPORT_PLIST" == "" ]; then
     fi
 fi
 
-if [ -d "${PROJECT_NAME}.xcworkspace" ]; then
+if [ -f "${PROJECT_NAME}.xcworkspace/contents.xcworkspacedata" ]; then
     XCODE_PROJECT="-workspace ${PROJECT_NAME}.xcworkspace"
     echo "Using for workspace: ${XCODE_PROJECT}\n"
 else

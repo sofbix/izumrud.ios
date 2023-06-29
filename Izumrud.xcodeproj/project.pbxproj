@@ -19,7 +19,6 @@
 		C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */; };
 		C3AAFF102745991D002900DB /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF0D2745991D002900DB /* UIButton.swift */; };
 		C3AAFF112745991D002900DB /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF0E2745991D002900DB /* DateFormatter.swift */; };
-		C3AAFF152745996C002900DB /* CheckProviderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF132745996C002900DB /* CheckProviderRow.swift */; };
 		C3AAFF1727459B3E002900DB /* FlatCountersDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */; };
 		C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1927459E12002900DB /* HistoryTableController.swift */; };
 		C3B3519B2A48DE4600345600 /* iSamaraCounters in Frameworks */ = {isa = PBXBuildFile; productRef = C3B3519A2A48DE4600345600 /* iSamaraCounters */; };
@@ -42,7 +41,6 @@
 		C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		C3AAFF0D2745991D002900DB /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C3AAFF0E2745991D002900DB /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
-		C3AAFF132745996C002900DB /* CheckProviderRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckProviderRow.swift; sourceTree = "<group>"; };
 		C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatCountersDetailsController.swift; sourceTree = "<group>"; };
 		C3AAFF1927459E12002900DB /* HistoryTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableController.swift; sourceTree = "<group>"; };
 		C3B8E3262A365AFF000A66A6 /* iSamaraCounters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = iSamaraCounters; path = Libs/iSamaraCounters; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */,
-				C3AAFF132745996C002900DB /* CheckProviderRow.swift */,
 			);
 			path = Counters;
 			sourceTree = "<group>";
@@ -279,7 +276,6 @@
 			files = (
 				C3242B2A2A27D06500DEE2B0 /* ProgressService.swift in Sources */,
 				C3AAFF102745991D002900DB /* UIButton.swift in Sources */,
-				C3AAFF152745996C002900DB /* CheckProviderRow.swift in Sources */,
 				C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */,
 				C3EE617E2A081AB200BB3260 /* StatisticsViewController.swift in Sources */,
 				C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */,

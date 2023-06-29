@@ -8,29 +8,34 @@
 import Foundation
 import BxInputController
 import PromiseKit
-import iSamaraCounters
 
-protocol CheckProviderProtocol : BxInputRow {
+public let serviceProvidersToSendingDevider : String.Element = ","
+
+public protocol ProgressServiceProtocol {
+    func start(with title: String) -> Promise<Data>
+}
+
+public protocol CheckProviderProtocol : BxInputRow {
     
     var value: Bool {get}
     
     var serviceName: String {get}
 
-    func updateValue(_ entity: FlatEntity)
+    func updateValue(from serviceProvidersToSending: String)
     
     func addCheckers(for input: SendDataServiceInput)
-    func startUpdate(services: inout [Promise<Data>], input: SendDataServiceInput)
+    func startUpdate(services: inout [Promise<Data>], input: SendDataServiceInput, progressService: ProgressServiceProtocol)
 
     var isNeedFirstLoad: Bool {get}
-    func firstLoadUpdate(services: inout [Promise<Data>], input: SendDataServiceInput)
+    func firstLoadUpdate(services: inout [Promise<Data>], input: SendDataServiceInput, progressService: ProgressServiceProtocol)
 }
 
-class CheckProviderRow<T: SendDataService>: BxInputCheckRow
+public class CheckProviderRow<T: SendDataService>: BxInputCheckRow
 {
 
     let service: T
     
-    required init(_ service: T){
+    public required init(_ service: T){
         self.service = service
         super.init(title: service.title, subtitle: nil, placeholder: nil, value: true)
     }
@@ -56,21 +61,21 @@ class CheckProviderRow<T: SendDataService>: BxInputCheckRow
         return checker
     }
 
-    var serviceName: String {
+    public var serviceName: String {
         return service.name
     }
 
-    func updateValue(_ entity: FlatEntity) {
-        let serviceProvidersToSending = entity.serviceProvidersToSending
+    public func updateValue(from serviceProvidersToSending: String) {
+        let serviceProvidersToSending = serviceProvidersToSending
         guard serviceProvidersToSending.isEmpty == false else {
             value = false
             return
         }
-        let services = serviceProvidersToSending.split(separator: FlatEntity.serviceProvidersToSendingDevider)
+        let services = serviceProvidersToSending.split(separator: serviceProvidersToSendingDevider)
         value = services.contains(Substring(serviceName))
     }
 
-    var isNeedFirstLoad: Bool {
+    public var isNeedFirstLoad: Bool {
         return service.isNeedFirstLoad
     }
     
@@ -79,23 +84,23 @@ class CheckProviderRow<T: SendDataService>: BxInputCheckRow
 extension CheckProviderRow: CheckProviderProtocol
 {
 
-    func addCheckers(for input: SendDataServiceInput)
+    public func addCheckers(for input: SendDataServiceInput)
     {
         input.addChecker(createSelfChecker(), for: self)
         service.addCheckers(for: input)
     }
 
-    func startUpdate(services: inout [Promise<Data>], input: SendDataServiceInput) {
+    public func startUpdate(services: inout [Promise<Data>], input: SendDataServiceInput, progressService: ProgressServiceProtocol) {
         if value {
-            services.append(ProgressService().start(with: "Передача в " + service.title))
+            services.append(progressService.start(with: "Передача в " + service.title))
             services.append(service.start(with: input))
         }
     }
 
-    func firstLoadUpdate(services: inout [Promise<Data>], input: SendDataServiceInput) {
+    public func firstLoadUpdate(services: inout [Promise<Data>], input: SendDataServiceInput, progressService: ProgressServiceProtocol) {
         if value {
             if isNeedFirstLoad, let firstLoadPromise = service.firstLoad(with: input) {
-                services.append(ProgressService().start(with: service.title + ": загрузка"))
+                services.append(progressService.start(with: service.title + ": загрузка"))
                 services.append(firstLoadPromise)
             }
         }

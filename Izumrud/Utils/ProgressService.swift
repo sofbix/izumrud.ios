@@ -9,8 +9,9 @@
 import Foundation
 import CircularSpinner
 import PromiseKit
+import iSamaraCounters
 
-struct ProgressService {
+struct ProgressService: ProgressServiceProtocol {
 
     func start(with title: String) -> Promise<Data> {
         return Promise { seal in

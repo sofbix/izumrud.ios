@@ -11,8 +11,6 @@ import RealmSwift
 
 class FlatEntity: Object {
     
-    static let serviceProvidersToSendingDevider : String.Element = ","
-    
     @objc dynamic var id: String = ""
     
     // for multyaccount mode in a future

@@ -114,7 +114,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
             // New counters sending to all Services:
             flatEntity.serviceProvidersToSending = servicesRows.map{ row -> String in
                 return row.serviceName
-            }.joined(separator: String(FlatEntity.serviceProvidersToSendingDevider))
+            }.joined(separator: String(serviceProvidersToSendingDevider))
             DatabaseManager.shared.commonRealm.add(flatEntity, update: .all)
             do {
                 try DatabaseManager.shared.commonRealm.commitWrite()
@@ -169,7 +169,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
         }
         
         servicesRows.forEach{ row in
-            row.updateValue(flatEntity)
+            row.updateValue(from: flatEntity.serviceProvidersToSending)
         }
         let servicesSection = BxInputSection(headerText: "Куда отправляем", rows: servicesRows, footerText: "Выберите поставщиков комунальных услуг, для которых требуется отправлять показания приборов")
         sections.append(servicesSection)
@@ -252,7 +252,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
                     return row.serviceName
                 }
                 return nil
-            }.joined(separator: String(FlatEntity.serviceProvidersToSendingDevider))
+            }.joined(separator: String(serviceProvidersToSendingDevider))
             
             DatabaseManager.shared.commonRealm.add(flatEntity, update: .modified)
             do {
@@ -352,7 +352,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
 
         servicesRows.forEach{ row in
             if isEditing, row.value {
-                row.firstLoadUpdate(services: &services, input: self)
+                row.firstLoadUpdate(services: &services, input: self, progressService: ProgressService())
             }
         }
         when(fulfilled: services)
@@ -367,7 +367,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     private func startServices() {
         var services : [Promise<Data>] = []
         servicesRows.forEach{ row in
-            row.startUpdate(services: &services, input: self)
+            row.startUpdate(services: &services, input: self, progressService: ProgressService())
         }
         #if DEBUG
         #else

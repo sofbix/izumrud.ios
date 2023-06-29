@@ -15,7 +15,7 @@
       "location" : "https://github.com/ByteriX/BxInputController.git",
       "state" : {
         "branch" : "master",
-        "revision" : "939eb600b72e095c55c172e0b57c1f92f3ee3e76"
+        "revision" : "4d303549e38eb97d35c8a895a7cc5c7254212b62"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ByteriX/CircularSpinner.git",
       "state" : {
-        "revision" : "38b02242b9b7c9fdd44bfe0bec088866a0028077",
-        "version" : "1.4.3"
+        "revision" : "0045e1b3e442d4d4599f5b4260af62ac5b31004b",
+        "version" : "1.4.4"
       }
     },
     {

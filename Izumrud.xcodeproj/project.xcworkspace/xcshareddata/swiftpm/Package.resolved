@@ -64,6 +64,15 @@
       }
     },
     {
+      "identity" : "isamaracounters",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sofbix/iSamaraCounters.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "57c2f0ac6ecff4606875410e5a0731dceb04ab2a"
+      }
+    },
+    {
       "identity" : "promisekit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mxcl/PromiseKit.git",

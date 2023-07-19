@@ -69,7 +69,7 @@
       "location" : "https://github.com/sofbix/iSamaraCounters.git",
       "state" : {
         "branch" : "main",
-        "revision" : "57c2f0ac6ecff4606875410e5a0731dceb04ab2a"
+        "revision" : "410b13ffeb198c63f324ddd9e39428fac2a02b59"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "f1434caadda443b4ed2261b91ea4f43ab1ee2aa5",
-        "version" : "13.15.1"
+        "revision" : "f1e962cd447f8b69f8f7cf46a188b1c6246923c5",
+        "version" : "13.17.0"
       }
     },
     {
@@ -96,7 +96,7 @@
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
         "branch" : "master",
-        "revision" : "5ed2c8ece79e63056641bd517435aaf81563f887"
+        "revision" : "be282647e4cabb0d2379ad6dcbd5c26cc001037b"
       }
     }
   ],

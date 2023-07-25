@@ -55,7 +55,7 @@ class FlatCountersDetailsController: BxInputController, SendDataServiceInput {
     private(set) var waterCounters: [WaterCounterViewModel] = []
 
     private lazy var servicesRows : [CheckProviderProtocol] = [
-        CheckProviderRow(SamGESSendDataService()),
+        CheckProviderRow(SamaraEnergoSendDataService()),
         CheckProviderRow(RKSSendDataService()),
         CheckProviderRow(EsPlusSendDataService()),
         CheckProviderRow(UpravdomSendDataService()),

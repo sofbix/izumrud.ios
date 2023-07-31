@@ -28,6 +28,7 @@
 		C3AAFF1A27459E12002900DB /* HistoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF1927459E12002900DB /* HistoryTableController.swift */; };
 		C3B3519B2A48DE4600345600 /* iSamaraCounters in Frameworks */ = {isa = PBXBuildFile; productRef = C3B3519A2A48DE4600345600 /* iSamaraCounters */; };
 		C3EE617E2A081AB200BB3260 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */; };
+		C3FDA5AE2A785D6300C47021 /* SendDataMockInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FDA5AD2A785D6300C47021 /* SendDataMockInput.swift */; };
 		E3214DC424C4B66B00872B81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3214DC324C4B66B00872B81 /* AppDelegate.swift */; };
 		E3214DCB24C4B66B00872B81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3214DC924C4B66B00872B81 /* Main.storyboard */; };
 		E3214DCD24C4B67100872B81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3214DCC24C4B67100872B81 /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 		C3AAFF1927459E12002900DB /* HistoryTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableController.swift; sourceTree = "<group>"; };
 		C3E82AC52A77E3DC00A91C29 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		C3FDA5AD2A785D6300C47021 /* SendDataMockInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDataMockInput.swift; sourceTree = "<group>"; };
 		E3214DC024C4B66B00872B81 /* Izumrud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Izumrud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3214DC324C4B66B00872B81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3214DCA24C4B66B00872B81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				C3E82AC52A77E3DC00A91C29 /* UnitTestPlan.xctestplan */,
 				C3266E992A77CABB00207740 /* IzumrudTests.swift */,
+				C3FDA5AD2A785D6300C47021 /* SendDataMockInput.swift */,
 			);
 			path = IzumrudTests;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3FDA5AE2A785D6300C47021 /* SendDataMockInput.swift in Sources */,
 				C3266E9A2A77CABB00207740 /* IzumrudTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

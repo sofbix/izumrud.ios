@@ -11,6 +11,8 @@ import iSamaraCounters
 
 final class IzumrudTests: XCTestCase {
 
+    let service = SamaraEnergoSendDataService()
+
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -21,7 +23,7 @@ final class IzumrudTests: XCTestCase {
 
     func testSamaraEnergo() throws {
         let expectation = expectation(description: "SamaraEnergo")
-        let service = SamaraEnergoSendDataService()
+
         service
             .map(SendDataMockInput())
             .done{ _ in

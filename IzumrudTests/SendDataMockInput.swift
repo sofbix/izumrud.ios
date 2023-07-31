@@ -11,21 +11,21 @@ import iSamaraCounters
 import BxInputController
 
 struct SendDataMockInput : SendDataServiceInput {
-    var surnameRow = BxInputTextRow(value: "")
-    var nameRow = BxInputTextRow(value: "")
-    var patronymicRow = BxInputTextRow(value: "")
-    var streetRow = BxInputTextRow(value: "")
-    var homeNumberRow = BxInputTextRow(value: "")
-    var flatNumberRow = BxInputTextRow(value: "")
-    var phoneNumberRow: BxInputFormattedTextRow = BxInputFormattedTextRow(enteredCharacters: "", value: "")
-    var emailRow = BxInputTextRow(value: "!")
-    var rksAccountNumberRow = BxInputTextRow(value: "")
-    var esPlusAccountNumberRow = BxInputTextRow(value: "")
-    var commentsRow = BxInputTextMemoRow(value: "")
-    var electricAccountNumberRow = BxInputTextRow(value: "")
-    var electricCounterNumberRow = BxInputTextRow(value: "")
-    var dayElectricCountRow = BxInputTextRow(value: "")
-    var nightElectricCountRow = BxInputTextRow(value: "")
+    var surnameRow: BxInputTextRow
+    var nameRow: BxInputTextRow
+    var patronymicRow: BxInputTextRow
+    var streetRow: BxInputTextRow
+    var homeNumberRow: BxInputTextRow
+    var flatNumberRow: BxInputTextRow
+    var phoneNumberRow: BxInputFormattedTextRow
+    var emailRow: BxInputTextRow
+    var rksAccountNumberRow: BxInputTextRow
+    var esPlusAccountNumberRow: BxInputTextRow
+    var commentsRow: BxInputTextMemoRow
+    var electricAccountNumberRow: BxInputTextRow
+    var electricCounterNumberRow: BxInputTextRow
+    var dayElectricCountRow: BxInputTextRow
+    var nightElectricCountRow: BxInputTextRow
 
     var waterCounters: [WaterCounterViewModel] = []
     func addChecker(_ checker: BxInputRowChecker, for row: BxInputRow) {

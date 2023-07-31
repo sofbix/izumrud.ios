@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "4DD1C7F5-A5D5-4730-9115-221C72DC34C1",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Izumrud.xcodeproj",
+      "identifier" : "E3214DBF24C4B66B00872B81",
+      "name" : "Izumrud"
+    },
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Izumrud.xcodeproj",
+        "identifier" : "C3266E962A77CABB00207740",
+        "name" : "IzumrudTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -15,6 +15,10 @@
 		C323DCA52A4B79DC00DAF283 /* BxInputController in Frameworks */ = {isa = PBXBuildFile; productRef = C323DCA42A4B79DC00DAF283 /* BxInputController */; };
 		C323DCA82A4B7B3400DAF283 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = C323DCA72A4B7B3400DAF283 /* Charts */; };
 		C3242B2A2A27D06500DEE2B0 /* ProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3242B292A27D06500DEE2B0 /* ProgressService.swift */; };
+		C3266E9A2A77CABB00207740 /* IzumrudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3266E992A77CABB00207740 /* IzumrudTests.swift */; };
+		C3266EA22A77CF1D00207740 /* BxCommon in Frameworks */ = {isa = PBXBuildFile; productRef = C3266EA12A77CF1D00207740 /* BxCommon */; };
+		C3266EA42A77CF1D00207740 /* BxObjC in Frameworks */ = {isa = PBXBuildFile; productRef = C3266EA32A77CF1D00207740 /* BxObjC */; };
+		C3266EA72A77D42E00207740 /* BxObjC in Frameworks */ = {isa = PBXBuildFile; productRef = C3266EA62A77D42E00207740 /* BxObjC */; };
 		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
 		C379BD422A5491C000FBA494 /* iSamaraCounters in Frameworks */ = {isa = PBXBuildFile; productRef = C379BD412A5491C000FBA494 /* iSamaraCounters */; };
 		C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */; };
@@ -33,10 +37,22 @@
 		E3863D5E24F7C05600C3C0B0 /* WaterCounterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3863D5D24F7C05600C3C0B0 /* WaterCounterEntity.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C3266E9B2A77CABB00207740 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3214DB824C4B66B00872B81 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3214DBF24C4B66B00872B81;
+			remoteInfo = Izumrud;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		C31F9CFA2A05327300BCBAF3 /* NavigationRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRoute.swift; sourceTree = "<group>"; };
 		C323DC992A4B71B900DAF283 /* WaterCounterEntity+WaterCounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaterCounterEntity+WaterCounterViewModel.swift"; sourceTree = "<group>"; };
 		C3242B292A27D06500DEE2B0 /* ProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressService.swift; sourceTree = "<group>"; };
+		C3266E972A77CABB00207740 /* IzumrudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IzumrudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3266E992A77CABB00207740 /* IzumrudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IzumrudTests.swift; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C339F67F29C830970095534F /* Izumrud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Izumrud.entitlements; sourceTree = "<group>"; };
 		C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +60,7 @@
 		C3AAFF0E2745991D002900DB /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		C3AAFF1627459B3E002900DB /* FlatCountersDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatCountersDetailsController.swift; sourceTree = "<group>"; };
 		C3AAFF1927459E12002900DB /* HistoryTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableController.swift; sourceTree = "<group>"; };
+		C3E82AC52A77E3DC00A91C29 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		C3EE617D2A081AB200BB3260 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		E3214DC024C4B66B00872B81 /* Izumrud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Izumrud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3214DC324C4B66B00872B81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +74,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C3266E942A77CABB00207740 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3266EA72A77D42E00207740 /* BxObjC in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3214DBD24C4B66B00872B81 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,7 +89,9 @@
 				C3B3519B2A48DE4600345600 /* iSamaraCounters in Frameworks */,
 				C323DC9D2A4B765D00DAF283 /* CircularSpinner in Frameworks */,
 				C323DCA82A4B7B3400DAF283 /* Charts in Frameworks */,
+				C3266EA22A77CF1D00207740 /* BxCommon in Frameworks */,
 				C323DCA02A4B76DF00DAF283 /* Realm in Frameworks */,
+				C3266EA42A77CF1D00207740 /* BxObjC in Frameworks */,
 				C323DCA52A4B79DC00DAF283 /* BxInputController in Frameworks */,
 				C323DCA22A4B76DF00DAF283 /* RealmSwift in Frameworks */,
 				C379BD422A5491C000FBA494 /* iSamaraCounters in Frameworks */,
@@ -81,6 +108,22 @@
 				C3242B292A27D06500DEE2B0 /* ProgressService.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		C3266E982A77CABB00207740 /* IzumrudTests */ = {
+			isa = PBXGroup;
+			children = (
+				C3E82AC52A77E3DC00A91C29 /* UnitTestPlan.xctestplan */,
+				C3266E992A77CABB00207740 /* IzumrudTests.swift */,
+			);
+			path = IzumrudTests;
+			sourceTree = "<group>";
+		};
+		C3266EA52A77D42E00207740 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C39AEA47262EB878000109E9 /* Features */ = {
@@ -139,7 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				E3214DC224C4B66B00872B81 /* Izumrud */,
+				C3266E982A77CABB00207740 /* IzumrudTests */,
 				E3214DC124C4B66B00872B81 /* Products */,
+				C3266EA52A77D42E00207740 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				E3214DC024C4B66B00872B81 /* Izumrud.app */,
+				C3266E972A77CABB00207740 /* IzumrudTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,6 +229,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C3266E962A77CABB00207740 /* IzumrudTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3266E9F2A77CABB00207740 /* Build configuration list for PBXNativeTarget "IzumrudTests" */;
+			buildPhases = (
+				C3266E932A77CABB00207740 /* Sources */,
+				C3266E942A77CABB00207740 /* Frameworks */,
+				C3266E952A77CABB00207740 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3266E9C2A77CABB00207740 /* PBXTargetDependency */,
+			);
+			name = IzumrudTests;
+			packageProductDependencies = (
+				C3266EA62A77D42E00207740 /* BxObjC */,
+			);
+			productName = IzumrudTests;
+			productReference = C3266E972A77CABB00207740 /* IzumrudTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E3214DBF24C4B66B00872B81 /* Izumrud */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3214DD424C4B67100872B81 /* Build configuration list for PBXNativeTarget "Izumrud" */;
@@ -204,6 +271,8 @@
 				C323DCA42A4B79DC00DAF283 /* BxInputController */,
 				C323DCA72A4B7B3400DAF283 /* Charts */,
 				C379BD412A5491C000FBA494 /* iSamaraCounters */,
+				C3266EA12A77CF1D00207740 /* BxCommon */,
+				C3266EA32A77CF1D00207740 /* BxObjC */,
 			);
 			productName = Izumrud;
 			productReference = E3214DC024C4B66B00872B81 /* Izumrud.app */;
@@ -216,10 +285,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Byterix;
 				TargetAttributes = {
+					C3266E962A77CABB00207740 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = E3214DBF24C4B66B00872B81;
+					};
 					E3214DBF24C4B66B00872B81 = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -240,17 +313,26 @@
 				C323DCA32A4B79DC00DAF283 /* XCRemoteSwiftPackageReference "BxInputController" */,
 				C323DCA62A4B7B3400DAF283 /* XCRemoteSwiftPackageReference "Charts" */,
 				C379BD402A5491C000FBA494 /* XCRemoteSwiftPackageReference "iSamaraCounters" */,
+				C3266EA02A77CF1D00207740 /* XCRemoteSwiftPackageReference "BxObjC" */,
 			);
 			productRefGroup = E3214DC124C4B66B00872B81 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E3214DBF24C4B66B00872B81 /* Izumrud */,
+				C3266E962A77CABB00207740 /* IzumrudTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C3266E952A77CABB00207740 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3214DBE24C4B66B00872B81 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +346,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C3266E932A77CABB00207740 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3266E9A2A77CABB00207740 /* IzumrudTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3214DBC24C4B66B00872B81 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -287,6 +377,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C3266E9C2A77CABB00207740 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3214DBF24C4B66B00872B81 /* Izumrud */;
+			targetProxy = C3266E9B2A77CABB00207740 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		E3214DC924C4B66B00872B81 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -307,6 +405,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C3266E9D2A77CABB00207740 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S3KMV5BF4H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Byterix.IzumrudTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Izumrud.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Izumrud";
+			};
+			name = Debug;
+		};
+		C3266E9E2A77CABB00207740 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S3KMV5BF4H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Byterix.IzumrudTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Izumrud.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Izumrud";
+			};
+			name = Release;
+		};
 		E3214DD224C4B67100872B81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -472,6 +610,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C3266E9F2A77CABB00207740 /* Build configuration list for PBXNativeTarget "IzumrudTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3266E9D2A77CABB00207740 /* Debug */,
+				C3266E9E2A77CABB00207740 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E3214DBB24C4B66B00872B81 /* Build configuration list for PBXProject "Izumrud" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -525,6 +672,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		C3266EA02A77CF1D00207740 /* XCRemoteSwiftPackageReference "BxObjC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ByteriX/BxObjC.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		C379BD402A5491C000FBA494 /* XCRemoteSwiftPackageReference "iSamaraCounters" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sofbix/iSamaraCounters.git";
@@ -560,6 +715,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C323DCA62A4B7B3400DAF283 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
+		};
+		C3266EA12A77CF1D00207740 /* BxCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3266EA02A77CF1D00207740 /* XCRemoteSwiftPackageReference "BxObjC" */;
+			productName = BxCommon;
+		};
+		C3266EA32A77CF1D00207740 /* BxObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3266EA02A77CF1D00207740 /* XCRemoteSwiftPackageReference "BxObjC" */;
+			productName = BxObjC;
+		};
+		C3266EA62A77D42E00207740 /* BxObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3266EA02A77CF1D00207740 /* XCRemoteSwiftPackageReference "BxObjC" */;
+			productName = BxObjC;
 		};
 		C379BD412A5491C000FBA494 /* iSamaraCounters */ = {
 			isa = XCSwiftPackageProductDependency;

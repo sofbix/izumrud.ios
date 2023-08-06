@@ -20,6 +20,7 @@
 		C3266EA42A77CF1D00207740 /* BxObjC in Frameworks */ = {isa = PBXBuildFile; productRef = C3266EA32A77CF1D00207740 /* BxObjC */; };
 		C3266EA72A77D42E00207740 /* BxObjC in Frameworks */ = {isa = PBXBuildFile; productRef = C3266EA62A77D42E00207740 /* BxObjC */; };
 		C32DDE19259F4CC80034AFD4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32DDE18259F4CC80034AFD4 /* Settings.swift */; };
+		C33AA0912A80309500F37948 /* UpravdomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AA0902A80309500F37948 /* UpravdomTests.swift */; };
 		C379BD422A5491C000FBA494 /* iSamaraCounters in Frameworks */ = {isa = PBXBuildFile; productRef = C379BD412A5491C000FBA494 /* iSamaraCounters */; };
 		C39AEA57262EC0B8000109E9 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */; };
 		C3AAFF102745991D002900DB /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAFF0D2745991D002900DB /* UIButton.swift */; };
@@ -56,6 +57,7 @@
 		C3266E992A77CABB00207740 /* IzumrudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IzumrudTests.swift; sourceTree = "<group>"; };
 		C32DDE18259F4CC80034AFD4 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C339F67F29C830970095534F /* Izumrud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Izumrud.entitlements; sourceTree = "<group>"; };
+		C33AA0902A80309500F37948 /* UpravdomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpravdomTests.swift; sourceTree = "<group>"; };
 		C39AEA56262EC0B8000109E9 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		C3AAFF0D2745991D002900DB /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C3AAFF0E2745991D002900DB /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				C3E82AC52A77E3DC00A91C29 /* UnitTestPlan.xctestplan */,
 				C3266E992A77CABB00207740 /* IzumrudTests.swift */,
+				C33AA0902A80309500F37948 /* UpravdomTests.swift */,
 				C3FDA5AD2A785D6300C47021 /* SendDataMockInput.swift */,
 			);
 			path = IzumrudTests;
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3FDA5AE2A785D6300C47021 /* SendDataMockInput.swift in Sources */,
+				C33AA0912A80309500F37948 /* UpravdomTests.swift in Sources */,
 				C3266E9A2A77CABB00207740 /* IzumrudTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
